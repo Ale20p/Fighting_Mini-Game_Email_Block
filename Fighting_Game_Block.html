@@ -1,13 +1,14 @@
 <!-- Fighting Game Email Block - TITTC Format -->
-%%[ /* <br><br><span style="color:red;"> - 2D FIGHTING MINI-GAME BLOCK - </span><br><br><div style="display:none;"> */ ]%%
+%%[ /* <br><br><span style="color:red;"> - 2D FIGHTING MINI-GAME BLOCK - </span><br><br>
+<div style="display:none;"> */ ]%%
 
-%%=BeginImpressionRegion("Fighting_Game_Block")=%%
+  %%=BeginImpressionRegion("Fighting_Game_Block")=%%
 
-%%[
+  %%[
   /****************************************************************************
-   * FIGHTING MINI-GAME CONFIGURATION
-   * Configurable per email deployment or Data Extension content row.
-   ****************************************************************************/
+  * FIGHTING MINI-GAME CONFIGURATION
+  * Configurable per email deployment or Data Extension content row.
+  ****************************************************************************/
 
   Set @Mod_ID = "FIGHT"
   Set @Mod_Width = "600"
@@ -20,6 +21,8 @@
 
   /* Fighter 1 (Player) Settings */
   Set @P1_Name = "SCORPION"
+  /* Starting health percentage: use a number from 0 to 100 */
+  Set @P1_Health = 100
   /* Set @P1_Image to a custom .png / .gif URL. If blank, built-in retro ninja sprite is used */
   Set @P1_Image = ""
   Set @P1_Width = "80px"
@@ -38,709 +41,1225 @@
   Set @Fallback_CTA_Text = "PLAY INTERACTIVE GAME"
   Set @Fallback_CTA_URL = "https://example.com/fighting-game"
 
-]%%
 
-<!--[if mso]>
+  ]%%
+
+  <!--[if mso]>
 <table cellpadding="0" cellspacing="0" border="0" style="width: 600px; margin: 0 auto;">
   <tr>
     <td style="width: 600px; padding: 0; text-align: center; background-color: %%=v(@Arena_BG_Color)=%%;">
 <![endif]-->
 
-<div class="paddingWrapper" style="width: 100%; max-width: 600px; margin: 0 auto; padding: 0;">
-  <div class="columnContainer" style="display: block; width: 100%; max-width: 600px; margin: 0 auto; text-align: center; background-color: %%=v(@Arena_BG_Color)=%%;">
+  <div class="paddingWrapper" style="width: 100%; max-width: 600px; margin: 0 auto; padding: 0;">
+    <div class="columnContainer"
+      style="display: block; width: 100%; max-width: 600px; margin: 0 auto; text-align: center; background-color: %%=v(@Arena_BG_Color)=%%;">
 
-    <style type="text/css">
-      /* Reset & Base Rules */
-      .fg-container {
-        position: relative;
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        overflow: hidden;
-        user-select: none;
-        -webkit-user-select: none;
-        -webkit-tap-highlight-color: transparent;
-        font-family: 'Courier New', Courier, monospace, sans-serif;
-        box-sizing: border-box;
-      }
+      <style type="text/css">
+        /* Reset & Base Rules */
+        .fg-container {
+          position: relative;
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+          overflow: hidden;
+          user-select: none;
+          -webkit-user-select: none;
+          -webkit-tap-highlight-color: transparent;
+          font-family: 'Courier New', Courier, monospace, sans-serif;
+          box-sizing: border-box;
+        }
 
-      /* Hidden Radio & Controller Inputs (Off-screen accessible for 100% client support) */
-      .fg-pos-radio,
-      .fg-action-radio {
-        position: absolute !important;
-        opacity: 0 !important;
-        width: 1px !important;
-        height: 1px !important;
-        margin: -1px !important;
-        padding: 0 !important;
-        z-index: -100 !important;
-        pointer-events: none !important;
-        max-height: 0 !important;
-        overflow: hidden !important;
-        clip: rect(0, 0, 0, 0) !important;
-      }
+        /* Hidden Radio & Controller Inputs (Off-screen accessible for 100% client support) */
+        .fg-pos-radio,
+        .fg-action-radio {
+          position: absolute !important;
+          opacity: 0 !important;
+          width: 1px !important;
+          height: 1px !important;
+          margin: -1px !important;
+          padding: 0 !important;
+          z-index: -100 !important;
+          pointer-events: none !important;
+          max-height: 0 !important;
+          overflow: hidden !important;
+          clip: rect(0, 0, 0, 0) !important;
+        }
 
-      /* Arena Stage */
-      .fg-stage {
-        position: relative;
-        width: 100%;
-        height: 290px;
-        background-color: %%=v(@Arena_BG_Color)=%%;
-        background-image: url('%%=v(@Arena_BG_Image)=%%');
-        background-size: cover;
-        background-position: center bottom;
-        background-repeat: no-repeat;
-        border: 2px solid #3d1c47;
-        box-sizing: border-box;
-        overflow: hidden;
-      }
+        /* Arena Stage */
+        .fg-stage {
+          position: relative;
+          width: 100%;
+          height: 290px;
+          background-color: %%=v(@Arena_BG_Color)=%%;
+          background-image: url('%%=v(@Arena_BG_Image)=%%');
+          background-size: cover;
+          background-position: center bottom;
+          background-repeat: no-repeat;
+          border: 2px solid #3d1c47;
+          box-sizing: border-box;
+          overflow: hidden;
+        }
 
-      /* Arena Vignette & Floor Ground */
-      .fg-floor {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 38px;
-        background: linear-gradient(180deg, rgba(20, 8, 28, 0.7) 0%, rgba(10, 4, 15, 0.95) 100%);
-        border-top: 2px solid #58216b;
-        box-shadow: 0 -4px 12px rgba(0,0,0,0.8);
-      }
+        /* Arena Vignette & Floor Ground */
+        .fg-floor {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 38px;
+          background: linear-gradient(180deg, rgba(20, 8, 28, 0.7) 0%, rgba(10, 4, 15, 0.95) 100%);
+          border-top: 2px solid #58216b;
+          box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.8);
+        }
 
-      /* HUD Header Bar */
-      .fg-hud {
-        position: absolute;
-        top: 10px;
-        left: 12px;
-        right: 12px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 20;
-        pointer-events: none;
-      }
+        /* HUD Header Bar */
+        .fg-hud {
+          position: absolute;
+          top: 10px;
+          left: 12px;
+          right: 12px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          z-index: 20;
+          pointer-events: none;
+        }
 
-      .fg-p1-hud {
-        background: rgba(0, 0, 0, 0.7);
-        border: 1px solid #ffd700;
-        padding: 4px 10px;
-        border-radius: 4px;
-        color: #ffd700;
-        font-size: 11px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
-      }
+        .fg-p1-hud {
+          background: rgba(0, 0, 0, 0.7);
+          border: 1px solid #ffd700;
+          padding: 4px 10px;
+          border-radius: 4px;
+          color: #ffd700;
+          font-size: 11px;
+          font-weight: bold;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+        }
 
-      .fg-zone-title {
-        color: #ff3344;
-        font-size: 12px;
-        font-weight: bold;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        text-shadow: 0 0 6px rgba(255, 51, 68, 0.8), 2px 2px 0px #000;
-      }
+        .fg-zone-title {
+          color: #ff3344;
+          font-size: 12px;
+          font-weight: bold;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          text-shadow: 0 0 6px rgba(255, 51, 68, 0.8), 2px 2px 0px #000;
+        }
 
-      /* Character Sprite & Stance */
-      .fg-character-anchor {
-        position: absolute;
-        bottom: 26px;
-        width: 80px;
-        height: 125px;
-        transition: left 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
-        z-index: 10;
-        will-change: left;
-      }
+        /* Character Sprite & Stance */
+        .fg-character-anchor {
+          position: absolute;
+          bottom: 26px;
+          width: 80px;
+          height: 125px;
+          transition: left 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
+          z-index: 10;
+          will-change: left;
+        }
 
-      /* Dedicated Vertical Jump Wrapper (isolates jump arc from sprite attacks & idle stance) */
-      .fg-jump-wrapper {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        transform-origin: center bottom;
-        -webkit-transform-origin: center bottom;
-        will-change: transform;
-      }
+        /* Dedicated Vertical Jump Wrapper (isolates jump arc from sprite attacks & idle stance) */
+        .fg-jump-wrapper {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-origin: center bottom;
+          -webkit-transform-origin: center bottom;
+          will-change: transform;
+        }
 
-      .fg-character-sprite {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        transform-origin: center bottom;
-        -webkit-transform-origin: center bottom;
-        -webkit-animation: fgIdleStance 1.4s ease-in-out infinite alternate;
-        animation: fgIdleStance 1.4s ease-in-out infinite alternate;
-      }
+        .fg-character-sprite {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-origin: center bottom;
+          -webkit-transform-origin: center bottom;
+          -webkit-animation: fgIdleStance 1.4s ease-in-out infinite alternate;
+          animation: fgIdleStance 1.4s ease-in-out infinite alternate;
+        }
 
-      /* Dynamic Shadow under Fighter */
-      .fg-shadow {
-        position: absolute;
-        bottom: -6px;
-        left: 15%;
-        width: 70%;
-        height: 10px;
-        background: radial-gradient(ellipse at center, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 75%);
-        border-radius: 50%;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-      }
+        /* Dynamic Shadow under Fighter */
+        .fg-shadow {
+          position: absolute;
+          bottom: -6px;
+          left: 15%;
+          width: 70%;
+          height: 10px;
+          background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 75%);
+          border-radius: 50%;
+          transition: transform 0.3s ease, opacity 0.3s ease;
+        }
 
-      /* Idle Animation: retro breathing & bobbing */
-      @-webkit-keyframes fgIdleStance {
-        0% { -webkit-transform: translateY(0) scaleY(1); transform: translateY(0) scaleY(1); }
-        50% { -webkit-transform: translateY(-2px) scaleY(1.015); transform: translateY(-2px) scaleY(1.015); }
-        100% { -webkit-transform: translateY(2px) scaleY(0.985); transform: translateY(2px) scaleY(0.985); }
-      }
-      @keyframes fgIdleStance {
-        0% { -webkit-transform: translateY(0) scaleY(1); transform: translateY(0) scaleY(1); }
-        50% { -webkit-transform: translateY(-2px) scaleY(1.015); transform: translateY(-2px) scaleY(1.015); }
-        100% { -webkit-transform: translateY(2px) scaleY(0.985); transform: translateY(2px) scaleY(0.985); }
-      }
+        /* Idle Animation: retro breathing & bobbing */
+        @-webkit-keyframes fgIdleStance {
+          0% {
+            -webkit-transform: translateY(0) scaleY(1);
+            transform: translateY(0) scaleY(1);
+          }
 
-      /* Jump Physics Keyframes (Arc 1 & Arc 2 for alternating seamless re-triggers) */
-      @-webkit-keyframes fgJumpArc1 {
-        0% { -webkit-transform: translateY(0) scaleY(0.92); transform: translateY(0) scaleY(0.92); }
-        15% { -webkit-transform: translateY(-40px) scaleY(1.08); transform: translateY(-40px) scaleY(1.08); }
-        45% { -webkit-transform: translateY(-88px) scaleY(1.02); transform: translateY(-88px) scaleY(1.02); }
-        60% { -webkit-transform: translateY(-80px) scaleY(0.98); transform: translateY(-80px) scaleY(0.98); }
-        85% { -webkit-transform: translateY(-20px) scaleY(1.04); transform: translateY(-20px) scaleY(1.04); }
-        95% { -webkit-transform: translateY(3px) scaleY(0.90); transform: translateY(3px) scaleY(0.90); }
-        100% { -webkit-transform: translateY(0) scaleY(1); transform: translateY(0) scaleY(1); }
-      }
-      @keyframes fgJumpArc1 {
-        0% { -webkit-transform: translateY(0) scaleY(0.92); transform: translateY(0) scaleY(0.92); }
-        15% { -webkit-transform: translateY(-40px) scaleY(1.08); transform: translateY(-40px) scaleY(1.08); }
-        45% { -webkit-transform: translateY(-88px) scaleY(1.02); transform: translateY(-88px) scaleY(1.02); }
-        60% { -webkit-transform: translateY(-80px) scaleY(0.98); transform: translateY(-80px) scaleY(0.98); }
-        85% { -webkit-transform: translateY(-20px) scaleY(1.04); transform: translateY(-20px) scaleY(1.04); }
-        95% { -webkit-transform: translateY(3px) scaleY(0.90); transform: translateY(3px) scaleY(0.90); }
-        100% { -webkit-transform: translateY(0) scaleY(1); transform: translateY(0) scaleY(1); }
-      }
+          50% {
+            -webkit-transform: translateY(-2px) scaleY(1.015);
+            transform: translateY(-2px) scaleY(1.015);
+          }
 
-      @-webkit-keyframes fgJumpArc2 {
-        0% { -webkit-transform: translateY(0) scaleY(0.92); transform: translateY(0) scaleY(0.92); }
-        15% { -webkit-transform: translateY(-40px) scaleY(1.08); transform: translateY(-40px) scaleY(1.08); }
-        45% { -webkit-transform: translateY(-88px) scaleY(1.02); transform: translateY(-88px) scaleY(1.02); }
-        60% { -webkit-transform: translateY(-80px) scaleY(0.98); transform: translateY(-80px) scaleY(0.98); }
-        85% { -webkit-transform: translateY(-20px) scaleY(1.04); transform: translateY(-20px) scaleY(1.04); }
-        95% { -webkit-transform: translateY(3px) scaleY(0.90); transform: translateY(3px) scaleY(0.90); }
-        100% { -webkit-transform: translateY(0) scaleY(1); transform: translateY(0) scaleY(1); }
-      }
-      @keyframes fgJumpArc2 {
-        0% { -webkit-transform: translateY(0) scaleY(0.92); transform: translateY(0) scaleY(0.92); }
-        15% { -webkit-transform: translateY(-40px) scaleY(1.08); transform: translateY(-40px) scaleY(1.08); }
-        45% { -webkit-transform: translateY(-88px) scaleY(1.02); transform: translateY(-88px) scaleY(1.02); }
-        60% { -webkit-transform: translateY(-80px) scaleY(0.98); transform: translateY(-80px) scaleY(0.98); }
-        85% { -webkit-transform: translateY(-20px) scaleY(1.04); transform: translateY(-20px) scaleY(1.04); }
-        95% { -webkit-transform: translateY(3px) scaleY(0.90); transform: translateY(3px) scaleY(0.90); }
-        100% { -webkit-transform: translateY(0) scaleY(1); transform: translateY(0) scaleY(1); }
-      }
+          100% {
+            -webkit-transform: translateY(2px) scaleY(0.985);
+            transform: translateY(2px) scaleY(0.985);
+          }
+        }
 
-      /* Shadow shrinking during jump (Alternating 1 & 2) */
-      @-webkit-keyframes fgShadowShrink1 {
-        0%, 100% { -webkit-transform: scale(1); transform: scale(1); opacity: 0.7; }
-        50% { -webkit-transform: scale(0.4); transform: scale(0.4); opacity: 0.2; }
-      }
-      @keyframes fgShadowShrink1 {
-        0%, 100% { -webkit-transform: scale(1); transform: scale(1); opacity: 0.7; }
-        50% { -webkit-transform: scale(0.4); transform: scale(0.4); opacity: 0.2; }
-      }
+        @keyframes fgIdleStance {
+          0% {
+            -webkit-transform: translateY(0) scaleY(1);
+            transform: translateY(0) scaleY(1);
+          }
 
-      @-webkit-keyframes fgShadowShrink2 {
-        0%, 100% { -webkit-transform: scale(1); transform: scale(1); opacity: 0.7; }
-        50% { -webkit-transform: scale(0.4); transform: scale(0.4); opacity: 0.2; }
-      }
-      @keyframes fgShadowShrink2 {
-        0%, 100% { -webkit-transform: scale(1); transform: scale(1); opacity: 0.7; }
-        50% { -webkit-transform: scale(0.4); transform: scale(0.4); opacity: 0.2; }
-      }
+          50% {
+            -webkit-transform: translateY(-2px) scaleY(1.015);
+            transform: translateY(-2px) scaleY(1.015);
+          }
 
-      /* Attack 1 (Punch / Jab) Keyframes */
-      @-webkit-keyframes fgPunch1 {
-        0% { -webkit-transform: translateY(0) scaleX(1); transform: translateY(0) scaleX(1); }
-        25% { -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96); transform: translateX(14px) scaleX(1.12) scaleY(0.96); }
-        50% { -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94); transform: translateX(20px) scaleX(1.18) scaleY(0.94); }
-        75% { -webkit-transform: translateX(8px) scaleX(1.05); transform: translateX(8px) scaleX(1.05); }
-        100% { -webkit-transform: translateY(0) scaleX(1); transform: translateY(0) scaleX(1); }
-      }
-      @keyframes fgPunch1 {
-        0% { -webkit-transform: translateY(0) scaleX(1); transform: translateY(0) scaleX(1); }
-        25% { -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96); transform: translateX(14px) scaleX(1.12) scaleY(0.96); }
-        50% { -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94); transform: translateX(20px) scaleX(1.18) scaleY(0.94); }
-        75% { -webkit-transform: translateX(8px) scaleX(1.05); transform: translateX(8px) scaleX(1.05); }
-        100% { -webkit-transform: translateY(0) scaleX(1); transform: translateY(0) scaleX(1); }
-      }
+          100% {
+            -webkit-transform: translateY(2px) scaleY(0.985);
+            transform: translateY(2px) scaleY(0.985);
+          }
+        }
 
-      @-webkit-keyframes fgPunch2 {
-        0% { -webkit-transform: translateY(0) scaleX(1); transform: translateY(0) scaleX(1); }
-        25% { -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96); transform: translateX(14px) scaleX(1.12) scaleY(0.96); }
-        50% { -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94); transform: translateX(20px) scaleX(1.18) scaleY(0.94); }
-        75% { -webkit-transform: translateX(8px) scaleX(1.05); transform: translateX(8px) scaleX(1.05); }
-        100% { -webkit-transform: translateY(0) scaleX(1); transform: translateY(0) scaleX(1); }
-      }
-      @keyframes fgPunch2 {
-        0% { -webkit-transform: translateY(0) scaleX(1); transform: translateY(0) scaleX(1); }
-        25% { -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96); transform: translateX(14px) scaleX(1.12) scaleY(0.96); }
-        50% { -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94); transform: translateX(20px) scaleX(1.18) scaleY(0.94); }
-        75% { -webkit-transform: translateX(8px) scaleX(1.05); transform: translateX(8px) scaleX(1.05); }
-        100% { -webkit-transform: translateY(0) scaleX(1); transform: translateY(0) scaleX(1); }
-      }
+        /* Jump Physics Keyframes (Arc 1 & Arc 2 for alternating seamless re-triggers) */
+        @-webkit-keyframes fgJumpArc1 {
+          0% {
+            -webkit-transform: translateY(0) scaleY(0.92);
+            transform: translateY(0) scaleY(0.92);
+          }
 
-      /* Attack 2 (Kick / Strike) Keyframes */
-      @-webkit-keyframes fgKick1 {
-        0% { -webkit-transform: translateY(0) rotate(0deg); transform: translateY(0) rotate(0deg); }
-        25% { -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg); transform: translateX(-4px) translateY(-8px) rotate(-8deg); }
-        50% { -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12); transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12); }
-        75% { -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg); transform: translateX(6px) translateY(-4px) rotate(3deg); }
-        100% { -webkit-transform: translateY(0) rotate(0deg); transform: translateY(0) rotate(0deg); }
-      }
-      @keyframes fgKick1 {
-        0% { -webkit-transform: translateY(0) rotate(0deg); transform: translateY(0) rotate(0deg); }
-        25% { -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg); transform: translateX(-4px) translateY(-8px) rotate(-8deg); }
-        50% { -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12); transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12); }
-        75% { -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg); transform: translateX(6px) translateY(-4px) rotate(3deg); }
-        100% { -webkit-transform: translateY(0) rotate(0deg); transform: translateY(0) rotate(0deg); }
-      }
+          15% {
+            -webkit-transform: translateY(-40px) scaleY(1.08);
+            transform: translateY(-40px) scaleY(1.08);
+          }
 
-      @-webkit-keyframes fgKick2 {
-        0% { -webkit-transform: translateY(0) rotate(0deg); transform: translateY(0) rotate(0deg); }
-        25% { -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg); transform: translateX(-4px) translateY(-8px) rotate(-8deg); }
-        50% { -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12); transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12); }
-        75% { -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg); transform: translateX(6px) translateY(-4px) rotate(3deg); }
-        100% { -webkit-transform: translateY(0) rotate(0deg); transform: translateY(0) rotate(0deg); }
-      }
-      @keyframes fgKick2 {
-        0% { -webkit-transform: translateY(0) rotate(0deg); transform: translateY(0) rotate(0deg); }
-        25% { -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg); transform: translateX(-4px) translateY(-8px) rotate(-8deg); }
-        50% { -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12); transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12); }
-        75% { -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg); transform: translateX(6px) translateY(-4px) rotate(3deg); }
-        100% { -webkit-transform: translateY(0) rotate(0deg); transform: translateY(0) rotate(0deg); }
-      }
+          45% {
+            -webkit-transform: translateY(-88px) scaleY(1.02);
+            transform: translateY(-88px) scaleY(1.02);
+          }
 
-      /* Jump State Activation via CSS Radio Selectors (Triggers on Dedicated fg-jump-wrapper) */
-      #fg_jump_1:checked ~ .fg-container .fg-jump-wrapper {
-        -webkit-animation: fgJumpArc1 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-        animation: fgJumpArc1 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-      }
-      #fg_jump_1:checked ~ .fg-container .fg-shadow {
-        -webkit-animation: fgShadowShrink1 0.62s ease-out !important;
-        animation: fgShadowShrink1 0.62s ease-out !important;
-      }
-      #fg_jump_2:checked ~ .fg-container .fg-jump-wrapper {
-        -webkit-animation: fgJumpArc2 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-        animation: fgJumpArc2 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-      }
-      #fg_jump_2:checked ~ .fg-container .fg-shadow {
-        -webkit-animation: fgShadowShrink2 0.62s ease-out !important;
-        animation: fgShadowShrink2 0.62s ease-out !important;
-      }
+          60% {
+            -webkit-transform: translateY(-80px) scaleY(0.98);
+            transform: translateY(-80px) scaleY(0.98);
+          }
 
-      /* Attack 1 State Activation via CSS Radio Selectors */
-      #fg_atk1_1:checked ~ .fg-container .fg-character-sprite {
-        -webkit-animation: fgPunch1 0.38s ease-out !important;
-        animation: fgPunch1 0.38s ease-out !important;
-      }
-      #fg_atk1_2:checked ~ .fg-container .fg-character-sprite {
-        -webkit-animation: fgPunch2 0.38s ease-out !important;
-        animation: fgPunch2 0.38s ease-out !important;
-      }
+          85% {
+            -webkit-transform: translateY(-20px) scaleY(1.04);
+            transform: translateY(-20px) scaleY(1.04);
+          }
 
-      /* Attack 2 State Activation via CSS Radio Selectors */
-      #fg_atk2_1:checked ~ .fg-container .fg-character-sprite {
-        -webkit-animation: fgKick1 0.44s ease-out !important;
-        animation: fgKick1 0.44s ease-out !important;
-      }
-      #fg_atk2_2:checked ~ .fg-container .fg-character-sprite {
-        -webkit-animation: fgKick2 0.44s ease-out !important;
-        animation: fgKick2 0.44s ease-out !important;
-      }
+          95% {
+            -webkit-transform: translateY(3px) scaleY(0.90);
+            transform: translateY(3px) scaleY(0.90);
+          }
 
-      /* Alternating Button Swaps (ensures repeated clicks re-trigger animations seamlessly) */
-      .fg-jump-alt-1 { display: inline-block !important; }
-      .fg-jump-alt-2 { display: none !important; }
-      #fg_jump_1:checked ~ .fg-container .fg-jump-alt-1 { display: none !important; }
-      #fg_jump_1:checked ~ .fg-container .fg-jump-alt-2 { display: inline-block !important; }
-      #fg_jump_2:checked ~ .fg-container .fg-jump-alt-1 { display: inline-block !important; }
-      #fg_jump_2:checked ~ .fg-container .fg-jump-alt-2 { display: none !important; }
+          100% {
+            -webkit-transform: translateY(0) scaleY(1);
+            transform: translateY(0) scaleY(1);
+          }
+        }
 
-      .fg-atk1-alt-1 { display: inline-block !important; }
-      .fg-atk1-alt-2 { display: none !important; }
-      #fg_atk1_1:checked ~ .fg-container .fg-atk1-alt-1 { display: none !important; }
-      #fg_atk1_1:checked ~ .fg-container .fg-atk1-alt-2 { display: inline-block !important; }
-      #fg_atk1_2:checked ~ .fg-container .fg-atk1-alt-1 { display: inline-block !important; }
-      #fg_atk1_2:checked ~ .fg-container .fg-atk1-alt-2 { display: none !important; }
+        @keyframes fgJumpArc1 {
+          0% {
+            -webkit-transform: translateY(0) scaleY(0.92);
+            transform: translateY(0) scaleY(0.92);
+          }
 
-      .fg-atk2-alt-1 { display: inline-block !important; }
-      .fg-atk2-alt-2 { display: none !important; }
-      #fg_atk2_1:checked ~ .fg-container .fg-atk2-alt-1 { display: none !important; }
-      #fg_atk2_1:checked ~ .fg-container .fg-atk2-alt-2 { display: inline-block !important; }
-      #fg_atk2_2:checked ~ .fg-container .fg-atk2-alt-1 { display: inline-block !important; }
-      #fg_atk2_2:checked ~ .fg-container .fg-atk2-alt-2 { display: none !important; }
+          15% {
+            -webkit-transform: translateY(-40px) scaleY(1.08);
+            transform: translateY(-40px) scaleY(1.08);
+          }
 
-      /* =======================================================================
+          45% {
+            -webkit-transform: translateY(-88px) scaleY(1.02);
+            transform: translateY(-88px) scaleY(1.02);
+          }
+
+          60% {
+            -webkit-transform: translateY(-80px) scaleY(0.98);
+            transform: translateY(-80px) scaleY(0.98);
+          }
+
+          85% {
+            -webkit-transform: translateY(-20px) scaleY(1.04);
+            transform: translateY(-20px) scaleY(1.04);
+          }
+
+          95% {
+            -webkit-transform: translateY(3px) scaleY(0.90);
+            transform: translateY(3px) scaleY(0.90);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) scaleY(1);
+            transform: translateY(0) scaleY(1);
+          }
+        }
+
+        @-webkit-keyframes fgJumpArc2 {
+          0% {
+            -webkit-transform: translateY(0) scaleY(0.92);
+            transform: translateY(0) scaleY(0.92);
+          }
+
+          15% {
+            -webkit-transform: translateY(-40px) scaleY(1.08);
+            transform: translateY(-40px) scaleY(1.08);
+          }
+
+          45% {
+            -webkit-transform: translateY(-88px) scaleY(1.02);
+            transform: translateY(-88px) scaleY(1.02);
+          }
+
+          60% {
+            -webkit-transform: translateY(-80px) scaleY(0.98);
+            transform: translateY(-80px) scaleY(0.98);
+          }
+
+          85% {
+            -webkit-transform: translateY(-20px) scaleY(1.04);
+            transform: translateY(-20px) scaleY(1.04);
+          }
+
+          95% {
+            -webkit-transform: translateY(3px) scaleY(0.90);
+            transform: translateY(3px) scaleY(0.90);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) scaleY(1);
+            transform: translateY(0) scaleY(1);
+          }
+        }
+
+        @keyframes fgJumpArc2 {
+          0% {
+            -webkit-transform: translateY(0) scaleY(0.92);
+            transform: translateY(0) scaleY(0.92);
+          }
+
+          15% {
+            -webkit-transform: translateY(-40px) scaleY(1.08);
+            transform: translateY(-40px) scaleY(1.08);
+          }
+
+          45% {
+            -webkit-transform: translateY(-88px) scaleY(1.02);
+            transform: translateY(-88px) scaleY(1.02);
+          }
+
+          60% {
+            -webkit-transform: translateY(-80px) scaleY(0.98);
+            transform: translateY(-80px) scaleY(0.98);
+          }
+
+          85% {
+            -webkit-transform: translateY(-20px) scaleY(1.04);
+            transform: translateY(-20px) scaleY(1.04);
+          }
+
+          95% {
+            -webkit-transform: translateY(3px) scaleY(0.90);
+            transform: translateY(3px) scaleY(0.90);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) scaleY(1);
+            transform: translateY(0) scaleY(1);
+          }
+        }
+
+        /* Shadow shrinking during jump (Alternating 1 & 2) */
+        @-webkit-keyframes fgShadowShrink1 {
+
+          0%,
+          100% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            opacity: 0.7;
+          }
+
+          50% {
+            -webkit-transform: scale(0.4);
+            transform: scale(0.4);
+            opacity: 0.2;
+          }
+        }
+
+        @keyframes fgShadowShrink1 {
+
+          0%,
+          100% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            opacity: 0.7;
+          }
+
+          50% {
+            -webkit-transform: scale(0.4);
+            transform: scale(0.4);
+            opacity: 0.2;
+          }
+        }
+
+        @-webkit-keyframes fgShadowShrink2 {
+
+          0%,
+          100% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            opacity: 0.7;
+          }
+
+          50% {
+            -webkit-transform: scale(0.4);
+            transform: scale(0.4);
+            opacity: 0.2;
+          }
+        }
+
+        @keyframes fgShadowShrink2 {
+
+          0%,
+          100% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            opacity: 0.7;
+          }
+
+          50% {
+            -webkit-transform: scale(0.4);
+            transform: scale(0.4);
+            opacity: 0.2;
+          }
+        }
+
+        /* Attack 1 (Punch / Jab) Keyframes */
+        @-webkit-keyframes fgPunch1 {
+          0% {
+            -webkit-transform: translateY(0) scaleX(1);
+            transform: translateY(0) scaleX(1);
+          }
+
+          25% {
+            -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96);
+            transform: translateX(14px) scaleX(1.12) scaleY(0.96);
+          }
+
+          50% {
+            -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94);
+            transform: translateX(20px) scaleX(1.18) scaleY(0.94);
+          }
+
+          75% {
+            -webkit-transform: translateX(8px) scaleX(1.05);
+            transform: translateX(8px) scaleX(1.05);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) scaleX(1);
+            transform: translateY(0) scaleX(1);
+          }
+        }
+
+        @keyframes fgPunch1 {
+          0% {
+            -webkit-transform: translateY(0) scaleX(1);
+            transform: translateY(0) scaleX(1);
+          }
+
+          25% {
+            -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96);
+            transform: translateX(14px) scaleX(1.12) scaleY(0.96);
+          }
+
+          50% {
+            -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94);
+            transform: translateX(20px) scaleX(1.18) scaleY(0.94);
+          }
+
+          75% {
+            -webkit-transform: translateX(8px) scaleX(1.05);
+            transform: translateX(8px) scaleX(1.05);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) scaleX(1);
+            transform: translateY(0) scaleX(1);
+          }
+        }
+
+        @-webkit-keyframes fgPunch2 {
+          0% {
+            -webkit-transform: translateY(0) scaleX(1);
+            transform: translateY(0) scaleX(1);
+          }
+
+          25% {
+            -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96);
+            transform: translateX(14px) scaleX(1.12) scaleY(0.96);
+          }
+
+          50% {
+            -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94);
+            transform: translateX(20px) scaleX(1.18) scaleY(0.94);
+          }
+
+          75% {
+            -webkit-transform: translateX(8px) scaleX(1.05);
+            transform: translateX(8px) scaleX(1.05);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) scaleX(1);
+            transform: translateY(0) scaleX(1);
+          }
+        }
+
+        @keyframes fgPunch2 {
+          0% {
+            -webkit-transform: translateY(0) scaleX(1);
+            transform: translateY(0) scaleX(1);
+          }
+
+          25% {
+            -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96);
+            transform: translateX(14px) scaleX(1.12) scaleY(0.96);
+          }
+
+          50% {
+            -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94);
+            transform: translateX(20px) scaleX(1.18) scaleY(0.94);
+          }
+
+          75% {
+            -webkit-transform: translateX(8px) scaleX(1.05);
+            transform: translateX(8px) scaleX(1.05);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) scaleX(1);
+            transform: translateY(0) scaleX(1);
+          }
+        }
+
+        /* Attack 2 (Kick / Strike) Keyframes */
+        @-webkit-keyframes fgKick1 {
+          0% {
+            -webkit-transform: translateY(0) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
+          }
+
+          25% {
+            -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg);
+            transform: translateX(-4px) translateY(-8px) rotate(-8deg);
+          }
+
+          50% {
+            -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
+            transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
+          }
+
+          75% {
+            -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg);
+            transform: translateX(6px) translateY(-4px) rotate(3deg);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
+          }
+        }
+
+        @keyframes fgKick1 {
+          0% {
+            -webkit-transform: translateY(0) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
+          }
+
+          25% {
+            -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg);
+            transform: translateX(-4px) translateY(-8px) rotate(-8deg);
+          }
+
+          50% {
+            -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
+            transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
+          }
+
+          75% {
+            -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg);
+            transform: translateX(6px) translateY(-4px) rotate(3deg);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
+          }
+        }
+
+        @-webkit-keyframes fgKick2 {
+          0% {
+            -webkit-transform: translateY(0) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
+          }
+
+          25% {
+            -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg);
+            transform: translateX(-4px) translateY(-8px) rotate(-8deg);
+          }
+
+          50% {
+            -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
+            transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
+          }
+
+          75% {
+            -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg);
+            transform: translateX(6px) translateY(-4px) rotate(3deg);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
+          }
+        }
+
+        @keyframes fgKick2 {
+          0% {
+            -webkit-transform: translateY(0) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
+          }
+
+          25% {
+            -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg);
+            transform: translateX(-4px) translateY(-8px) rotate(-8deg);
+          }
+
+          50% {
+            -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
+            transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
+          }
+
+          75% {
+            -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg);
+            transform: translateX(6px) translateY(-4px) rotate(3deg);
+          }
+
+          100% {
+            -webkit-transform: translateY(0) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
+          }
+        }
+
+        /* Jump State Activation via CSS Radio Selectors (Triggers on Dedicated fg-jump-wrapper) */
+        #fg_jump_1:checked~.fg-container .fg-jump-wrapper {
+          -webkit-animation: fgJumpArc1 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+          animation: fgJumpArc1 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        }
+
+        #fg_jump_1:checked~.fg-container .fg-shadow {
+          -webkit-animation: fgShadowShrink1 0.62s ease-out !important;
+          animation: fgShadowShrink1 0.62s ease-out !important;
+        }
+
+        #fg_jump_2:checked~.fg-container .fg-jump-wrapper {
+          -webkit-animation: fgJumpArc2 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+          animation: fgJumpArc2 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        }
+
+        #fg_jump_2:checked~.fg-container .fg-shadow {
+          -webkit-animation: fgShadowShrink2 0.62s ease-out !important;
+          animation: fgShadowShrink2 0.62s ease-out !important;
+        }
+
+        /* Attack 1 State Activation via CSS Radio Selectors */
+        #fg_atk1_1:checked~.fg-container .fg-character-sprite {
+          -webkit-animation: fgPunch1 0.38s ease-out !important;
+          animation: fgPunch1 0.38s ease-out !important;
+        }
+
+        #fg_atk1_2:checked~.fg-container .fg-character-sprite {
+          -webkit-animation: fgPunch2 0.38s ease-out !important;
+          animation: fgPunch2 0.38s ease-out !important;
+        }
+
+        /* Attack 2 State Activation via CSS Radio Selectors */
+        #fg_atk2_1:checked~.fg-container .fg-character-sprite {
+          -webkit-animation: fgKick1 0.44s ease-out !important;
+          animation: fgKick1 0.44s ease-out !important;
+        }
+
+        #fg_atk2_2:checked~.fg-container .fg-character-sprite {
+          -webkit-animation: fgKick2 0.44s ease-out !important;
+          animation: fgKick2 0.44s ease-out !important;
+        }
+
+        /* Alternating Button Swaps (ensures repeated clicks re-trigger animations seamlessly) */
+        .fg-jump-alt-1 {
+          display: inline-block !important;
+        }
+
+        .fg-jump-alt-2 {
+          display: none !important;
+        }
+
+        #fg_jump_1:checked~.fg-container .fg-jump-alt-1 {
+          display: none !important;
+        }
+
+        #fg_jump_1:checked~.fg-container .fg-jump-alt-2 {
+          display: inline-block !important;
+        }
+
+        #fg_jump_2:checked~.fg-container .fg-jump-alt-1 {
+          display: inline-block !important;
+        }
+
+        #fg_jump_2:checked~.fg-container .fg-jump-alt-2 {
+          display: none !important;
+        }
+
+        .fg-atk1-alt-1 {
+          display: inline-block !important;
+        }
+
+        .fg-atk1-alt-2 {
+          display: none !important;
+        }
+
+        #fg_atk1_1:checked~.fg-container .fg-atk1-alt-1 {
+          display: none !important;
+        }
+
+        #fg_atk1_1:checked~.fg-container .fg-atk1-alt-2 {
+          display: inline-block !important;
+        }
+
+        #fg_atk1_2:checked~.fg-container .fg-atk1-alt-1 {
+          display: inline-block !important;
+        }
+
+        #fg_atk1_2:checked~.fg-container .fg-atk1-alt-2 {
+          display: none !important;
+        }
+
+        .fg-atk2-alt-1 {
+          display: inline-block !important;
+        }
+
+        .fg-atk2-alt-2 {
+          display: none !important;
+        }
+
+        #fg_atk2_1:checked~.fg-container .fg-atk2-alt-1 {
+          display: none !important;
+        }
+
+        #fg_atk2_1:checked~.fg-container .fg-atk2-alt-2 {
+          display: inline-block !important;
+        }
+
+        #fg_atk2_2:checked~.fg-container .fg-atk2-alt-1 {
+          display: inline-block !important;
+        }
+
+        #fg_atk2_2:checked~.fg-container .fg-atk2-alt-2 {
+          display: none !important;
+        }
+
+        /* =======================================================================
          ARCADE CONTROL PANEL (3-Tier Layout: Jump / Left-Right / Atk1-Atk2)
          ======================================================================= */
-      .fg-control-panel {
-        background: linear-gradient(180deg, #180d22 0%, #0d0514 100%);
-        border: 2px solid #3d1c47;
-        border-top: none;
-        padding: 12px 10px 14px 10px;
-        text-align: center;
-        box-sizing: border-box;
-      }
+        .fg-control-panel {
+          background: linear-gradient(180deg, #180d22 0%, #0d0514 100%);
+          border: 2px solid #3d1c47;
+          border-top: none;
+          padding: 12px 10px 14px 10px;
+          text-align: center;
+          box-sizing: border-box;
+        }
 
-      .fg-controls-wrap {
-        display: inline-block;
-        margin: 0 auto;
-        text-align: center;
-      }
+        .fg-controls-wrap {
+          display: inline-block;
+          margin: 0 auto;
+          text-align: center;
+        }
 
-      .fg-ctrl-row {
-        margin: 4px 0;
-        text-align: center;
-        white-space: nowrap;
-      }
+        .fg-ctrl-row {
+          margin: 4px 0;
+          text-align: center;
+          white-space: nowrap;
+        }
 
-      /* Arcade Buttons Base */
-      .fg-btn {
-        display: inline-block;
-        box-sizing: border-box;
-        padding: 10px 18px;
-        margin: 3px 5px;
-        font-family: 'Courier New', Courier, monospace, sans-serif;
-        font-size: 13px;
-        font-weight: 900;
-        letter-spacing: 1px;
-        color: #ffffff;
-        text-decoration: none;
-        text-align: center;
-        cursor: pointer;
-        border-radius: 6px;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 3px 0 #000, 0 4px 6px rgba(0,0,0,0.6);
-        transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
-        -webkit-user-select: none;
-        user-select: none;
-        touch-action: manipulation;
-        vertical-align: middle;
-      }
+        /* Arcade Buttons Base */
+        .fg-btn {
+          display: inline-block;
+          box-sizing: border-box;
+          padding: 10px 18px;
+          margin: 3px 5px;
+          font-family: 'Courier New', Courier, monospace, sans-serif;
+          font-size: 13px;
+          font-weight: 900;
+          letter-spacing: 1px;
+          color: #ffffff;
+          text-decoration: none;
+          text-align: center;
+          cursor: pointer;
+          border-radius: 6px;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 3px 0 #000, 0 4px 6px rgba(0, 0, 0, 0.6);
+          transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+          -webkit-user-select: none;
+          user-select: none;
+          touch-action: manipulation;
+          vertical-align: middle;
+        }
 
-      .fg-btn:hover {
-        filter: brightness(1.18);
-      }
+        .fg-btn:hover {
+          filter: brightness(1.18);
+        }
 
-      .fg-btn:active {
-        transform: translateY(2px);
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 0 #000, 0 2px 3px rgba(0,0,0,0.6);
-      }
+        .fg-btn:active {
+          transform: translateY(2px);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 0 #000, 0 2px 3px rgba(0, 0, 0, 0.6);
+        }
 
-      /* Row 1: Jump Button (Amber / Gold Accent, Centered) */
-      .fg-btn-jump {
-        min-width: 140px;
-        background: linear-gradient(180deg, #ff8f00 0%, #e65100 100%);
-        border: 1px solid #ffa726;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 3px 0 #8c2d00, 0 4px 8px rgba(255,143,0,0.4);
-      }
-      .fg-btn-jump:hover {
-        background: linear-gradient(180deg, #ffa000 0%, #f57c00 100%);
-      }
+        /* Row 1: Jump Button (Amber / Gold Accent, Centered) */
+        .fg-btn-jump {
+          min-width: 140px;
+          background: linear-gradient(180deg, #ff8f00 0%, #e65100 100%);
+          border: 1px solid #ffa726;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 3px 0 #8c2d00, 0 4px 8px rgba(255, 143, 0, 0.4);
+        }
 
-      /* Row 2: Left & Right Movement Buttons (Purple / Violet) */
-      .fg-btn-move {
-        min-width: 130px;
-        background: linear-gradient(180deg, #7b1fa2 0%, #4a148c 100%);
-        border: 1px solid #9c27b0;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 3px 0 #280854, 0 4px 8px rgba(123,31,162,0.35);
-      }
-      .fg-btn-move:hover {
-        background: linear-gradient(180deg, #8e24aa 0%, #6a1b9a 100%);
-      }
+        .fg-btn-jump:hover {
+          background: linear-gradient(180deg, #ffa000 0%, #f57c00 100%);
+        }
 
-      /* Row 3: Attack 1 & Attack 2 Action Buttons (Crimson & Magenta) */
-      .fg-btn-atk {
-        min-width: 130px;
-      }
-      .fg-btn-atk1 {
-        background: linear-gradient(180deg, #d32f2f 0%, #880e4f 100%);
-        border: 1px solid #f44336;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 3px 0 #4a001a, 0 4px 8px rgba(211,47,47,0.35);
-      }
-      .fg-btn-atk1:hover {
-        background: linear-gradient(180deg, #e53935 0%, #ad1457 100%);
-      }
+        /* Row 2: Left & Right Movement Buttons (Purple / Violet) */
+        .fg-btn-move {
+          min-width: 130px;
+          background: linear-gradient(180deg, #7b1fa2 0%, #4a148c 100%);
+          border: 1px solid #9c27b0;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 3px 0 #280854, 0 4px 8px rgba(123, 31, 162, 0.35);
+        }
 
-      .fg-btn-atk2 {
-        background: linear-gradient(180deg, #c2185b 0%, #4a148c 100%);
-        border: 1px solid #e91e63;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 3px 0 #2c0542, 0 4px 8px rgba(194,24,91,0.35);
-      }
-      .fg-btn-atk2:hover {
-        background: linear-gradient(180deg, #d81b60 0%, #6a1b9a 100%);
-      }
+        .fg-btn-move:hover {
+          background: linear-gradient(180deg, #8e24aa 0%, #6a1b9a 100%);
+        }
 
-      /* Disabled state at arena edges */
-      .fg-btn-disabled {
-        opacity: 0.28 !important;
-        cursor: not-allowed !important;
-        pointer-events: none !important;
-        box-shadow: none !important;
-      }
+        /* Row 3: Attack 1 & Attack 2 Action Buttons (Crimson & Magenta) */
+        .fg-btn-atk {
+          min-width: 130px;
+        }
 
-      /* Dynamic Position Controllers: All hidden by default */
-      .fg-ctrl-set {
-        display: none;
-      }
+        .fg-btn-atk1 {
+          background: linear-gradient(180deg, #d32f2f 0%, #880e4f 100%);
+          border: 1px solid #f44336;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 3px 0 #4a001a, 0 4px 8px rgba(211, 47, 47, 0.35);
+        }
 
-      /* Position HUD Dots */
-      .fg-pos-hud {
-        margin-top: 10px;
-        font-size: 10px;
-        color: #7b6288;
-        letter-spacing: 1.5px;
-      }
-      .fg-dot {
-        display: inline-block;
-        width: 6px;
-        height: 6px;
-        margin: 0 2px;
-        border-radius: 50%;
-        background-color: #3b2247;
-        transition: background-color 0.2s ease, box-shadow 0.2s ease;
-      }
+        .fg-btn-atk1:hover {
+          background: linear-gradient(180deg, #e53935 0%, #ad1457 100%);
+        }
 
-      /* =======================================================================
+        .fg-btn-atk2 {
+          background: linear-gradient(180deg, #c2185b 0%, #4a148c 100%);
+          border: 1px solid #e91e63;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 3px 0 #2c0542, 0 4px 8px rgba(194, 24, 91, 0.35);
+        }
+
+        .fg-btn-atk2:hover {
+          background: linear-gradient(180deg, #d81b60 0%, #6a1b9a 100%);
+        }
+
+        /* Disabled state at arena edges */
+        .fg-btn-disabled {
+          opacity: 0.28 !important;
+          cursor: not-allowed !important;
+          pointer-events: none !important;
+          box-shadow: none !important;
+        }
+
+        /* Dynamic Position Controllers: All hidden by default */
+        .fg-ctrl-set {
+          display: none;
+        }
+
+        /* Position HUD Dots */
+        .fg-pos-hud {
+          margin-top: 10px;
+          font-size: 10px;
+          color: #7b6288;
+          letter-spacing: 1.5px;
+        }
+
+        .fg-dot {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          margin: 0 2px;
+          border-radius: 50%;
+          background-color: #3b2247;
+          transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Stack the health bar above the player name */
+        .fg-p1-status {
+          width: 160px;
+          max-width: 48%;
+          text-align: left;
+        }
+
+        /* Health bar frame / empty portion */
+        .fg-health-track {
+          height: 14px;
+          margin-bootm: 5px;
+          padding: 2px;
+          overflow: hidden;
+          box-sizing: border-box;
+          background-color: #3a1018;
+          border: 1px solid #ffd700;
+          border-radius: 3px;
+          box-shadow: 0 0 8px rgba(255, 215, 0, 0.35);
+          ;
+        }
+
+        /* Remaining health */
+        .fg-health-fill {
+          height: 100%;
+          background-color: #43d34a;
+          background-image: linear-gradient(180deg,
+              #a0ff65 0%,
+              #43d34a 45%,
+              #17832a 100%);
+        }
+
+        /* =======================================================================
          7 STAGE POSITION STATES (Anchor Left + Control Swap + Dot Active)
          ======================================================================= */
 
-      /* POS 1 */
-      #fg_pos_1:checked ~ .fg-container #fg_ctrl_1 { display: inline-block !important; }
-      #fg_pos_1:checked ~ .fg-container .fg-character-anchor { left: 5% !important; }
-      #fg_pos_1:checked ~ .fg-container #fg_dot_1 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
-
-      /* POS 2 */
-      #fg_pos_2:checked ~ .fg-container #fg_ctrl_2 { display: inline-block !important; }
-      #fg_pos_2:checked ~ .fg-container .fg-character-anchor { left: 18% !important; }
-      #fg_pos_2:checked ~ .fg-container #fg_dot_2 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
-
-      /* POS 3 */
-      #fg_pos_3:checked ~ .fg-container #fg_ctrl_3 { display: inline-block !important; }
-      #fg_pos_3:checked ~ .fg-container .fg-character-anchor { left: 31% !important; }
-      #fg_pos_3:checked ~ .fg-container #fg_dot_3 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
-
-      /* POS 4 (CENTER DEFAULT) */
-      #fg_pos_4:checked ~ .fg-container #fg_ctrl_4 { display: inline-block !important; }
-      #fg_pos_4:checked ~ .fg-container .fg-character-anchor { left: 44% !important; }
-      #fg_pos_4:checked ~ .fg-container #fg_dot_4 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
-
-      /* POS 5 */
-      #fg_pos_5:checked ~ .fg-container #fg_ctrl_5 { display: inline-block !important; }
-      #fg_pos_5:checked ~ .fg-container .fg-character-anchor { left: 57% !important; }
-      #fg_pos_5:checked ~ .fg-container #fg_dot_5 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
-
-      /* POS 6 */
-      #fg_pos_6:checked ~ .fg-container #fg_ctrl_6 { display: inline-block !important; }
-      #fg_pos_6:checked ~ .fg-container .fg-character-anchor { left: 70% !important; }
-      #fg_pos_6:checked ~ .fg-container #fg_dot_6 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
-
-      /* POS 7 */
-      #fg_pos_7:checked ~ .fg-container #fg_ctrl_7 { display: inline-block !important; }
-      #fg_pos_7:checked ~ .fg-container .fg-character-anchor { left: 82% !important; }
-      #fg_pos_7:checked ~ .fg-container #fg_dot_7 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
-
-      /* Responsive Mobile Viewports (max-width: 599px) */
-      @media only screen and (max-width: 599px) {
-        .fg-stage {
-          height: 240px !important;
+        /* POS 1 */
+        #fg_pos_1:checked~.fg-container #fg_ctrl_1 {
+          display: inline-block !important;
         }
-        .fg-character-anchor {
-          width: 65px !important;
-          height: 100px !important;
-          bottom: 22px !important;
+
+        #fg_pos_1:checked~.fg-container .fg-character-anchor {
+          left: 5% !important;
         }
-        .fg-btn {
-          padding: 8px 12px !important;
-          font-size: 11px !important;
-          margin: 2px 3px !important;
+
+        #fg_pos_1:checked~.fg-container #fg_dot_1 {
+          background-color: #ffd700 !important;
+          box-shadow: 0 0 6px #ffd700;
         }
-        .fg-btn-jump {
-          min-width: 120px !important;
+
+        /* POS 2 */
+        #fg_pos_2:checked~.fg-container #fg_ctrl_2 {
+          display: inline-block !important;
         }
-        .fg-btn-move,
-        .fg-btn-atk {
-          min-width: 105px !important;
+
+        #fg_pos_2:checked~.fg-container .fg-character-anchor {
+          left: 18% !important;
         }
-      }
-    </style>
 
-    <!--[if !mso]><!-->
-    <!-- INTERACTIVE GAME ENGINE (Apple Mail, iOS, WebKit) -->
-    
-    <!-- Position Radio Inputs -->
-    <input type="radio" name="fg_pos" id="fg_pos_1" class="fg-pos-radio" />
-    <input type="radio" name="fg_pos" id="fg_pos_2" class="fg-pos-radio" />
-    <input type="radio" name="fg_pos" id="fg_pos_3" class="fg-pos-radio" />
-    <input type="radio" name="fg_pos" id="fg_pos_4" class="fg-pos-radio" checked="checked" />
-    <input type="radio" name="fg_pos" id="fg_pos_5" class="fg-pos-radio" />
-    <input type="radio" name="fg_pos" id="fg_pos_6" class="fg-pos-radio" />
-    <input type="radio" name="fg_pos" id="fg_pos_7" class="fg-pos-radio" />
+        #fg_pos_2:checked~.fg-container #fg_dot_2 {
+          background-color: #ffd700 !important;
+          box-shadow: 0 0 6px #ffd700;
+        }
 
-    <!-- Action Radio Inputs (Jump, Punch, Kick - Unified under fg_action to ensure clean resets without state collisions) -->
-    <input type="radio" name="fg_action" id="fg_act_idle" class="fg-action-radio" checked="checked" />
-    <input type="radio" name="fg_action" id="fg_jump_1" class="fg-action-radio" />
-    <input type="radio" name="fg_action" id="fg_jump_2" class="fg-action-radio" />
-    <input type="radio" name="fg_action" id="fg_atk1_1" class="fg-action-radio" />
-    <input type="radio" name="fg_action" id="fg_atk1_2" class="fg-action-radio" />
-    <input type="radio" name="fg_action" id="fg_atk2_1" class="fg-action-radio" />
-    <input type="radio" name="fg_action" id="fg_atk2_2" class="fg-action-radio" />
+        /* POS 3 */
+        #fg_pos_3:checked~.fg-container #fg_ctrl_3 {
+          display: inline-block !important;
+        }
 
-    <div class="fg-container">
+        #fg_pos_3:checked~.fg-container .fg-character-anchor {
+          left: 31% !important;
+        }
 
-      <!-- Combat Arena -->
-      <div class="fg-stage">
+        #fg_pos_3:checked~.fg-container #fg_dot_3 {
+          background-color: #ffd700 !important;
+          box-shadow: 0 0 6px #ffd700;
+        }
 
-        <!-- Top HUD -->
-        <div class="fg-hud">
-          <div class="fg-p1-hud">%%=v(@P1_Name)=%%</div>
-          <div class="fg-zone-title">OUTWORLD ARENA</div>
+        /* POS 4 (CENTER DEFAULT) */
+        #fg_pos_4:checked~.fg-container #fg_ctrl_4 {
+          display: inline-block !important;
+        }
+
+        #fg_pos_4:checked~.fg-container .fg-character-anchor {
+          left: 44% !important;
+        }
+
+        #fg_pos_4:checked~.fg-container #fg_dot_4 {
+          background-color: #ffd700 !important;
+          box-shadow: 0 0 6px #ffd700;
+        }
+
+        /* POS 5 */
+        #fg_pos_5:checked~.fg-container #fg_ctrl_5 {
+          display: inline-block !important;
+        }
+
+        #fg_pos_5:checked~.fg-container .fg-character-anchor {
+          left: 57% !important;
+        }
+
+        #fg_pos_5:checked~.fg-container #fg_dot_5 {
+          background-color: #ffd700 !important;
+          box-shadow: 0 0 6px #ffd700;
+        }
+
+        /* POS 6 */
+        #fg_pos_6:checked~.fg-container #fg_ctrl_6 {
+          display: inline-block !important;
+        }
+
+        #fg_pos_6:checked~.fg-container .fg-character-anchor {
+          left: 70% !important;
+        }
+
+        #fg_pos_6:checked~.fg-container #fg_dot_6 {
+          background-color: #ffd700 !important;
+          box-shadow: 0 0 6px #ffd700;
+        }
+
+        /* POS 7 */
+        #fg_pos_7:checked~.fg-container #fg_ctrl_7 {
+          display: inline-block !important;
+        }
+
+        #fg_pos_7:checked~.fg-container .fg-character-anchor {
+          left: 82% !important;
+        }
+
+        #fg_pos_7:checked~.fg-container #fg_dot_7 {
+          background-color: #ffd700 !important;
+          box-shadow: 0 0 6px #ffd700;
+        }
+
+        /* Responsive Mobile Viewports (max-width: 599px) */
+        @media only screen and (max-width: 599px) {
+          .fg-stage {
+            height: 240px !important;
+          }
+
+          .fg-character-anchor {
+            width: 65px !important;
+            height: 100px !important;
+            bottom: 22px !important;
+          }
+
+          .fg-btn {
+            padding: 8px 12px !important;
+            font-size: 11px !important;
+            margin: 2px 3px !important;
+          }
+
+          .fg-btn-jump {
+            min-width: 120px !important;
+          }
+
+          .fg-btn-move,
+          .fg-btn-atk {
+            min-width: 105px !important;
+          }
+        }
+      </style>
+
+      <!--[if !mso]><!-->
+      <!-- INTERACTIVE GAME ENGINE (Apple Mail, iOS, WebKit) -->
+
+      <!-- Position Radio Inputs -->
+      <input type="radio" name="fg_pos" id="fg_pos_1" class="fg-pos-radio" />
+      <input type="radio" name="fg_pos" id="fg_pos_2" class="fg-pos-radio" />
+      <input type="radio" name="fg_pos" id="fg_pos_3" class="fg-pos-radio" />
+      <input type="radio" name="fg_pos" id="fg_pos_4" class="fg-pos-radio" checked="checked" />
+      <input type="radio" name="fg_pos" id="fg_pos_5" class="fg-pos-radio" />
+      <input type="radio" name="fg_pos" id="fg_pos_6" class="fg-pos-radio" />
+      <input type="radio" name="fg_pos" id="fg_pos_7" class="fg-pos-radio" />
+
+      <!-- Action Radio Inputs (Jump, Punch, Kick - Unified under fg_action to ensure clean resets without state collisions) -->
+      <input type="radio" name="fg_action" id="fg_act_idle" class="fg-action-radio" checked="checked" />
+      <input type="radio" name="fg_action" id="fg_jump_1" class="fg-action-radio" />
+      <input type="radio" name="fg_action" id="fg_jump_2" class="fg-action-radio" />
+      <input type="radio" name="fg_action" id="fg_atk1_1" class="fg-action-radio" />
+      <input type="radio" name="fg_action" id="fg_atk1_2" class="fg-action-radio" />
+      <input type="radio" name="fg_action" id="fg_atk2_1" class="fg-action-radio" />
+      <input type="radio" name="fg_action" id="fg_atk2_2" class="fg-action-radio" />
+
+      <div class="fg-container">
+
+        <!-- Combat Arena -->
+        <div class="fg-stage">
+
+          <!-- Top HUD -->
+          <div class="fg-hud">
+
+            <!-- Player health and name -->
+            <div class="fg-p1-status">
+              <div class="fg-health-track" role="presentation" aria-label="Player health" aria-valuemin="0"
+                aria-valuemax="100" aria-valuenow="%%=v(@P1_Health)=%%">
+                <div class="fg-health-fill" style="width: %%=v(@P1_Health)=%%">
+                </div>
+              </div>
+              <div class="fg-p1-hud">%%=v(@P1_Name)=%%</div>
+            </div>
+
+            <div class="fg-zone-title">OUTWORLD ARENA</div>
+          </div>
+
+          <!-- The Moveable Character -->
+          <div class="fg-character-anchor">
+            <div class="fg-jump-wrapper">
+              <div class="fg-character-sprite">
+                %%[ IF @P1_Image != "" AND NOT Empty(@P1_Image) THEN ]%%
+                <!-- Custom User Image (.png or .gif) -->
+                <img src="%%=v(@P1_Image)=%%" alt="%%=v(@P1_Name)=%%"
+                  style="display: block; width: 100%; height: 100%; object-fit: contain;" />
+                %%[ ELSE ]%%
+                <!-- Built-in Retro Ninja Fighter Sprite (Scalable SVG) -->
+                <svg viewBox="0 0 80 120" width="100%" height="100%"
+                  style="display: block; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));">
+                  <!-- Head / Ninja Mask -->
+                  <circle cx="40" cy="22" r="14" fill="#1b1b1b" stroke="#000" stroke-width="2" />
+                  <!-- Yellow Ninja Hood Trim -->
+                  <path d="M 28 16 Q 40 8 52 16 L 52 26 Q 40 32 28 26 Z" fill="#e5ad06" stroke="#8d6800"
+                    stroke-width="1.5" />
+                  <!-- Eyes Slot -->
+                  <rect x="33" y="19" width="14" height="4" rx="2" fill="#fff" />
+                  <circle cx="37" cy="21" r="1.2" fill="#000" />
+                  <circle cx="43" cy="21" r="1.2" fill="#000" />
+                  <!-- Ninja Mask Cloth -->
+                  <path d="M 32 25 L 48 25 L 46 34 L 34 34 Z" fill="#e5ad06" stroke="#8d6800" stroke-width="1.5" />
+                  <!-- Torso / Gi -->
+                  <path d="M 27 36 L 53 36 L 49 72 L 31 72 Z" fill="#1b1b1b" stroke="#000" stroke-width="2" />
+                  <!-- Yellow Tabard V-Strap -->
+                  <path d="M 29 36 L 37 36 L 41 68 L 33 68 Z" fill="#e5ad06" />
+                  <path d="M 51 36 L 43 36 L 39 68 L 47 68 Z" fill="#e5ad06" />
+                  <!-- Belt / Sash -->
+                  <rect x="29" y="68" width="22" height="6" fill="#111" stroke="#e5ad06" stroke-width="1" />
+                  <rect x="38" y="74" width="4" height="14" fill="#e5ad06" />
+                  <!-- Left Arm / Fist -->
+                  <path d="M 27 38 L 16 52 L 20 66 L 27 58 Z" fill="#1b1b1b" />
+                  <circle cx="21" cy="65" r="5" fill="#e5ad06" stroke="#000" stroke-width="1" />
+                  <!-- Right Arm / Guard -->
+                  <path d="M 53 38 L 64 50 L 59 64 L 52 56 Z" fill="#1b1b1b" />
+                  <circle cx="59" cy="64" r="5" fill="#e5ad06" stroke="#000" stroke-width="1" />
+                  <!-- Legs / Stance -->
+                  <!-- Left Leg -->
+                  <path d="M 32 74 L 25 96 L 22 114 L 30 114 L 35 96 L 39 74 Z" fill="#1b1b1b" stroke="#000"
+                    stroke-width="1.5" />
+                  <!-- Right Leg -->
+                  <path d="M 48 74 L 55 96 L 58 114 L 50 114 L 45 96 L 41 74 Z" fill="#1b1b1b" stroke="#000"
+                    stroke-width="1.5" />
+                  <!-- Shin Guards -->
+                  <rect x="22" y="98" width="8" height="13" rx="2" fill="#e5ad06" stroke="#8d6800" stroke-width="1" />
+                  <rect x="50" y="98" width="8" height="13" rx="2" fill="#e5ad06" stroke="#8d6800" stroke-width="1" />
+                </svg>
+                %%[ ENDIF ]%%
+              </div>
+            </div>
+            <!-- Dynamic Foot Shadow -->
+            <div class="fg-shadow"></div>
+          </div>
+
+          <!-- Ground Floor -->
+          <div class="fg-floor"></div>
+
         </div>
 
-        <!-- The Moveable Character -->
-        <div class="fg-character-anchor">
-          <div class="fg-jump-wrapper">
-            <div class="fg-character-sprite">
-            %%[ IF @P1_Image != "" AND NOT Empty(@P1_Image) THEN ]%%
-              <!-- Custom User Image (.png or .gif) -->
-              <img src="%%=v(@P1_Image)=%%" alt="%%=v(@P1_Name)=%%" style="display: block; width: 100%; height: 100%; object-fit: contain;" />
-            %%[ ELSE ]%%
-              <!-- Built-in Retro Ninja Fighter Sprite (Scalable SVG) -->
-              <svg viewBox="0 0 80 120" width="100%" height="100%" style="display: block; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));">
-                <!-- Head / Ninja Mask -->
-                <circle cx="40" cy="22" r="14" fill="#1b1b1b" stroke="#000" stroke-width="2"/>
-                <!-- Yellow Ninja Hood Trim -->
-                <path d="M 28 16 Q 40 8 52 16 L 52 26 Q 40 32 28 26 Z" fill="#e5ad06" stroke="#8d6800" stroke-width="1.5" />
-                <!-- Eyes Slot -->
-                <rect x="33" y="19" width="14" height="4" rx="2" fill="#fff" />
-                <circle cx="37" cy="21" r="1.2" fill="#000" />
-                <circle cx="43" cy="21" r="1.2" fill="#000" />
-                <!-- Ninja Mask Cloth -->
-                <path d="M 32 25 L 48 25 L 46 34 L 34 34 Z" fill="#e5ad06" stroke="#8d6800" stroke-width="1.5" />
-                <!-- Torso / Gi -->
-                <path d="M 27 36 L 53 36 L 49 72 L 31 72 Z" fill="#1b1b1b" stroke="#000" stroke-width="2"/>
-                <!-- Yellow Tabard V-Strap -->
-                <path d="M 29 36 L 37 36 L 41 68 L 33 68 Z" fill="#e5ad06" />
-                <path d="M 51 36 L 43 36 L 39 68 L 47 68 Z" fill="#e5ad06" />
-                <!-- Belt / Sash -->
-                <rect x="29" y="68" width="22" height="6" fill="#111" stroke="#e5ad06" stroke-width="1" />
-                <rect x="38" y="74" width="4" height="14" fill="#e5ad06" />
-                <!-- Left Arm / Fist -->
-                <path d="M 27 38 L 16 52 L 20 66 L 27 58 Z" fill="#1b1b1b" />
-                <circle cx="21" cy="65" r="5" fill="#e5ad06" stroke="#000" stroke-width="1" />
-                <!-- Right Arm / Guard -->
-                <path d="M 53 38 L 64 50 L 59 64 L 52 56 Z" fill="#1b1b1b" />
-                <circle cx="59" cy="64" r="5" fill="#e5ad06" stroke="#000" stroke-width="1" />
-                <!-- Legs / Stance -->
-                <!-- Left Leg -->
-                <path d="M 32 74 L 25 96 L 22 114 L 30 114 L 35 96 L 39 74 Z" fill="#1b1b1b" stroke="#000" stroke-width="1.5" />
-                <!-- Right Leg -->
-                <path d="M 48 74 L 55 96 L 58 114 L 50 114 L 45 96 L 41 74 Z" fill="#1b1b1b" stroke="#000" stroke-width="1.5" />
-                <!-- Shin Guards -->
-                <rect x="22" y="98" width="8" height="13" rx="2" fill="#e5ad06" stroke="#8d6800" stroke-width="1" />
-                <rect x="50" y="98" width="8" height="13" rx="2" fill="#e5ad06" stroke="#8d6800" stroke-width="1" />
-              </svg>
-            %%[ ENDIF ]%%
+        <!-- Arcade Control Pad (3-Tier D-Pad Layout matching user sketch) -->
+        <div class="fg-control-panel">
+          <div class="fg-controls-wrap">
+
+            <!-- Row 1: Jump (Centered) -->
+            <div class="fg-ctrl-row fg-row-jump">
+              <label for="fg_jump_1" class="fg-btn fg-btn-jump fg-jump-alt-1">%%=v(@Btn_Jump_Label)=%%</label>
+              <label for="fg_jump_2" class="fg-btn fg-btn-jump fg-jump-alt-2">%%=v(@Btn_Jump_Label)=%%</label>
+            </div>
+
+            <!-- Row 2: Left & Right (Movement) -->
+            <div class="fg-ctrl-row fg-row-move">
+              <!-- Pos 1 -->
+              <div id="fg_ctrl_1" class="fg-ctrl-set">
+                <span class="fg-btn fg-btn-move fg-btn-disabled">%%=v(@Btn_Left_Label)=%%</span>
+                <label for="fg_pos_2" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+              </div>
+
+              <!-- Pos 2 -->
+              <div id="fg_ctrl_2" class="fg-ctrl-set">
+                <label for="fg_pos_1" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+                <label for="fg_pos_3" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+              </div>
+
+              <!-- Pos 3 -->
+              <div id="fg_ctrl_3" class="fg-ctrl-set">
+                <label for="fg_pos_2" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+                <label for="fg_pos_4" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+              </div>
+
+              <!-- Pos 4 (Default Center) -->
+              <div id="fg_ctrl_4" class="fg-ctrl-set">
+                <label for="fg_pos_3" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+                <label for="fg_pos_5" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+              </div>
+
+              <!-- Pos 5 -->
+              <div id="fg_ctrl_5" class="fg-ctrl-set">
+                <label for="fg_pos_4" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+                <label for="fg_pos_6" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+              </div>
+
+              <!-- Pos 6 -->
+              <div id="fg_ctrl_6" class="fg-ctrl-set">
+                <label for="fg_pos_5" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+                <label for="fg_pos_7" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+              </div>
+
+              <!-- Pos 7 -->
+              <div id="fg_ctrl_7" class="fg-ctrl-set">
+                <label for="fg_pos_6" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+                <span class="fg-btn fg-btn-move fg-btn-disabled">%%=v(@Btn_Right_Label)=%%</span>
+              </div>
+            </div>
+
+            <!-- Row 3: Attack 1 & Attack 2 -->
+            <div class="fg-ctrl-row fg-row-atk">
+              <label for="fg_atk1_1"
+                class="fg-btn fg-btn-atk fg-btn-atk1 fg-atk1-alt-1">%%=v(@Btn_Atk1_Label)=%%</label>
+              <label for="fg_atk1_2"
+                class="fg-btn fg-btn-atk fg-btn-atk1 fg-atk1-alt-2">%%=v(@Btn_Atk1_Label)=%%</label>
+
+              <label for="fg_atk2_1"
+                class="fg-btn fg-btn-atk fg-btn-atk2 fg-atk2-alt-1">%%=v(@Btn_Atk2_Label)=%%</label>
+              <label for="fg_atk2_2"
+                class="fg-btn fg-btn-atk fg-btn-atk2 fg-atk2-alt-2">%%=v(@Btn_Atk2_Label)=%%</label>
+            </div>
+
+          </div>
+
+          <!-- Position Dots Indicator -->
+          <div class="fg-pos-hud">
+            POSITION:
+            <span id="fg_dot_1" class="fg-dot"></span>
+            <span id="fg_dot_2" class="fg-dot"></span>
+            <span id="fg_dot_3" class="fg-dot"></span>
+            <span id="fg_dot_4" class="fg-dot"></span>
+            <span id="fg_dot_5" class="fg-dot"></span>
+            <span id="fg_dot_6" class="fg-dot"></span>
+            <span id="fg_dot_7" class="fg-dot"></span>
           </div>
         </div>
-        <!-- Dynamic Foot Shadow -->
-        <div class="fg-shadow"></div>
+
       </div>
+      <!--<![endif]-->
 
-        <!-- Ground Floor -->
-        <div class="fg-floor"></div>
-
-      </div>
-
-      <!-- Arcade Control Pad (3-Tier D-Pad Layout matching user sketch) -->
-      <div class="fg-control-panel">
-        <div class="fg-controls-wrap">
-
-          <!-- Row 1: Jump (Centered) -->
-          <div class="fg-ctrl-row fg-row-jump">
-            <label for="fg_jump_1" class="fg-btn fg-btn-jump fg-jump-alt-1">%%=v(@Btn_Jump_Label)=%%</label>
-            <label for="fg_jump_2" class="fg-btn fg-btn-jump fg-jump-alt-2">%%=v(@Btn_Jump_Label)=%%</label>
-          </div>
-
-          <!-- Row 2: Left & Right (Movement) -->
-          <div class="fg-ctrl-row fg-row-move">
-            <!-- Pos 1 -->
-            <div id="fg_ctrl_1" class="fg-ctrl-set">
-              <span class="fg-btn fg-btn-move fg-btn-disabled">%%=v(@Btn_Left_Label)=%%</span>
-              <label for="fg_pos_2" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
-            </div>
-
-            <!-- Pos 2 -->
-            <div id="fg_ctrl_2" class="fg-ctrl-set">
-              <label for="fg_pos_1" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
-              <label for="fg_pos_3" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
-            </div>
-
-            <!-- Pos 3 -->
-            <div id="fg_ctrl_3" class="fg-ctrl-set">
-              <label for="fg_pos_2" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
-              <label for="fg_pos_4" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
-            </div>
-
-            <!-- Pos 4 (Default Center) -->
-            <div id="fg_ctrl_4" class="fg-ctrl-set">
-              <label for="fg_pos_3" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
-              <label for="fg_pos_5" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
-            </div>
-
-            <!-- Pos 5 -->
-            <div id="fg_ctrl_5" class="fg-ctrl-set">
-              <label for="fg_pos_4" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
-              <label for="fg_pos_6" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
-            </div>
-
-            <!-- Pos 6 -->
-            <div id="fg_ctrl_6" class="fg-ctrl-set">
-              <label for="fg_pos_5" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
-              <label for="fg_pos_7" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
-            </div>
-
-            <!-- Pos 7 -->
-            <div id="fg_ctrl_7" class="fg-ctrl-set">
-              <label for="fg_pos_6" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
-              <span class="fg-btn fg-btn-move fg-btn-disabled">%%=v(@Btn_Right_Label)=%%</span>
-            </div>
-          </div>
-
-          <!-- Row 3: Attack 1 & Attack 2 -->
-          <div class="fg-ctrl-row fg-row-atk">
-            <label for="fg_atk1_1" class="fg-btn fg-btn-atk fg-btn-atk1 fg-atk1-alt-1">%%=v(@Btn_Atk1_Label)=%%</label>
-            <label for="fg_atk1_2" class="fg-btn fg-btn-atk fg-btn-atk1 fg-atk1-alt-2">%%=v(@Btn_Atk1_Label)=%%</label>
-
-            <label for="fg_atk2_1" class="fg-btn fg-btn-atk fg-btn-atk2 fg-atk2-alt-1">%%=v(@Btn_Atk2_Label)=%%</label>
-            <label for="fg_atk2_2" class="fg-btn fg-btn-atk fg-btn-atk2 fg-atk2-alt-2">%%=v(@Btn_Atk2_Label)=%%</label>
-          </div>
-
-        </div>
-
-        <!-- Position Dots Indicator -->
-        <div class="fg-pos-hud">
-          POSITION: 
-          <span id="fg_dot_1" class="fg-dot"></span>
-          <span id="fg_dot_2" class="fg-dot"></span>
-          <span id="fg_dot_3" class="fg-dot"></span>
-          <span id="fg_dot_4" class="fg-dot"></span>
-          <span id="fg_dot_5" class="fg-dot"></span>
-          <span id="fg_dot_6" class="fg-dot"></span>
-          <span id="fg_dot_7" class="fg-dot"></span>
-        </div>
-      </div>
-
-    </div>
-    <!--<![endif]-->
-
-    <!--[if mso]>
+      <!--[if mso]>
     <div style="width: 100%; max-width: 600px; margin: 0 auto; background-color: %%=v(@Arena_BG_Color)=%%; border: 2px solid #3d1c47;">
       <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
         <tr>
@@ -774,16 +1293,17 @@
     </div>
     <![endif]-->
 
+    </div>
   </div>
-</div>
 
-<!--[if mso]>
+  <!--[if mso]>
     </td>
   </tr>
 </table>
 <![endif]-->
 
-%%=EndImpressionRegion()=%%
+  %%=EndImpressionRegion()=%%
 
-%%[ /* </div> */ ]%%
+  %%[ /*
+</div> */ ]%%
 <!-- /Fighting Game Email Block -->
