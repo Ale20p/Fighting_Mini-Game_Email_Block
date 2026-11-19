@@ -1,0 +1,577 @@
+<!-- Fighting Game Email Block - TITTC Format -->
+%%[ /* <br><br><span style="color:red;"> - 2D FIGHTING MINI-GAME BLOCK - </span><br><br><div style="display:none;"> */ ]%%
+
+%%=BeginImpressionRegion("Fighting_Game_Block")=%%
+
+%%[
+  /****************************************************************************
+   * FIGHTING MINI-GAME CONFIGURATION
+   * Configurable per email deployment or Data Extension content row.
+   ****************************************************************************/
+
+  Set @Mod_ID = "FIGHT"
+  Set @Mod_Width = "600"
+  Set @Mod_Height = "340"
+
+  /* Arena Background: URL to .png, .jpg or .gif */
+  Set @Arena_BG_Image = "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=600&auto=format&fit=crop&q=80"
+  Set @Arena_BG_Color = "#0f0714"
+  Set @Floor_Color = "#1f1026"
+
+  /* Fighter 1 (Player) Settings */
+  Set @P1_Name = "SCORPION"
+  /* Set @P1_Image to a custom .png / .gif URL. If blank, built-in retro ninja sprite is used */
+  Set @P1_Image = ""
+  Set @P1_Width = "80px"
+  Set @P1_Height = "125px"
+
+  /* Controls Settings */
+  Set @Btn_Left_Label = "◀ WALK LEFT"
+  Set @Btn_Right_Label = "WALK RIGHT ▶"
+  Set @Btn_Jump_Label = "▲ JUMP"
+
+  /* Non-Interactive Fallback (Outlook Desktop / MSO) */
+  Set @Fallback_Image = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80"
+  Set @Fallback_Title = "MORTAL EMAIL: TEST YOUR MIGHT"
+  Set @Fallback_CTA_Text = "PLAY INTERACTIVE GAME"
+  Set @Fallback_CTA_URL = "https://example.com/fighting-game"
+
+]%%
+
+<!--[if mso]>
+<table cellpadding="0" cellspacing="0" border="0" style="width: 600px; margin: 0 auto;">
+  <tr>
+    <td style="width: 600px; padding: 0; text-align: center; background-color: %%=v(@Arena_BG_Color)=%%;">
+<![endif]-->
+
+<div class="paddingWrapper" style="width: 100%; max-width: 600px; margin: 0 auto; padding: 0;">
+  <div class="columnContainer" style="display: block; width: 100%; max-width: 600px; margin: 0 auto; text-align: center; background-color: %%=v(@Arena_BG_Color)=%%;">
+
+    <style type="text/css">
+      /* Reset & Base Rules */
+      .fg-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        overflow: hidden;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Courier New', Courier, monospace, sans-serif;
+        box-sizing: border-box;
+      }
+
+      /* Hidden Radio & Controller Inputs (Off-screen accessible for 100% client support) */
+      .fg-pos-radio,
+      .fg-jump-radio {
+        position: absolute !important;
+        opacity: 0 !important;
+        width: 1px !important;
+        height: 1px !important;
+        margin: -1px !important;
+        padding: 0 !important;
+        z-index: -100 !important;
+        pointer-events: none !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+      }
+
+      /* Arena Stage */
+      .fg-stage {
+        position: relative;
+        width: 100%;
+        height: 290px;
+        background-color: %%=v(@Arena_BG_Color)=%%;
+        background-image: url('%%=v(@Arena_BG_Image)=%%');
+        background-size: cover;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        border: 2px solid #3d1c47;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      /* Arena Vignette & Floor Ground */
+      .fg-floor {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 38px;
+        background: linear-gradient(180deg, rgba(20, 8, 28, 0.7) 0%, rgba(10, 4, 15, 0.95) 100%);
+        border-top: 2px solid #58216b;
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.8);
+      }
+
+      /* HUD Header Bar */
+      .fg-hud {
+        position: absolute;
+        top: 10px;
+        left: 12px;
+        right: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 20;
+        pointer-events: none;
+      }
+
+      .fg-p1-hud {
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid #ffd700;
+        padding: 4px 10px;
+        border-radius: 4px;
+        color: #ffd700;
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+      }
+
+      .fg-zone-title {
+        color: #ff3344;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-shadow: 0 0 6px rgba(255, 51, 68, 0.8), 2px 2px 0px #000;
+      }
+
+      /* Character Sprite & Stance */
+      .fg-character-anchor {
+        position: absolute;
+        bottom: 26px;
+        width: 80px;
+        height: 125px;
+        transition: left 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 10;
+        will-change: left, transform;
+      }
+
+      .fg-character-sprite {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-origin: center bottom;
+        animation: fgIdleStance 1.4s ease-in-out infinite alternate;
+      }
+
+      /* Shadow under character */
+      .fg-shadow {
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 64px;
+        height: 14px;
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 70%);
+        border-radius: 50%;
+        z-index: -1;
+      }
+
+      /* Idle Animation */
+      @keyframes fgIdleStance {
+        0% { transform: translateY(0px) scale(1, 1); }
+        50% { transform: translateY(-3px) scale(0.98, 1.02); }
+        100% { transform: translateY(1px) scale(1.02, 0.98); }
+      }
+
+      /* Jump Keyframes */
+      @keyframes fgJumpArc1 {
+        0% { transform: translateY(0px); }
+        40% { transform: translateY(-90px); }
+        60% { transform: translateY(-90px); }
+        100% { transform: translateY(0px); }
+      }
+
+      @keyframes fgJumpArc2 {
+        0% { transform: translateY(0px); }
+        40% { transform: translateY(-90px); }
+        60% { transform: translateY(-90px); }
+        100% { transform: translateY(0px); }
+      }
+
+      /* Alternating Jump Action Triggers */
+      #fg_jump_1:checked ~ .fg-container .fg-character-sprite {
+        animation: fgJumpArc1 0.75s cubic-bezier(0.25, 0.9, 0.3, 1) !important;
+      }
+
+      #fg_jump_2:checked ~ .fg-container .fg-character-sprite {
+        animation: fgJumpArc2 0.75s cubic-bezier(0.25, 0.9, 0.3, 1) !important;
+      }
+
+      /* Alternating Jump Button Display */
+      .fg-jump-alt-1,
+      .fg-jump-alt-2 {
+        display: none;
+      }
+
+      #fg_jump_idle:checked ~ .fg-container .fg-jump-alt-1,
+      #fg_jump_2:checked ~ .fg-container .fg-jump-alt-1 {
+        display: inline-block !important;
+      }
+
+      #fg_jump_1:checked ~ .fg-container .fg-jump-alt-2 {
+        display: inline-block !important;
+      }
+
+      /* Control Pad Bar */
+      .fg-control-panel {
+        background: linear-gradient(180deg, #180d22 0%, #0d0514 100%);
+        border: 2px solid #3d1c47;
+        border-top: none;
+        padding: 10px 8px 12px 8px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      .fg-button-group {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      /* Controller Arcade Buttons */
+      .fg-btn {
+        display: inline-block;
+        padding: 9px 15px;
+        margin: 3px 4px;
+        font-family: 'Courier New', Courier, monospace, sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        color: #ffffff;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 3px 0 #000, 0 4px 6px rgba(0,0,0,0.6);
+        transition: transform 0.08s ease, box-shadow 0.08s ease;
+        -webkit-user-select: none;
+        user-select: none;
+        touch-action: manipulation;
+      }
+
+      .fg-btn:active {
+        transform: translateY(2px);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 1px 0 #000, 0 2px 3px rgba(0,0,0,0.6);
+      }
+
+      /* Movement Buttons Style */
+      .fg-btn-move {
+        background: linear-gradient(180deg, #443266 0%, #291b42 100%);
+        border: 1px solid #7d5aa6;
+      }
+
+      .fg-btn-move:hover {
+        background: linear-gradient(180deg, #574182 0%, #362457 100%);
+      }
+
+      /* Jump Button Style */
+      .fg-btn-jump {
+        background: linear-gradient(180deg, #b83b5e 0%, #6a1b32 100%);
+        border: 1px solid #f05479;
+        color: #fff;
+      }
+
+      .fg-btn-jump:hover {
+        background: linear-gradient(180deg, #d4486f 0%, #83223f 100%);
+      }
+
+      /* Disabled Button State (at edges) */
+      .fg-btn-disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        background: #1c1524 !important;
+        border-color: #3b2c4c !important;
+        box-shadow: none !important;
+        transform: none !important;
+      }
+
+      /* Step position indicators */
+      .fg-pos-hud {
+        margin-top: 8px;
+        font-size: 10px;
+        color: #a48cb5;
+        letter-spacing: 1px;
+      }
+
+      .fg-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        margin: 0 3px;
+        border-radius: 50%;
+        background-color: #3f2a50;
+        vertical-align: middle;
+      }
+
+      /* Hide all dynamic position control groups by default */
+      .fg-ctrl-set {
+        display: none;
+      }
+
+      /* =======================================================================
+         POSITION STATE MACHINE (7 Discrete Steps across the 600px Arena)
+         Position 1:  5% (Far Left)
+         Position 2: 18%
+         Position 3: 31%
+         Position 4: 44% (Center Default)
+         Position 5: 57%
+         Position 6: 70%
+         Position 7: 82% (Far Right)
+         ======================================================================= */
+
+      /* POS 1 */
+      #fg_pos_1:checked ~ .fg-container #fg_ctrl_1 { display: inline-block !important; }
+      #fg_pos_1:checked ~ .fg-container .fg-character-anchor { left: 5% !important; }
+      #fg_pos_1:checked ~ .fg-container #fg_dot_1 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
+
+      /* POS 2 */
+      #fg_pos_2:checked ~ .fg-container #fg_ctrl_2 { display: inline-block !important; }
+      #fg_pos_2:checked ~ .fg-container .fg-character-anchor { left: 18% !important; }
+      #fg_pos_2:checked ~ .fg-container #fg_dot_2 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
+
+      /* POS 3 */
+      #fg_pos_3:checked ~ .fg-container #fg_ctrl_3 { display: inline-block !important; }
+      #fg_pos_3:checked ~ .fg-container .fg-character-anchor { left: 31% !important; }
+      #fg_pos_3:checked ~ .fg-container #fg_dot_3 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
+
+      /* POS 4 (CENTER DEFAULT) */
+      #fg_pos_4:checked ~ .fg-container #fg_ctrl_4 { display: inline-block !important; }
+      #fg_pos_4:checked ~ .fg-container .fg-character-anchor { left: 44% !important; }
+      #fg_pos_4:checked ~ .fg-container #fg_dot_4 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
+
+      /* POS 5 */
+      #fg_pos_5:checked ~ .fg-container #fg_ctrl_5 { display: inline-block !important; }
+      #fg_pos_5:checked ~ .fg-container .fg-character-anchor { left: 57% !important; }
+      #fg_pos_5:checked ~ .fg-container #fg_dot_5 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
+
+      /* POS 6 */
+      #fg_pos_6:checked ~ .fg-container #fg_ctrl_6 { display: inline-block !important; }
+      #fg_pos_6:checked ~ .fg-container .fg-character-anchor { left: 70% !important; }
+      #fg_pos_6:checked ~ .fg-container #fg_dot_6 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
+
+      /* POS 7 */
+      #fg_pos_7:checked ~ .fg-container #fg_ctrl_7 { display: inline-block !important; }
+      #fg_pos_7:checked ~ .fg-container .fg-character-anchor { left: 82% !important; }
+      #fg_pos_7:checked ~ .fg-container #fg_dot_7 { background-color: #ffd700 !important; box-shadow: 0 0 6px #ffd700; }
+
+      /* Mobile Sizing Refinement */
+      @media only screen and (max-width: 599px) {
+        .fg-stage {
+          height: 240px !important;
+        }
+        .fg-character-anchor {
+          width: 65px !important;
+          height: 102px !important;
+          bottom: 22px !important;
+        }
+        .fg-btn {
+          padding: 8px 10px !important;
+          font-size: 11px !important;
+          margin: 2px !important;
+        }
+      }
+    </style>
+
+    <!--[if !mso]><!-->
+    <!-- INTERACTIVE GAME ENGINE (Apple Mail, iOS, WebKit) -->
+    
+    <!-- Position Radio Inputs -->
+    <input type="radio" name="fg_pos" id="fg_pos_1" class="fg-pos-radio" />
+    <input type="radio" name="fg_pos" id="fg_pos_2" class="fg-pos-radio" />
+    <input type="radio" name="fg_pos" id="fg_pos_3" class="fg-pos-radio" />
+    <input type="radio" name="fg_pos" id="fg_pos_4" class="fg-pos-radio" checked="checked" />
+    <input type="radio" name="fg_pos" id="fg_pos_5" class="fg-pos-radio" />
+    <input type="radio" name="fg_pos" id="fg_pos_6" class="fg-pos-radio" />
+    <input type="radio" name="fg_pos" id="fg_pos_7" class="fg-pos-radio" />
+
+    <!-- Jump Radio Inputs (Alternating for continuous jump triggers) -->
+    <input type="radio" name="fg_jump" id="fg_jump_idle" class="fg-jump-radio" checked="checked" />
+    <input type="radio" name="fg_jump" id="fg_jump_1" class="fg-jump-radio" />
+    <input type="radio" name="fg_jump" id="fg_jump_2" class="fg-jump-radio" />
+
+    <div class="fg-container">
+
+      <!-- Combat Arena -->
+      <div class="fg-stage">
+        
+        <!-- Top HUD -->
+        <div class="fg-hud">
+          <div class="fg-p1-hud">%%=v(@P1_Name)=%%</div>
+          <div class="fg-zone-title">OUTWORLD ARENA</div>
+        </div>
+
+        <!-- The Moveable Character -->
+        <div class="fg-character-anchor">
+          <div class="fg-character-sprite">
+            
+            %%[ IF @P1_Image != "" AND NOT Empty(@P1_Image) THEN ]%%
+              <!-- Custom User Image (.png or .gif) -->
+              <img src="%%=v(@P1_Image)=%%" alt="%%=v(@P1_Name)=%%" style="display: block; width: 100%; height: 100%; object-fit: contain;" />
+            %%[ ELSE ]%%
+              <!-- Built-in Retro Ninja Fighter Sprite (Scalable SVG) -->
+              <svg viewBox="0 0 80 120" width="100%" height="100%" style="display: block; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));">
+                <!-- Head / Ninja Mask -->
+                <circle cx="40" cy="22" r="14" fill="#1b1b1b" stroke="#000" stroke-width="2"/>
+                <!-- Yellow Ninja Hood Trim -->
+                <path d="M 28 16 Q 40 8 52 16 L 52 26 Q 40 32 28 26 Z" fill="#e5ad06" stroke="#8d6800" stroke-width="1.5" />
+                <!-- Eyes Slot -->
+                <rect x="33" y="19" width="14" height="4" rx="2" fill="#fff" />
+                <circle cx="37" cy="21" r="1.2" fill="#000" />
+                <circle cx="43" cy="21" r="1.2" fill="#000" />
+                <!-- Ninja Mask Cloth -->
+                <path d="M 32 25 L 48 25 L 46 34 L 34 34 Z" fill="#e5ad06" stroke="#8d6800" stroke-width="1.5" />
+                <!-- Torso / Gi -->
+                <path d="M 27 36 L 53 36 L 49 72 L 31 72 Z" fill="#1b1b1b" stroke="#000" stroke-width="2"/>
+                <!-- Yellow Tabard V-Strap -->
+                <path d="M 29 36 L 37 36 L 41 68 L 33 68 Z" fill="#e5ad06" />
+                <path d="M 51 36 L 43 36 L 39 68 L 47 68 Z" fill="#e5ad06" />
+                <!-- Belt / Sash -->
+                <rect x="29" y="68" width="22" height="6" fill="#111" stroke="#e5ad06" stroke-width="1" />
+                <rect x="38" y="74" width="4" height="14" fill="#e5ad06" />
+                <!-- Left Arm / Fist -->
+                <path d="M 27 38 L 16 52 L 20 66 L 27 58 Z" fill="#1b1b1b" />
+                <circle cx="21" cy="65" r="5" fill="#e5ad06" stroke="#000" stroke-width="1" />
+                <!-- Right Arm / Guard -->
+                <path d="M 53 38 L 64 50 L 59 64 L 52 56 Z" fill="#1b1b1b" />
+                <circle cx="59" cy="64" r="5" fill="#e5ad06" stroke="#000" stroke-width="1" />
+                <!-- Legs / Stance -->
+                <!-- Left Leg -->
+                <path d="M 32 74 L 25 96 L 22 114 L 30 114 L 35 96 L 39 74 Z" fill="#1b1b1b" stroke="#000" stroke-width="1.5" />
+                <!-- Right Leg -->
+                <path d="M 48 74 L 55 96 L 58 114 L 50 114 L 45 96 L 41 74 Z" fill="#1b1b1b" stroke="#000" stroke-width="1.5" />
+                <!-- Shin Guards -->
+                <rect x="22" y="98" width="8" height="13" rx="2" fill="#e5ad06" stroke="#8d6800" stroke-width="1" />
+                <rect x="50" y="98" width="8" height="13" rx="2" fill="#e5ad06" stroke="#8d6800" stroke-width="1" />
+              </svg>
+            %%[ ENDIF ]%%
+
+          </div>
+          <!-- Dynamic Foot Shadow -->
+          <div class="fg-shadow"></div>
+        </div>
+
+        <!-- Ground Floor -->
+        <div class="fg-floor"></div>
+      </div>
+
+      <!-- Arcade Control Pad -->
+      <div class="fg-control-panel">
+        <div class="fg-button-group">
+
+          <!-- Alternating Jump Button -->
+          <div style="display: inline-block; vertical-align: middle;">
+            <label for="fg_jump_1" class="fg-btn fg-btn-jump fg-jump-alt-1">%%=v(@Btn_Jump_Label)=%%</label>
+            <label for="fg_jump_2" class="fg-btn fg-btn-jump fg-jump-alt-2">%%=v(@Btn_Jump_Label)=%%</label>
+          </div>
+
+          <!-- Dynamic Controls for Pos 1 -->
+          <div id="fg_ctrl_1" class="fg-ctrl-set">
+            <span class="fg-btn fg-btn-move fg-btn-disabled">%%=v(@Btn_Left_Label)=%%</span>
+            <label for="fg_pos_2" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+          </div>
+
+          <!-- Dynamic Controls for Pos 2 -->
+          <div id="fg_ctrl_2" class="fg-ctrl-set">
+            <label for="fg_pos_1" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+            <label for="fg_pos_3" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+          </div>
+
+          <!-- Dynamic Controls for Pos 3 -->
+          <div id="fg_ctrl_3" class="fg-ctrl-set">
+            <label for="fg_pos_2" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+            <label for="fg_pos_4" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+          </div>
+
+          <!-- Dynamic Controls for Pos 4 (Center Default) -->
+          <div id="fg_ctrl_4" class="fg-ctrl-set">
+            <label for="fg_pos_3" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+            <label for="fg_pos_5" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+          </div>
+
+          <!-- Dynamic Controls for Pos 5 -->
+          <div id="fg_ctrl_5" class="fg-ctrl-set">
+            <label for="fg_pos_4" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+            <label for="fg_pos_6" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+          </div>
+
+          <!-- Dynamic Controls for Pos 6 -->
+          <div id="fg_ctrl_6" class="fg-ctrl-set">
+            <label for="fg_pos_5" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+            <label for="fg_pos_7" class="fg-btn fg-btn-move">%%=v(@Btn_Right_Label)=%%</label>
+          </div>
+
+          <!-- Dynamic Controls for Pos 7 -->
+          <div id="fg_ctrl_7" class="fg-ctrl-set">
+            <label for="fg_pos_6" class="fg-btn fg-btn-move">%%=v(@Btn_Left_Label)=%%</label>
+            <span class="fg-btn fg-btn-move fg-btn-disabled">%%=v(@Btn_Right_Label)=%%</span>
+          </div>
+
+        </div>
+
+        <!-- Position Dots Indicator -->
+        <div class="fg-pos-hud">
+          POSITION: 
+          <span id="fg_dot_1" class="fg-dot"></span>
+          <span id="fg_dot_2" class="fg-dot"></span>
+          <span id="fg_dot_3" class="fg-dot"></span>
+          <span id="fg_dot_4" class="fg-dot"></span>
+          <span id="fg_dot_5" class="fg-dot"></span>
+          <span id="fg_dot_6" class="fg-dot"></span>
+          <span id="fg_dot_7" class="fg-dot"></span>
+        </div>
+      </div>
+
+    </div>
+    <!--<![endif]-->
+
+    <!--[if mso]>
+    <!-- OUTLOOK / MSO FALLBACK (Non-interactive clients) -->
+    <div style="width: 100%; max-width: 600px; margin: 0 auto; background-color: %%=v(@Arena_BG_Color)=%%; border: 2px solid #3d1c47;">
+      <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+        <tr>
+          <td align="center" style="padding: 10px 0 5px 0;">
+            <p style="font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; color: #ffd700; margin: 0; padding: 0; letter-spacing: 2px;">
+              %%=v(@Fallback_Title)=%%
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding: 0;">
+            <a href="%%=RedirectTo(@Fallback_CTA_URL)=%%" target="_blank" style="text-decoration: none;">
+              <img src="%%=v(@Fallback_Image)=%%" alt="%%=v(@Fallback_Title)=%%" width="600" style="display: block; width: 100%; max-width: 600px; height: auto; border: 0;" />
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding: 15px 0;">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="center" bgcolor="#b83b5e" style="border-radius: 4px; padding: 12px 25px;">
+                  <a href="%%=RedirectTo(@Fallback_CTA_URL)=%%" target="_blank" style="font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; color: #ffffff; text-decoration: none; display: inline-block;">
+                    %%=v(@Fallback_CTA_Text)=%% &raquo;
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <![endif]-->
+
+  </div>
+</div>
+
+<!--[if mso]>
+    </td>
+  </tr>
+</table>
+<![endif]-->
+
+%%=EndImpressionRegion()=%%
+%%[ /* </div> */ ]%%
+<!-- /Fighting Game Email Block -->
