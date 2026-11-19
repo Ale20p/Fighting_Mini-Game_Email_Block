@@ -1,1 +1,2 @@
 # Fighting_Mini-Game_Email_Block
+This project will be to develop a code block that can be placed into an email template on Salesforce. This code block will be a mini 2D Mortal Kombat style fighting game that can work on all email or most email clients and on mobile and desktop.

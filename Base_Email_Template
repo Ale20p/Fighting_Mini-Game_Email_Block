@@ -1,0 +1,599 @@
+< !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head></head><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>%%=treatascontent(@Subject_Line)=%%</title><meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0" /><meta name="format-detection" content="telephone=no" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="x-apple-disable-message-reformatting"><style></style><style type="text/css">html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+div[class="responsiveColumn2"] {
+    max-width: none !important;
+}
+
+div[class="responsiveColumn3"] {
+    max-width: none !important;
+}
+
+div[class="responsiveColumn1_3"] {
+    max-width: none !important;
+}
+
+div[class="responsiveColumn2_3"] {
+    max-width: none !important;
+}
+
+div[class="im"] {
+    color: #777777 !important;
+}
+
+span[class="im"] {
+    color: #777777 !important;
+}
+
+p[class="im"] {
+    color: #777777 !important;
+}
+
+@media only screen and (min-width: 600px) {
+
+    .hide {
+        display: none !important;
+        max-height: 0 !important;
+        mso-hide: all !important;
+        overflow: hidden !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        padding: 0 !important;
+    }
+
+    .show {
+        display: block !important;
+    }
+
+    .responsiveSpacer {
+        display: inline-block !important;
+    }
+
+}
+
+@media only screen and (min-width: 600px) {
+
+    div[class="paddingWrapper"] {
+        width: 600px !important;
+    }
+
+    div[class="columnContainer"] {
+        width: 600px !important;
+    }
+
+    div[class="responsiveColumn2"] {
+        max-width: 290px !important;
+    }
+
+    div[class="responsiveColumn3"] {
+        max-width: 190px !important;
+    }
+
+    div[class="responsiveColumn1_3"] {
+        max-width: 300px !important;
+    }
+
+    div[class="responsiveColumn2_3"] {
+        max-width: 300px !important;
+    }
+
+    .hide600 {
+        display: none !important;
+        max-height: 0 !important;
+        mso-hide: all !important;
+        overflow: hidden !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        padding: 0 !important;
+    }
+
+    .show600 {
+        display: block !important;
+    }
+
+    .show600inline {
+        display: inline-block !important;
+    }
+
+}
+
+</style>%%[
+/* <br><br><span style="color:purple;"><center>HEAD STYLES<br>- Gmail Darkmode Fix & Alternate BG Images -</center></span><br><br><div style="display:none;"> */
+]%% %%[
+/***************************************************************************************
+  * The purpose of this block is to add the fix that prevents Gmail from automatically
+  * inverting colours in darkmode so as to preserve accessibility and brand colours.
+  *
+  * Note: You also have the option of setting specific background images for Gmail, Outlook,
+  * and Yahoo versions that also automatically invert or change background colours and
+  * affect legibility.
+  ****************************************************************************************/
+]%% %%[
+/***************************************************************************************
+  * Delete the following <meta> tag if you don't want to force light mode on Gmail.
+  * !!! NOT RECOMMENDED !!! ONLY do so in very specific scenarios!
+  ****************************************************************************************/
+]%% <meta name="color-scheme" content="light only" />%%[
+/***************************************************************************************
+  * Use the following variables if you need to set specific backgrounds for Gmail and/or
+  * Outlook and/or Yahoo (webmail).
+  *
+  * NOTE: This will affect ALL versions of Gmail (desktop/web, iOS, and Android) in both
+  * dark mode AND light mode.
+  * 
+  * For Outlook, it will affect those versions that automatically
+  * invert colours in dark mode, but will also affect light mode as well. Outlook desktop
+  * apps will remain unaffected.
+  * 
+  * Yahoo also has darkmode issues, so you can set a background specific for that as well.
+  * 
+  * You may use the same image for all three, but you must add it to all variables.
+  ****************************************************************************************/
+
+SET @gmail_background_image =""
+
+SET @outlook_background_image =""
+
+SET @yahoo_background_image =""
+
+]%% %%[ IF NOT Empty(@yahoo_background_image) AND @yahoo_background_image !="" THEN]%% <style>.& .main-bg {
+    background-image: url(%%=v(@yahoo_background_image)=%%) !important;
+}
+
+</style>%%[ ENDIF]%% %%[ IF NOT Empty(@gmail_background_image) AND @gmail_background_image !="" THEN]%% <style>u~.body .main-bg {
+    background-image: url(%%=v(@gmail_background_image)=%%) !important;
+}
+
+</style>%%[ ENDIF]%% %%[ IF NOT Empty(@outlook_background_image) AND @outlook_background_image !="" THEN]%% <style>.main-bg\0 {
+    background-image: url(%%=v(@outlook_background_image)=%%) !important;
+}
+
+</style>%%[ ENDIF]%% <style>
+/***************************************************
+     *  !!!!!!!!!!!! LEGACY CODE !!!!!!!!!!!! 
+     *  USE ONLY IF DIRECTED TO!!!
+     * 
+     *  GMAIL STYLES:
+     *  These styles will apply to all instances of
+     *  Gmail - dark mode AND light mode on any device.
+     *  For HTML usage structure, see below.
+     **************************************************/
+
+/* keep text black */
+u~.body .gm-kb-main {
+    color: #000000 !important;
+}
+
+u~.body .gm-kb-outer {
+    background: #fff;
+    mix-blend-mode: difference;
+}
+
+u~.body .gm-kb-inner {
+    background: #fff;
+    mix-blend-mode: difference;
+}
+
+/* keep text white */
+u~.body .gm-kw-main {
+    color: #ffffff !important;
+}
+
+u~.body .gm-kw-outer {
+    background: #000;
+    mix-blend-mode: screen;
+}
+
+u~.body .gm-kw-inner {
+    background: #000;
+    mix-blend-mode: difference;
+}
+
+
+/****************************************************
+     *   HTML Required structure: 
+     * <p [...] class="dm-anno">
+     *  <span class="gm-kb-outer">
+     *   <span class="gm-kb-inner">\\=treatascontent(@Mod_Body_Copy)=//</span>
+     *  </span>
+     * </p>
+     ***************************************************/
+
+</style>%%[
+/****************************************************
+ HTML Required structure for GMAIL: 
+ <p [...] class="gm-kb-main">
+   <span class="gm-kb-outer">
+    <span class="gm-kb-inner">%%=treatascontent(@Mod_Body_Copy)=%%</span>
+   </span>
+  </p>
+  
+  Steps:
+  (1) Expand the title or text block you need to apply the fix to.
+  (2) Add "gm-xx-main" (or a custom one if you need a custom colour) to the <p> tag containing the text/title
+  (3) Add <span class="gm-xx-outer"><span class="gm-xx-inner"> before the `treatascontent(...)`
+  (4) Add </span></span> after the `treatascontent(...)`.
+  ***************************************************/
+]%% %%[
+/* </div> */
+]%% < !--[if mso]><xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>< ![endif]--></head>%%[
+/* <br><br><span style="color:red;"><center>GLOBAL DESIGN PARAMETERS</center></span><br><br><div style="display:none;"> */
+]%% %%[ SET @Content_Matrix ="EMEA_DE_EMAIL_GENERAL_Mihai"
+/* Default for testing:  EMEA_DE_EMAIL_GENERAL*/
+
+SET @GAME =""
+SET @Font_Family ="Arial, Helvetica, sans-serif"
+SET @Title_Font_Family ="Arial, Helvetica, sans-serif"
+SET @CTA_Font_Family ="Arial, Helvetica, sans-serif"
+SET @Email_BG_Image =""
+SET @BG_Color ="#000000"
+SET @Font_Color ="#ffffff"
+SET @Title_Font_Color ="#ffffff"
+SET @CTA_Button_Color ="#edd300"
+SET @CTA_Border_Color ="#edd300"
+SET @CTA_Font_Color ="#000000"
+SET @CTA_Border_Size ="1px"
+/* Put values from 0px to 10px */
+SET @CTA_Border_Radius ="0px"
+/* Put values from 0px to 40px */
+SET @CTA_Border_Radius_Ratio ="0"
+/* Put values from 0 to 200 */
+SET @BlackTheme =1
+/* For White Theme: 0 */
+SET @Mod_Separator_Image_Default =""
+SET @Mod_Separator_Image_Type1 =""
+SET @Mod_Separator_Image_Type2 =""
+
+IF [FLAG_UPLAY_SUBSCRIBER]=="PREMIUM_ACTIVE" OR [FLAG_UPLAY_SUBSCRIBER]=="PREMIUM_ANYWHERE_ACTIVE" OR [FLAG_UPLAY_SUBSCRIBER]=="PREMIUM_ACTIVE_CANCELLED" OR [FLAG_UPLAY_SUBSCRIBER]=="PREMIUM_ANYWHERE_ACTIVE_CANCELLED"
+THEN SET @Template ="UPLAYPLUS"
+ELSE SET @Template ="GENERAL"
+/*Select from UPLAYPLUS & UPLAYPLUSTERMED & UPLUSSERVICE & UPLUSSERVICETERMED & GENERAL & STORE & STOREWISHLIST & EPIC & EPICSERVICE & EPICSTADIA & UBIFWD & UBIFWDEPIC & UBIFWDUPLAY & GENERICSERVICE & STORESERVICE & NOHF & NOHFWU & PARTNER & SIMPLESERVICE */
+ENDIF]%% %%[
+/* </div> */
+]%% %%[
+/* <br><br><span style="color:#ff00ff;"><center> - CAUTION! - DO NOT DELETE - LOCALES & SUBJECT LINE by Language_ID - </center></span><br><br><div style="display:none;"> */
+]%% %%[
+/* GET LOCALE INFO */
+
+/* INSTRUCTIONS FOR Country_ID and Language_ID */
+/*
+You may only use ONE of the below options: (1) or (2)!
+Option (1) is for BATCH campaigns and testing/proofing.
+Option (2) is for REAL-TIME and TRIGGERED emails.
+By default, Option (1) is chosen.
+To use Option (2), you need to COMMENT OUT Option (1) (lines 17 and 18) and UNCOMMENT Option (2) (lines 28 through 38).
+To comment out something, you can put a slash/star at the beginning of the content, and then a star/slash (reversed) at the end of the comment, like you see on lines 7 and 14. Everything in between those lines will be ignored by SFMC. To uncomment something, simply remove the slash/star from the beginning of the content, and the slash/star from the end.
+*/
+
+/* Option (1): Country_ID and Language_ID for BATCH EMAILS & TESTING/PROOFING */
+Set @Country_ID =lowercase([Country_ID]) Set @Language_ID =lowercase([Language_ID])
+/* If you need the username and it's included in the deployment DE, you can uncomment this line */
+/*
+SET @Calculated_Username = [Calculated_Username]
+*/
+
+
+/* Option (2): Country_ID and Language_ID for REAL-TIME/TRIGGERED EMAILS */
+/*
+ SET @User_ID = _SubscriberKey
+ SET @rowsUser = LookupRows("USERS_DE", "USER_ID", @User_ID)
+ SET @rowCount = rowcount(@rowsUser)
+    
+ IF @rowCount > 0 then
+   SET @rowUser = row(@rowsUser, 1)
+   SET @Country_ID = lowercase(field(@rowUser, "COUNTRY_ID"))
+   SET @Language_ID = lowercase(field(@rowUser, "LANGUAGE_ID"))
+ ENDIF
+ 
+ SET @Calculated_Username = Lookup("USER_ENRICHED_DE", "CALCULATED_USERNAME", "USER_ID",  @User_ID)
+*/
+
+/* FIX FOR Language_ID and/or Country_ID being reinjected into SFMC as ND */
+IF Lowercase(@Country_ID)=="nd" or Empty(@Country_ID) THEN SET @Country_ID =""
+ENDIF IF Lowercase(@Language_ID)=="nd" or Empty(@Language_ID) THEN SET @Language_ID =""
+ENDIF Set @Original_Language_ID =Lowercase(@Language_ID) Set @Language_ID =IIF(length(@Language_ID) > 2, substring(@Language_ID, 1, 2), @Language_ID) Set @Ubibar_Color ="Black"
+Set @Theme_Color =IIF(@BlackTheme, "Black", "White") Set @Theme_Counter_Color =IIF(@BlackTheme, "White", "Black") Set @Mail_BG_Color =IIF(@BlackTheme, "#000000", "#ffffff") Set @CommonCountry ="gb,uk,fr,es,it,nl,pl,ru,jp,kr,cn,tw,hk,th,au,ko,de,at,tr,in,vn,vd,id,bd,sg,cz,gr,hu,pt,ro,lu,dk,fi,no,se,my,ph,sk,ie,hr,ad,mc"
+Set @ArabicCountry ="qa,bh,dz,ly,ma,sa,ae,jo,iq,lb,om,ps,sy,ye,dj,eg"
+Set @EMEACommonCountry ="gb,uk,fr,es,it,nl,pl,ru,jp,kr,cn,tw,hk,th,au,nz,ko,de,at,tr,be,ch,qa,bh,dz,ly,ma,sa,ae,jo,iq,lb,om,ps,sy,ye,dj,eg,no,fi,se,is,in,vn,vd,id,bd,sg,cz,gr,hu,pt,ro,lu,dk,ie,my,ph,sk,hr,ad,mc"
+Set @NCSACommonCountry ="ca,us,br,mx,ar,bo,cl,cr,co,do,ec,gt,hn,ni,pa,pe,py,sv,uy,ve"
+Set @NCSASpanishCountry ="mx,ar,bo,cl,cr,co,do,ec,gt,hn,ni,pa,pe,py,sv,uy,ve"
+
+/* SET UP LOCALES */
+
+Set @Locale =v(@Language_ID)
+/* SET UP DEFAULT LOCALES */
+
+IF EMPTY(@Language_ID) AND @Country_ID =="fr" THEN Set @Locale ="fr"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="de" THEN Set @Locale ="de"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="at" THEN Set @Locale ="de"
+ENDIF IF @Language_ID =="esp" OR @Language_ID =="sp" OR @Language_ID =="spa" OR (EMPTY(@Language_ID) AND @Country_ID =="es") THEN Set @Locale ="es"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="it" THEN Set @Locale ="it"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="nl" THEN Set @Locale ="nl"
+ENDIF IF @Language_ID =="po" OR @Language_ID =="pol" OR (EMPTY(@Language_ID) AND @Country_ID =="pl") THEN Set @Locale ="pl"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="ru" THEN Set @Locale ="ru"
+ENDIF IF @Language_ID =="ja" OR @Language_ID =="jp" OR (EMPTY(@Language_ID) AND @Country_ID =="jp") THEN Set @Locale ="jp"
+ENDIF IF @Language_ID =="ko" OR @Language_ID =="kor" OR @Language_ID =="kr" OR (EMPTY(@Language_ID) AND @Country_ID =="kr") OR (EMPTY(@Language_ID) AND @Country_ID =="ko") THEN Set @Locale ="kr"
+ENDIF IF @Language_ID =="pt" OR @Language_ID =="por" OR (EMPTY(@Language_ID) AND @Country_ID =="pt") THEN Set @Locale ="pt"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="tr" THEN Set @Locale ="tr"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="th" THEN Set @Locale ="th"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="be" THEN Set @Locale ="en"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="ch" THEN Set @Locale ="en"
+ENDIF IF EMPTY(@Language_ID) AND IndexOf(@ArabicCountry, @Country_ID)>0 THEN Set @Locale ="en"
+ENDIF IF (@Language_ID =="zh" AND @Country_ID =="cn") OR (EMPTY(@Language_ID) AND @Country_ID =="cn") THEN Set @Locale ="cn"
+ENDIF IF (@Language_ID =="zh" AND @Country_ID =="cn") OR (@Language_ID =="zh" AND @Country_ID !="tw" AND @Country_ID !="hk") OR (EMPTY(@Language_ID) AND @Country_ID =="cn") THEN Set @Locale ="cn"
+ENDIF IF (@Language_ID =="zh" AND @Country_ID =="tw") OR (EMPTY(@Language_ID) AND @Country_ID =="tw") THEN Set @Locale ="tw"
+ENDIF IF (@Language_ID =="zh" AND @Country_ID =="hk") OR (EMPTY(@Language_ID) AND @Country_ID =="hk") THEN Set @Locale ="hk"
+ENDIF IF @Language_ID =="hi" OR (EMPTY(@Language_ID) AND @Country_ID =="in") THEN Set @Locale ="in"
+ENDIF IF @Language_ID =="vi" OR (EMPTY(@Language_ID) AND @Country_ID =="vn") OR (EMPTY(@Language_ID) AND @Country_ID =="vd") THEN Set @Locale ="vn"
+ENDIF IF @Language_ID =="id" OR @Language_ID =="ind" OR (EMPTY(@Language_ID) AND @Country_ID =="id") THEN Set @Locale ="id"
+ENDIF IF @Language_ID =="bn" OR @Language_ID =="ben" OR (EMPTY(@Language_ID) AND @Country_ID =="bd") THEN Set @Locale ="bd"
+ENDIF IF @Language_ID =="ms" OR (EMPTY(@Language_ID) AND @Country_ID =="my") THEN Set @Locale ="my"
+ENDIF IF @Language_ID =="fil" OR (EMPTY(@Language_ID) AND @Country_ID =="ph") THEN Set @Locale ="ph"
+ENDIF IF (@Language_ID =="ms" AND @Country_ID =="sg") OR (EMPTY(@Language_ID) AND @Country_ID =="sg") THEN Set @Locale ="sg"
+ENDIF IF @Language_ID =="cs" OR @Language_ID =="cz" OR (EMPTY(@Language_ID) AND @Country_ID =="cz") THEN Set @Locale ="cz"
+ENDIF IF @Language_ID =="el" OR @Language_ID =="ell" OR @Language_ID =="gr" OR @Language_ID =="gre" OR (EMPTY(@Language_ID) AND @Country_ID =="gr") THEN Set @Locale ="gr"
+ENDIF IF @Language_ID =="hu" OR @Language_ID =="hun" OR (EMPTY(@Language_ID) AND @Country_ID =="hu") THEN Set @Locale ="hu"
+ENDIF IF @Language_ID =="lb" OR @Language_ID =="ltz" OR (EMPTY(@Language_ID) AND @Country_ID =="lu") THEN Set @Locale ="lu"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="ro" THEN Set @Locale ="ro"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="sk" THEN Set @Locale ="sk"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="hr" THEN Set @Locale ="hr"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="ad" THEN Set @Locale ="ad"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="mc" THEN Set @Locale ="mc"
+ENDIF IF @Language_ID =="ga" OR (EMPTY(@Language_ID) AND @Country_ID =="ie") THEN Set @Locale ="ie"
+ENDIF IF @Language_ID =="da" OR (EMPTY(@Language_ID) AND @Country_ID =="dk") THEN Set @Locale ="dk"
+ENDIF IF EMPTY(@Language_ID) AND @Country_ID =="fi" THEN Set @Locale ="fi"
+ENDIF IF @Language_ID =="no" OR @Language_ID =="nb" OR (EMPTY(@Language_ID) AND @Country_ID =="no") THEN Set @Locale ="no"
+ENDIF IF @Language_ID =="sv" OR (EMPTY(@Language_ID) AND @Country_ID =="se") THEN Set @Locale ="se"
+ENDIF IF @Country_ID =="uk" OR @Country_ID =="gb" THEN Set @Locale ="uk"
+ENDIF IF @Country_ID =="au" OR @Country_ID =="nz" THEN Set @Locale ="au"
+ENDIF
+/* SET UP NCSA LOCALES */
+IF @Language_ID =="en" and @Country_ID =="ca" THEN Set @Locale ="en_CA"
+ELSEIF @Country_ID =="ca" and @Language_ID =="fr" THEN Set @Locale ="fr_CA"
+ELSEIF @Country_ID =="ca" and @Language_ID =="es" THEN Set @Locale ="es_MX"
+ELSEIF @Country_ID =="ca" and @Language_ID =="pt" THEN Set @Locale ="pt_BR"
+ENDIF IF @Country_ID =="us" and @Language_ID =="en" THEN Set @Locale ="en_US"
+ELSEIF @Country_ID =="us" and @Language_ID =="fr" THEN Set @Locale ="fr_CA"
+ELSEIF @Country_ID =="us" and @Language_ID =="es" THEN Set @Locale ="es_MX"
+ELSEIF @Country_ID =="us" and @Language_ID =="pt" THEN Set @Locale ="pt_BR"
+ENDIF IF @Country_ID =="mx" and @Language_ID =="en" THEN Set @Locale ="en_US"
+ELSEIF @Country_ID =="mx" and @Language_ID =="fr" THEN Set @Locale ="fr_CA"
+ELSEIF @Country_ID =="mx" and @Language_ID =="es" THEN Set @Locale ="es_MX"
+ELSEIF @Country_ID =="mx" and @Language_ID =="pt" THEN Set @Locale ="pt_BR"
+ENDIF IF @Country_ID =="br" and @Language_ID =="en" THEN Set @Locale ="en_US"
+ELSEIF @Country_ID =="br" and @Language_ID =="fr" THEN Set @Locale ="fr_CA"
+ELSEIF @Country_ID =="br" and @Language_ID =="es" THEN Set @Locale ="es_MX"
+ELSEIF @Country_ID =="br" and @Language_ID =="pt" THEN Set @Locale ="pt_BR"
+ENDIF IF IndexOf(@NCSASpanishCountry, @Country_ID)>0 and @Language_ID =="en" THEN Set @Locale ="en_US"
+ELSEIF IndexOf(@NCSASpanishCountry, @Country_ID)>0 and @Language_ID =="fr" THEN Set @Locale ="fr_CA"
+ELSEIF IndexOf(@NCSASpanishCountry, @Country_ID)>0 and @Language_ID =="es" THEN Set @Locale ="es_MX"
+ELSEIF IndexOf(@NCSASpanishCountry, @Country_ID)>0 and @Language_ID =="pt" THEN Set @Locale ="pt_BR"
+ENDIF if Lowercase(@Country_ID)=="us" OR Lowercase(@Country_ID)=="ca" OR Lowercase(@Country_ID)=="mx" OR Lowercase(@Country_ID)=="br" OR IndexOf(@NCSASpanishCountry, Lowercase(@Country_ID))>0 then SET @Zone ="ncsa"
+else SET @Zone ="emea"
+endif
+/*************************************************
+*  The following fallbacks are bandaids to
+*  try and address data inconsistencies with
+*  Country_ID and Language_ID that exist within
+*  SFMC while data entry points are audited.
+**************************************************/
+
+/* Special cases for inconsistent Brazilian Portuguese data */
+VAR @in_ptbr_variants IF Lowercase(@Original_Language_ID)=="pt_br" OR Lowercase(@Original_Language_ID)=="pt-br" OR Lowercase(@Original_Language_ID)=="br" THEN SET @in_ptbr_variants =true ELSE SET @in_ptbr_variants =false ENDIF VAR @in_pt_variants IF Lowercase(@Original_Language_ID)=="pt-pt" OR Lowercase(@Original_Language_ID)=="pt_pt" OR Lowercase(@Original_Language_ID)=="pt" THEN SET @in_pt_variants =true ELSE SET @in_pt_variants =false ENDIF IF @in_ptbr_variants ==true OR (@in_pt_variants ==true AND Lowercase(@Country_ID)=="br") THEN SET @Locale ="pt_BR"
+SET @Zone ="ncsa"
+ENDIF
+/* Special cases for inconsistent Mexican Spanish data */
+VAR @in_esmx_variants IF Lowercase(@Original_Language_ID)=="es_mx" OR Lowercase(@Original_Language_ID)=="es-mx" OR Lowercase(@Original_Language_ID)=="mx" THEN SET @in_esmx_variants =true ELSE SET @in_esmx_variants =false ENDIF VAR @in_es_variants IF Lowercase(@Original_Language_ID)=="es-es" OR Lowercase(@Original_Language_ID)=="es_es" OR Lowercase(@Original_Language_ID)=="es" THEN SET @in_es_variants =true ELSE SET @in_es_variants =false ENDIF IF @in_esmx_variants ==true OR (@in_es_variants ==true AND Lowercase(@Country_ID)=="mx") THEN SET @Locale ="es_MX"
+SET @Zone ="ncsa"
+ENDIF
+/* Try to fall back to fr-fr for fr_CA if there is no fr_CA locs */
+IF @Locale =="fr_CA" THEN VAR @frca_row, @fr_row SET @frca_row =LookupRows(@Content_Matrix, "Locale", "fr_CA") SET @fr_row =LookupRows(@Content_Matrix, "Locale", "fr") IF RowCount(@frca_row) < 1 AND RowCount(@fr_row)>0 THEN SET @Locale ="fr"
+ENDIF ENDIF
+/* Fallback for when Language_ID is "undefined", "unspecified", blank, etc. */
+IF Length(@Original_Language_ID) !=2 OR Empty(@Original_Language_ID) THEN IF Lowercase(@Country_ID)=="ca" THEN SET @Locale ="en_CA"
+SET @Zone ="ncsa"
+ENDIF IF Lowercase(@Country_ID)=="us" THEN SET @Locale ="en_US"
+SET @Zone ="ncsa"
+ENDIF IF Lowercase(@Country_ID)=="mx" THEN SET @Locale ="es_MX"
+SET @Zone ="ncsa"
+ENDIF IF Lowercase(@Country_ID)=="br" THEN SET @Locale ="pt_BR"
+SET @Zone ="ncsa"
+ENDIF ENDIF SET @Rows =LookupRows(@Content_Matrix, "Locale", @Locale) IF RowCount(@Rows) < 1 And @Locale =="hk" THEN SET @Locale ="tw"
+SET @Rows =LookupRows(@Content_Matrix, "Locale", "tw") ENDIF IF RowCount(@Rows) < 1 And (@Locale =="id" or @Locale =="my" or @Locale =="ph") THEN SET @Locale ="sg"
+SET @Rows =LookupRows(@Content_Matrix, "Locale", "sg") ENDIF IF RowCount(@Rows) < 1 And @Zone =="ncsa" THEN SET @Locale ="en_US"
+SET @Rows =LookupRows(@Content_Matrix, "Locale", "en_US") ELSEIF RowCount(@Rows) < 1 THEN SET @Locale ="en"
+SET @Rows =LookupRows(@Content_Matrix, "Locale", "en") ENDIF SET @Content_Row =Row(@Rows, 1)
+/* SET UP ARABIC */
+SET @RightToLeft =IIF(@Locale =="ar", 1, 0)]%% %%[
+/* ADD SUBJECT LINE & PREHEADER  */
+SET @IsProof =IIF(_messagecontext=="PREVIEW" OR _IsTestSend, 1, 0) SET @Test_Subject_Line =Concat(IIF(@IsProof, Concat(@Locale, " | "), ""), TreatAsContent(Field(@Content_Row, "Subject_Line"))) SET @Subject_Line =TreatAsContent(Field(@Content_Row, "Subject_Line", 0)) SET @Subject_Line2 =TreatAsContent(Field(@Content_Row, "Subject_Line2", 0)) SET @Subject_Line3 =TreatAsContent(Field(@Content_Row, "Subject_Line3", 0)) SET @Subject_Line4 =TreatAsContent(Field(@Content_Row, "Subject_Line4", 0)) SET @Subject_Line5 =TreatAsContent(Field(@Content_Row, "Subject_Line5", 0)) SET @Preheader_Line =TreatAsContent(Field(@Content_Row, "Preheader_Line", 0)) SET @Preheader_Line2 =TreatAsContent(Field(@Content_Row, "Preheader_Line2", 0)) SET @Preheader_Line3 =TreatAsContent(Field(@Content_Row, "Preheader_Line3", 0)) SET @Preheader_Line4 =TreatAsContent(Field(@Content_Row, "Preheader_Line4", 0)) SET @Preheader_Line5 =TreatAsContent(Field(@Content_Row, "Preheader_Line5", 0))]%% %%[
+/* </div> */
+]%% %%[
+/* <br><br><span style="color:grey;"><center>- PROOF ONLY -  MULTI-SUBJECTLINES & PREHEADERS - </center></span><br><br><div style="display:none;"> */
+]%% %%[ SET @IsProof =IIF(_messagecontext=="PREVIEW" OR _IsTestSend, 1, 0) IF @IsProof ==1 THEN IF length(@Subject_Line)>2 THEN SET @Subject_Line_Proof =concat(@Locale, " SL: ", @Subject_Line) ENDIF IF length(@Subject_Line2)>2 THEN SET @Subject_Line2_Proof =concat(" <br/>SL2: ", @Subject_Line2) ENDIF IF length(@Subject_Line3)>2 THEN SET @Subject_Line3_Proof =concat(" <br/>SL3: ", @Subject_Line3) ENDIF IF length(@Subject_Line4)>2 THEN SET @Subject_Line4_Proof =concat(" <br/>SL4: ", @Subject_Line4) ENDIF IF length(@Subject_Line5)>2 THEN SET @Subject_Line5_Proof =concat(" <br/>SL5: ", @Subject_Line5) ENDIF IF length(@Preheader_Line)>2 THEN SET @Preheader_Line_Proof =concat(" <br/>PRE: ", @Preheader_Line) ENDIF IF length(@Preheader_Line2)>2 THEN SET @Preheader_Line2_Proof =concat(" <br/>PRE2: ", @Preheader_Line2) ENDIF IF length(@Preheader_Line3)>2 THEN SET @Preheader_Line3_Proof =concat(" <br/>PRE3: ", @Preheader_Line3) ENDIF IF length(@Preheader_Line4)>2 THEN SET @Preheader_Line4_Proof =concat(" <br/>PRE4: ", @Preheader_Line4) ENDIF IF length(@Preheader_Line5)>2 THEN SET @Preheader_Line5_Proof =concat(" <br/>PRE5: ", @Preheader_Line5) ENDIF SET @Test_SubjectLines =Concat(@Subject_Line_Proof, @Subject_Line2_Proof, @Subject_Line3_Proof, @Subject_Line4_Proof, @Subject_Line5_Proof) SET @Test_PreheaderLines =Concat(@Preheader_Line_Proof, @Preheader_Line2_Proof, @Preheader_Line3_Proof, @Preheader_Line4_Proof, @Preheader_Line5_Proof)]%% < !-- 1 Column Article --><table cellpadding="0" cellspacing="0" border="0" style="width: 100%; min-width: 100%; height: auto; background-color: WHITE;"><tr><td align="center" style="width: 100%; min-width: 100%; height: auto; padding: 0;">< !--[if mso]><table cellpadding="0" cellspacing="0" border="0" style="width: 600px; margin: 0 auto;"><tr><td style="width: 600px; height: auto; padding: 0; text-align: center; background-color:  WHITE;">< ![endif]--><div class="paddingWrapper" style="width: 100%; max-width: 600px; height: auto; padding: 0; background-color:  WHITE;">< !--[if mso]><table cellpadding="0" cellspacing="0" border="0" style="width: 600px; height: auto;"><tr><td style="width: 600px; height: auto; padding: 10px 0 10px 0; background-color:  WHITE;" valign="top" align="center">< ![endif]--><div class="columnContainer" style="display: block; width: 100%; max-width: 600px; height: auto; padding: 10px 0 10px 0; text-align: Left; background-color:  WHITE;"><p %%=IIF(@RightToLeft, 'dir="rtl"', '')=%% style="font-family: %%=v(@Font_Family)=%%; font-size: 12px; font-weight: normal; line-height: 1.5; color: BLACK; text-align: Left; margin: 20px 0px; padding: 0 10px;">%%=treatascontent(@Test_SubjectLines)=%%<br/>%%=treatascontent(@Test_PreheaderLines)=%% </p></div>< !--[if mso]></td></tr></table>< ![endif]--></div>< !--[if mso]></td></tr></table>< ![endif]--></td></tr></table>< !-- /1 Column Article -->%%[ ENDIF]%% %%[
+/* </div> */
+]%% <body class="body" style="background-color: %%=v(@Mail_BG_Color)=%%;"><div style="width: 100%; height: 0; overflow: hidden; font-size: 0px; margin: 0; padding: 0; display: none;">&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+&nbsp;
+&zwnj;
+</div><div style="font-size:0; line-height:0;"><custom name="opencounter" type="tracking" /></div>< !-- ************************************************************************ -->%%[
+/* <br><br><span style="color:grey;"> - PREHEADER & HEADER - </span><br><br><div style="display:none;"> */
+]%% %%[if @Zone =="emea" then]%% %%[IF @Template =="UPLAYPLUS" THEN]%% %%=ContentBlockByKey("WW_HEADER_UPLUS")=%% %%[ENDIF]%% %%[IF @Template =="UPLUSSERVICE" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_UPLUSSERVICE_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="UPLUSSERVICETERMED" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_UPLUSSERVICE_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="STORE" THEN]%% %%=ContentBlockByKey("WW_HEADER_STORE_2022")=%% %%[ENDIF]%% %%[IF @Template =="STOREWISHLIST" THEN]%% %%=ContentBlockByKey("WW_HEADER_STORE_2022")=%% %%[ENDIF]%% %%[IF @Template =="EPIC" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="EPICSERVICE" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="EPICSTADIA" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="UBIFWD" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_UBIFWD")=%% %%[ENDIF]%% %%[IF @Template =="UBIFWDEPIC" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_UBIFWD")=%% %%[ENDIF]%% %%[IF @Template =="UBIFWDUPLAY" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_UBIFWDUPLAY")=%% %%[ENDIF]%% %%[IF @Template =="GENERICSERVICE" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="STORESERVICE" THEN]%% %%=ContentBlockByKey("WW_HEADER_STORE_2022")=%% %%[ENDIF]%% %%[IF @Template =="UBIACCOUNTS" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_UBI_ACCOUNTS")=%% %%[ENDIF]%% %%[IF @Template =="PARTNER" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="SIMPLESERVICE" THEN]%% %%=ContentBlockByKey("WW_HEADER_SIMPLE_SERVICE")=%% %%[ IF @BG_Color =="" OR Empty(@BG_Color) THEN SET @BG_Color ="#2f2f2f"
+ENDIF]%% %%[ENDIF]%% %%[IF @Template =="GENERICJOURNEYS" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="NOHF" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_NOUBIBAR")=%% %%[ENDIF]%% %%[IF @Template =="NOHFWU" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_NOUBIBAR")=%% %%[ENDIF]%% %%[IF @Template !="UPLAYPLUS" AND @Template !="UPLUSSERVICE" AND @Template !="UPLUSSERVICETERMED" AND @Template !="STORE" AND @Template !="STOREWISHLIST" AND @Template !="EPIC" AND @Template !="EPICSERVICE" AND @Template !="EPICSTADIA" AND @Template !="UBIFWD" AND @Template !="UBIFWDEPIC" AND @Template !="UBIFWDUPLAY" AND @Template !="GENERICSERVICE" AND @Template !="STORESERVICE" AND @Template !="UBIACCOUNTS" AND @Template !="GENERICJOURNEYS" AND @Template !="NOHF" AND @Template !="NOHFWU" AND @Template !="PARTNER" AND @Template !="SIMPLESERVICE" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ENDIF]%% %%[elseif @Zone =="ncsa" then]%% %%[IF @Template =="NOHF" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_NOUBIBAR")=%% %%[ELSEIF @Template =="GENERICSERVICE" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ELSEIF @Template =="STORE" THEN]%% %%=ContentBlockByKey("WW_HEADER_STORE_2022")=%% %%[ELSEIF @Template =="STORESERVICE" THEN]%% %%=ContentBlockByKey("WW_HEADER_STORE_2022")=%% %%[ELSEIF @Template =="UPLUSSERVICE" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_UPLUSSERVICE_Mihai")=%% %%[ELSEIF @Template =="UBIACCOUNTS" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_UBI_ACCOUNTS")=%% %%[ELSEIF @Template =="UPLAYPLUS" THEN]%% %%=ContentBlockByKey("WW_HEADER_UPLUS")=%% %%[ELSEIF @Template =="PARTNER" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ELSEIF @Template =="SIMPLESERVICE" THEN]%% %%=ContentBlockByKey("WW_HEADER_SIMPLE_SERVICE")=%% %%[ IF @BG_Color =="" OR Empty(@BG_Color) THEN SET @BG_Color ="#2f2f2f"
+ENDIF]%% %%[ELSEIF @Template =="UPLAYPLUSTERMED" THEN]%% %%=ContentBlockByKey("WW_HEADER_UPLUS")=%% %%[ELSEIF @Template =="EPIC" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ELSEIF @Template =="GENERICJOURNEYS" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ELSEIF @Template =="NOHFWU" THEN]%% %%=ContentBlockByKey("EMEA_HEADER_NOUBIBAR")=%% %%[ELSE @Template !="NOHF" AND @Template !="GENERICSERVICE" AND @Template !="STORE" AND @Template !="STORESERVICE" AND @Template !="UPLUSSERVICE" AND @Template !="UBIACCOUNTS" AND @Template !="UPLAYPLUS" AND @Template !="UPLAYPLUSTERMED" AND @Template !="EPIC" AND @Template !="GENERICJOURNEYS" AND @Template !="PARTNER" AND @Template !="SIMPLESERVICE" THEN]%% %%=ContentBlockByKey("WW_HEADER_GENERIC_Mihai")=%% %%[ENDIF]%% %%[endif]%% %%[
+/* </div> */
+]%% <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; min-width: 100%; height: auto; background-color: %%=v(@Theme_Color)=%%;"><tr><td align="center" style="width: 100%; min-width: 100%; height: auto; padding: 0;">< !--[if mso]><table cellpadding="0" cellspacing="0" border="0" style="width: 600px; margin: 0 auto;"><tr><td style="width: 600px; height: auto; padding: 0; text-align: center; background-color: %%=v(@BG_Color)=%%;">< ![endif]--><div style="width: 100%; max-width: 600px; height: auto; margin: 0; padding: 0; background-image: url('%%=v(@Email_BG_Image)=%%'); background-repeat: no-repeat; background-position: top center; background-size: 100%; background-color: %%=v(@BG_Color)=%%;" class="main-bg"></div>< !--[if mso]></td></tr></table>< ![endif]--></td></tr></table>%%[
+/* <br><br><span style="color:grey;"> - FOOTER - </span><br><br><div style="display:none;"> */
+]%% %%[if @Zone =="emea" then]%% %%[IF @Template =="UPLAYPLUS" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_UPLAYPLUS_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="UPLUSSERVICE" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_UPLUSSERVICE_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="UPLUSSERVICETERMED" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_UPLUSSERVICETERMED_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="STORE" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_STORE_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="STOREWISHLIST" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_STORE_WISHLIST")=%% %%[ENDIF]%% %%[IF @Template =="EPIC" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_EPIC_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="EPICSERVICE" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_EPIC_SERVICE_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="EPICSTADIA" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_EPIC_STADIA")=%% %%[ENDIF]%% %%[IF @Template =="UBIFWD" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_UBIFWD")=%% %%[ENDIF]%% %%[IF @Template =="UBIFWDEPIC" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_EPIC_Mihai")=%% %%[ENDIF]%% %%[IF @Template =="UBIFWDUPLAY" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_UBIFWD")=%% %%[ENDIF]%% %%[IF @Template =="GENERICSERVICE" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_GENERIC_SERVICE")=%% %%[ENDIF]%% %%[IF @Template =="PARTNER" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_PARTNER")=%% %%[ENDIF]%% %%[IF @Template =="SIMPLESERVICE" THEN]%% %%=ContentBlockByKey("WW_FOOTER_SIMPLE_SERVICE")=%% %%[ENDIF]%% %%[IF @Template =="STORESERVICE" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_STORE_SERVICE")=%% %%[ENDIF]%% %%[IF @Template =="UBIACCOUNTS" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_UBI_ACCOUNTS")=%% %%[ENDIF]%% %%[IF @Template =="GENERICJOURNEYS" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_GENERIC_JOURNEYS")=%% %%[ENDIF]%% %%[IF @Template =="NOHF" THEN]%% %%[ENDIF]%% %%[IF @Template =="NOHFWU" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_UNSUB_ONLY")=%% %%[ENDIF]%% %%[IF @Template !="UPLAYPLUS" AND @Template !="UPLUSSERVICE" AND @Template !="UPLUSSERVICETERMED" AND @Template !="STORE" AND @Template !="STOREWISHLIST" AND @Template !="EPIC" AND @Template !="EPICSERVICE" AND @Template !="EPICSTADIA" AND @Template !="UBIFWD" AND @Template !="UBIFWDEPIC" AND @Template !="UBIFWDUPLAY" AND @Template !="GENERICSERVICE" AND @Template !="STORESERVICE" AND @Template !="UBIACCOUNTS" AND @Template !="GENERICJOURNEYS" AND @Template !="NOHF" AND @Template !="NOHFWU" AND @Template !="PARTNER" AND @Template !="SIMPLESERVICE" THEN]%% %%=ContentBlockByKey("EMEA_FOOTER_GENERIC_Mihai")=%% %%[ENDIF]%% %%[elseif @Zone =="ncsa" then]%% %%[IF @Template =="NOHF" THEN]%% %%[ELSEIF @Template =="GENERICSERVICE" THEN]%% %%=ContentBlockByKey("NCSA_FOOTER_GENERIC_SERVICE")=%% %%[ELSEIF @Template =="STORE" THEN]%% %%=ContentBlockByKey("NCSA_FOOTER_STORE_Mihai")=%% %%[ELSEIF @Template =="STORESERVICE" THEN]%% %%=ContentBlockByKey("NCSA_FOOTER_STORE_SERVICE")=%% %%[ELSEIF @Template =="UPLUSSERVICE" THEN]%% %%=ContentBlockByKey("NCSA_FOOTER_UPLUSSERVICE")=%% %%[ELSEIF @Template =="UPLAYPLUS" THEN]%% %%=ContentBlockByKey("NCSA_FOOTER_UPLAYPLUS")=%% %%[ELSEIF @Template =="UPLAYPLUSTERMED" THEN]%% %%=ContentBlockByKey("NCSA_FOOTER_UPLAYPLUS_TERMED")=%% %%[ELSEIF @Template =="EPIC" THEN]%% %%=ContentBlockByKey("NCSA_FOOTER_EPIC_Mihai")=%% %%[ELSEIF @Template =="PARTNER" THEN]%% %%=ContentBlockByKey("NCSA_FOOTER_PARTNER")=%% %%[ELSEIF @Template =="SIMPLESERVICE" THEN]%% %%=ContentBlockByKey("WW_FOOTER_SIMPLE_SERVICE")=%% %%[ELSEIF @Template =="GENERICJOURNEYS" THEN]%% %%=ContentBlockByKey("d1a553fd-a6cf-4a0e-a7f3-274ae631db39")=%% %%[ELSEIF @Template =="NOHFWU" THEN]%% %%=ContentBlockByKey("NCSA_FOOTER_PARTNER")=%% %%[ELSE @Template !="STORE" AND @Template !="STORESERVICE" AND @Template !="UPLAYPLUS" AND @Template !="UPLUSSERVICE" AND @Template !="GENERICSERVICE" AND @Template !="NOHF" AND @Template !="UPLAYPLUSTERMED" AND @Template !="EPIC" AND @Template !="GENERICJOURNEYS" AND @Template !="PARTNER" AND @Template !="SIMPLESERVICE" THEN]%% %%=ContentBlockByKey("NCSA_FOOTER_GENERIC_Mihai")=%% %%[ENDIF]%% %%[endif]%% %%[
+/* </div> */
+]%% < !-- ************************************************************************** --><img src="https://pixel.app.returnpath.net/pixel.gif?r=c2dfe6b6771c2e3d19d1a664e3ad3a7842755bca" width="1" height="1" /></body></html>
