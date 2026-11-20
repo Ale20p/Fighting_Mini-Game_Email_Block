@@ -1668,19 +1668,27 @@
         }
 
         /* Rematch Button Styling */
-        .fg-btn-rematch {
+        .fg-btn-rematch,
+        button.fg-btn-rematch {
+          display: inline-block;
           min-width: 260px;
           background: linear-gradient(180deg, #ffd700 0%, #ff8f00 100%);
           color: #1a0026;
           border: 1px solid #ffe57f;
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 3px 0 #b26a00, 0 4px 12px rgba(255, 215, 0, 0.5);
+          font-family: inherit;
+          font-size: 13px;
           font-weight: 900;
           letter-spacing: 1.5px;
+          cursor: pointer;
+          outline: none;
+          vertical-align: middle;
           -webkit-animation: fgPulseRematch 1.5s infinite;
           animation: fgPulseRematch 1.5s infinite;
         }
 
-        .fg-btn-rematch:hover {
+        .fg-btn-rematch:hover,
+        button.fg-btn-rematch:hover {
           filter: brightness(1.2);
         }
 
@@ -1768,6 +1776,7 @@
 
       <!--[if !mso]><!-->
       <!-- INTERACTIVE GAME ENGINE (Apple Mail, iOS, WebKit) -->
+      <form class="fg-game-form" onsubmit="return false;" style="margin: 0; padding: 0; border: none; display: block;">
 
       <!-- Position Radio Inputs -->
       <input type="radio" name="fg_pos" id="fg_pos_1" class="fg-pos-radio" />
@@ -2049,9 +2058,9 @@
 
               </div>
 
-              <!-- Rematch Button (Active when Opponent is K.O. at 0 HP, regardless of position) -->
+              <!-- Reset Match Button (Active when Opponent is K.O. at 0 HP - resets position, action, and health) -->
               <div class="fg-rematch-wrap">
-                <label for="fg_hp_100" class="fg-btn fg-btn-rematch">&#x21bb; REMATCH / PLAY AGAIN</label>
+                <button type="reset" class="fg-btn fg-btn-rematch">&#x21bb; RESET MATCH</button>
               </div>
 
             </div>
@@ -2072,6 +2081,7 @@
         </div>
 
       </div>
+      </form>
       <!--<![endif]-->
 
       <!--[if mso]>
