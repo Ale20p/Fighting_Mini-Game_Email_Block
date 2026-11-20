@@ -1,72 +1,113 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<style>
-  body {
-    background: #110818;
-    color: #fff;
-    font-family: sans-serif;
-    padding: 20px;
-  }
-  .stage {
-    position: relative;
-    width: 600px;
-    height: 340px;
-    background: #1e1028;
-    border: 2px solid #552277;
-    overflow: hidden;
-  }
-  .floor {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 26px;
-    background: #331545;
-    border-top: 2px solid #ff3366;
-  }
-  .anchor-p2 {
-    position: absolute;
-    bottom: 26px;
-    left: 72%;
-    width: 95px;
-    height: 105px;
-    border: 1px dashed cyan;
-  }
-  .p2-sprite {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 95px;
-    height: 105px;
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 100px 96px;
-    image-rendering: pixelated;
-    transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform-origin: center bottom;
-    -webkit-transform-origin: center bottom;
-    animation: p2Idle 0.75s steps(1) infinite;
-  }
-  @keyframes p2Idle {
-    0%, 33.32% { background-image: url('sword_1/ready_1.png'); }
-    33.33%, 66.65% { background-image: url('sword_1/ready_2.png'); }
-    66.66%, 100% { background-image: url('sword_1/ready_3.png'); }
-  }
-  .p2-dead {
-    animation: p2Dead 0.7s steps(1) forwards !important;
-  }
-  @keyframes p2Dead {
-    0%, 19.99% { background-image: url('sword_1/fall_back_1.png'); }
-    20.00%, 39.99% { background-image: url('sword_1/fall_back_2.png'); }
-    40.00%, 59.99% { background-image: url('sword_1/fall_back_3.png'); }
-    60.00%, 79.99% { background-image: url('sword_1/fall_back_4.png'); }
-    80.00%, 100% { background-image: url('sword_1/fall_back_5.png'); }
-  }
-</style>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background: #110818;
+      color: #fff;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    .stage {
+      position: relative;
+      width: 600px;
+      height: 340px;
+      background: #1e1028;
+      border: 2px solid #552277;
+      overflow: hidden;
+    }
+
+    .floor {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 26px;
+      background: #331545;
+      border-top: 2px solid #ff3366;
+    }
+
+    .anchor-p2 {
+      position: absolute;
+      bottom: 26px;
+      left: 72%;
+      width: 95px;
+      height: 105px;
+      border: 1px dashed cyan;
+    }
+
+    .p2-sprite {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 95px;
+      height: 105px;
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      background-size: 100px 96px;
+      image-rendering: pixelated;
+      transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform-origin: center bottom;
+      -webkit-transform-origin: center bottom;
+      animation: p2Idle 0.75s steps(1) infinite;
+    }
+
+    @keyframes p2Idle {
+
+      0%,
+      33.32% {
+        background-image: url('sword_1/ready_1.png');
+      }
+
+      33.33%,
+      66.65% {
+        background-image: url('sword_1/ready_2.png');
+      }
+
+      66.66%,
+      100% {
+        background-image: url('sword_1/ready_3.png');
+      }
+    }
+
+    .p2-dead {
+      animation: p2Dead 0.7s steps(1) forwards !important;
+    }
+
+    @keyframes p2Dead {
+
+      0%,
+      19.99% {
+        background-image: url('sword_1/fall_back_1.png');
+      }
+
+      20.00%,
+      39.99% {
+        background-image: url('sword_1/fall_back_2.png');
+      }
+
+      40.00%,
+      59.99% {
+        background-image: url('sword_1/fall_back_3.png');
+      }
+
+      60.00%,
+      79.99% {
+        background-image: url('sword_1/fall_back_4.png');
+      }
+
+      80.00%,
+      100% {
+        background-image: url('sword_1/fall_back_5.png');
+      }
+    }
+  </style>
 </head>
+
 <body>
   <h2>Knight Test</h2>
   <div class="stage">
@@ -78,5 +119,5 @@
   <button onclick="document.getElementById('knight').className='p2-sprite p2-dead'">Defeat Knight</button>
   <button onclick="document.getElementById('knight').className='p2-sprite'">Reset Knight</button>
 </body>
-</html>
 
+</html>

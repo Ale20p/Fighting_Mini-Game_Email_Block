@@ -181,6 +181,7 @@
           position: absolute;
           bottom: 0;
           left: 0;
+          background-image: url('%%=v(@P1_Base_URL)=%%ready_1.png');
           background-repeat: no-repeat;
           background-position: center bottom;
           background-size: 100px 96px;
@@ -223,21 +224,59 @@
           83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%ready_6.png'); }
         }
 
-        /* Player 1 Jump Sprite Keyframes */
+        /* Player 1 Jump Sprite Keyframes (Alternating 1 & 2 for re-triggering) */
+        @-webkit-keyframes fgP1JumpSprite1 {
+          0%, 14.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_1.png'); }
+          15.00%, 34.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_2.png'); }
+          35.00%, 64.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_3.png'); }
+          65.00%, 84.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_4.png'); }
+          85.00%, 94.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_5.png'); }
+          95.00%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%ready_1.png'); }
+        }
+
+        @keyframes fgP1JumpSprite1 {
+          0%, 14.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_1.png'); }
+          15.00%, 34.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_2.png'); }
+          35.00%, 64.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_3.png'); }
+          65.00%, 84.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_4.png'); }
+          85.00%, 94.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_5.png'); }
+          95.00%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%ready_1.png'); }
+        }
+
+        @-webkit-keyframes fgP1JumpSprite2 {
+          0%, 14.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_1.png'); }
+          15.00%, 34.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_2.png'); }
+          35.00%, 64.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_3.png'); }
+          65.00%, 84.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_4.png'); }
+          85.00%, 94.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_5.png'); }
+          95.00%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%ready_1.png'); }
+        }
+
+        @keyframes fgP1JumpSprite2 {
+          0%, 14.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_1.png'); }
+          15.00%, 34.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_2.png'); }
+          35.00%, 64.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_3.png'); }
+          65.00%, 84.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_4.png'); }
+          85.00%, 94.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_5.png'); }
+          95.00%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%ready_1.png'); }
+        }
+
         @-webkit-keyframes fgP1JumpSprite {
-          0%, 19.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_1.png'); }
-          20.00%, 39.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_2.png'); }
-          40.00%, 69.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_3.png'); }
-          70.00%, 89.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_4.png'); }
-          90.00%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%jump_5.png'); }
+          0%, 14.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_1.png'); }
+          15.00%, 34.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_2.png'); }
+          35.00%, 64.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_3.png'); }
+          65.00%, 84.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_4.png'); }
+          85.00%, 94.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_5.png'); }
+          95.00%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%ready_1.png'); }
         }
 
         @keyframes fgP1JumpSprite {
-          0%, 19.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_1.png'); }
-          20.00%, 39.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_2.png'); }
-          40.00%, 69.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_3.png'); }
-          70.00%, 89.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_4.png'); }
-          90.00%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%jump_5.png'); }
+          0%, 14.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_1.png'); }
+          15.00%, 34.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_2.png'); }
+          35.00%, 64.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_3.png'); }
+          65.00%, 84.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_4.png'); }
+          85.00%, 94.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_5.png'); }
+          95.00%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%ready_1.png'); }
         }
 
         /* Jump Physics Keyframes (Arc 1 & Arc 2 for alternating seamless re-triggers) */
@@ -454,7 +493,43 @@
           }
         }
 
-        /* Attack 1 (Axe Strike) Sprite Keyframes */
+        /* Attack 1 (Axe Strike) Sprite Keyframes (Alternating 1 & 2 for re-triggering) */
+        @-webkit-keyframes fgP1Atk1_1 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_6.png'); }
+        }
+
+        @keyframes fgP1Atk1_1 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_6.png'); }
+        }
+
+        @-webkit-keyframes fgP1Atk1_2 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_6.png'); }
+        }
+
+        @keyframes fgP1Atk1_2 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_6.png'); }
+        }
+
         @-webkit-keyframes fgP1Atk1 {
           0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_1.png'); }
           16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_2.png'); }
@@ -473,7 +548,43 @@
           83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_6.png'); }
         }
 
-        /* Attack 2 (Heavy Chop) Sprite Keyframes */
+        /* Attack 2 (Heavy Chop) Sprite Keyframes (Alternating 1 & 2 for re-triggering) */
+        @-webkit-keyframes fgP1Atk2_1 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_6.png'); }
+        }
+
+        @keyframes fgP1Atk2_1 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_6.png'); }
+        }
+
+        @-webkit-keyframes fgP1Atk2_2 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_6.png'); }
+        }
+
+        @keyframes fgP1Atk2_2 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_6.png'); }
+        }
+
         @-webkit-keyframes fgP1Atk2 {
           0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_1.png'); }
           16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_2.png'); }
@@ -493,16 +604,24 @@
         }
 
         /* Jump State Activation via CSS Radio Selectors (Triggers on Dedicated fg-jump-wrapper & sprite) */
-        #fg_jump_1:checked~.fg-container .fg-jump-wrapper,
-        #fg_jump_2:checked~.fg-container .fg-jump-wrapper {
+        #fg_jump_1:checked~.fg-container .fg-jump-wrapper {
           -webkit-animation: fgJumpArc1 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
           animation: fgJumpArc1 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
         }
 
-        #fg_jump_1:checked~.fg-container .fg-character-sprite,
+        #fg_jump_2:checked~.fg-container .fg-jump-wrapper {
+          -webkit-animation: fgJumpArc2 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+          animation: fgJumpArc2 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        }
+
+        #fg_jump_1:checked~.fg-container .fg-character-sprite {
+          -webkit-animation: fgP1JumpSprite1 0.62s steps(1) forwards !important;
+          animation: fgP1JumpSprite1 0.62s steps(1) forwards !important;
+        }
+
         #fg_jump_2:checked~.fg-container .fg-character-sprite {
-          -webkit-animation: fgP1JumpSprite 0.62s steps(1) !important;
-          animation: fgP1JumpSprite 0.62s steps(1) !important;
+          -webkit-animation: fgP1JumpSprite2 0.62s steps(1) forwards !important;
+          animation: fgP1JumpSprite2 0.62s steps(1) forwards !important;
         }
 
         #fg_jump_1:checked~.fg-container .fg-shadow {
@@ -515,28 +634,46 @@
           animation: fgShadowShrink2 0.62s ease-out !important;
         }
 
-        /* Attack 1 State Activation via CSS Radio Selectors */
-        #fg_atk1_1:checked~.fg-container .fg-character-sprite,
+        /* Attack 1 State Activation via CSS Radio Selectors (Alternating 1 & 2 for re-triggering) */
+        #fg_atk1_1:checked~.fg-container .fg-character-sprite {
+          width: 190px !important;
+          height: 124px !important;
+          left: -15px !important;
+          background-size: 190px 124px !important;
+          background-position: left bottom !important;
+          -webkit-animation: fgP1Atk1_1 0.45s steps(1) forwards !important;
+          animation: fgP1Atk1_1 0.45s steps(1) forwards !important;
+        }
+
         #fg_atk1_2:checked~.fg-container .fg-character-sprite {
           width: 190px !important;
           height: 124px !important;
           left: -15px !important;
           background-size: 190px 124px !important;
           background-position: left bottom !important;
-          -webkit-animation: fgP1Atk1 0.45s steps(1) forwards !important;
-          animation: fgP1Atk1 0.45s steps(1) forwards !important;
+          -webkit-animation: fgP1Atk1_2 0.45s steps(1) forwards !important;
+          animation: fgP1Atk1_2 0.45s steps(1) forwards !important;
         }
 
-        /* Attack 2 State Activation via CSS Radio Selectors */
-        #fg_atk2_1:checked~.fg-container .fg-character-sprite,
+        /* Attack 2 State Activation via CSS Radio Selectors (Alternating 1 & 2 for re-triggering) */
+        #fg_atk2_1:checked~.fg-container .fg-character-sprite {
+          width: 190px !important;
+          height: 124px !important;
+          left: -15px !important;
+          background-size: 190px 124px !important;
+          background-position: left bottom !important;
+          -webkit-animation: fgP1Atk2_1 0.48s steps(1) forwards !important;
+          animation: fgP1Atk2_1 0.48s steps(1) forwards !important;
+        }
+
         #fg_atk2_2:checked~.fg-container .fg-character-sprite {
           width: 190px !important;
           height: 124px !important;
           left: -15px !important;
           background-size: 190px 124px !important;
           background-position: left bottom !important;
-          -webkit-animation: fgP1Atk2 0.48s steps(1) forwards !important;
-          animation: fgP1Atk2 0.48s steps(1) forwards !important;
+          -webkit-animation: fgP1Atk2_2 0.48s steps(1) forwards !important;
+          animation: fgP1Atk2_2 0.48s steps(1) forwards !important;
         }
 
         /* Alternating Button Swaps (ensures repeated clicks re-trigger animations seamlessly) */
@@ -986,6 +1123,7 @@
           position: absolute;
           bottom: 0;
           left: 0;
+          background-image: url('%%=v(@P2_Base_URL)=%%ready_1.png');
           background-repeat: no-repeat;
           background-position: center bottom;
           background-size: 100px 96px;
@@ -1069,7 +1207,31 @@
           66.66%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%ready_3.png'); }
         }
 
-        /* P2 Hit Sprite Keyframes (Recoil stance on damage) */
+        /* P2 Hit Sprite Keyframes (Recoil stance on damage - Alternating 1 & 2) */
+        @-webkit-keyframes fgP2HitSprite1 {
+          0%, 33.32% { background-image: url('%%=v(@P2_Base_URL)=%%hit_1.png'); }
+          33.33%, 66.65% { background-image: url('%%=v(@P2_Base_URL)=%%hit_2.png'); }
+          66.66%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%hit_3.png'); }
+        }
+
+        @keyframes fgP2HitSprite1 {
+          0%, 33.32% { background-image: url('%%=v(@P2_Base_URL)=%%hit_1.png'); }
+          33.33%, 66.65% { background-image: url('%%=v(@P2_Base_URL)=%%hit_2.png'); }
+          66.66%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%hit_3.png'); }
+        }
+
+        @-webkit-keyframes fgP2HitSprite2 {
+          0%, 33.32% { background-image: url('%%=v(@P2_Base_URL)=%%hit_1.png'); }
+          33.33%, 66.65% { background-image: url('%%=v(@P2_Base_URL)=%%hit_2.png'); }
+          66.66%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%hit_3.png'); }
+        }
+
+        @keyframes fgP2HitSprite2 {
+          0%, 33.32% { background-image: url('%%=v(@P2_Base_URL)=%%hit_1.png'); }
+          33.33%, 66.65% { background-image: url('%%=v(@P2_Base_URL)=%%hit_2.png'); }
+          66.66%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%hit_3.png'); }
+        }
+
         @-webkit-keyframes fgP2HitSprite {
           0%, 33.32% { background-image: url('%%=v(@P2_Base_URL)=%%hit_1.png'); }
           33.33%, 66.65% { background-image: url('%%=v(@P2_Base_URL)=%%hit_2.png'); }
@@ -1168,7 +1330,95 @@
           }
         }
 
-        /* P2 Hit Stagger Animation (recoil backward on damage) */
+        /* P2 Hit Stagger Animation (recoil backward on damage - Alternating 1 & 2) */
+        @-webkit-keyframes fgP2HitStagger1 {
+          0% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+
+          25% {
+            -webkit-transform: translateX(18px) skewX(-5deg);
+            transform: translateX(18px) skewX(-5deg);
+          }
+
+          50% {
+            -webkit-transform: translateX(10px) skewX(-2deg);
+            transform: translateX(10px) skewX(-2deg);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes fgP2HitStagger1 {
+          0% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+
+          25% {
+            -webkit-transform: translateX(18px) skewX(-5deg);
+            transform: translateX(18px) skewX(-5deg);
+          }
+
+          50% {
+            -webkit-transform: translateX(10px) skewX(-2deg);
+            transform: translateX(10px) skewX(-2deg);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+        }
+
+        @-webkit-keyframes fgP2HitStagger2 {
+          0% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+
+          25% {
+            -webkit-transform: translateX(18px) skewX(-5deg);
+            transform: translateX(18px) skewX(-5deg);
+          }
+
+          50% {
+            -webkit-transform: translateX(10px) skewX(-2deg);
+            transform: translateX(10px) skewX(-2deg);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes fgP2HitStagger2 {
+          0% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+
+          25% {
+            -webkit-transform: translateX(18px) skewX(-5deg);
+            transform: translateX(18px) skewX(-5deg);
+          }
+
+          50% {
+            -webkit-transform: translateX(10px) skewX(-2deg);
+            transform: translateX(10px) skewX(-2deg);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+        }
+
         @-webkit-keyframes fgP2HitStagger {
           0% {
             -webkit-transform: translateX(0);
@@ -1213,36 +1463,92 @@
           }
         }
 
-        /* Hit Flash Fade */
+        /* Hit Flash Fade (Alternating 1 & 2) */
+        @-webkit-keyframes fgHitFlashAnim1 {
+          0% { opacity: 0.9; }
+          40% { opacity: 0.7; }
+          100% { opacity: 0; }
+        }
+
+        @keyframes fgHitFlashAnim1 {
+          0% { opacity: 0.9; }
+          40% { opacity: 0.7; }
+          100% { opacity: 0; }
+        }
+
+        @-webkit-keyframes fgHitFlashAnim2 {
+          0% { opacity: 0.9; }
+          40% { opacity: 0.7; }
+          100% { opacity: 0; }
+        }
+
+        @keyframes fgHitFlashAnim2 {
+          0% { opacity: 0.9; }
+          40% { opacity: 0.7; }
+          100% { opacity: 0; }
+        }
+
         @-webkit-keyframes fgHitFlashAnim {
-          0% {
-            opacity: 0.9;
-          }
-
-          40% {
-            opacity: 0.7;
-          }
-
-          100% {
-            opacity: 0;
-          }
+          0% { opacity: 0.9; }
+          40% { opacity: 0.7; }
+          100% { opacity: 0; }
         }
 
         @keyframes fgHitFlashAnim {
-          0% {
-            opacity: 0.9;
-          }
+          0% { opacity: 0.9; }
+          40% { opacity: 0.7; }
+          100% { opacity: 0; }
+        }
 
-          40% {
-            opacity: 0.7;
+        /* Hit Brightness Pulse (Alternating 1 & 2) */
+        @-webkit-keyframes fgHitBrightPulse1 {
+          0% {
+            -webkit-filter: brightness(2) contrast(1.3);
+            filter: brightness(2) contrast(1.3);
           }
 
           100% {
-            opacity: 0;
+            -webkit-filter: brightness(1) contrast(1);
+            filter: brightness(1) contrast(1);
           }
         }
 
-        /* Hit Brightness Pulse */
+        @keyframes fgHitBrightPulse1 {
+          0% {
+            -webkit-filter: brightness(2) contrast(1.3);
+            filter: brightness(2) contrast(1.3);
+          }
+
+          100% {
+            -webkit-filter: brightness(1) contrast(1);
+            filter: brightness(1) contrast(1);
+          }
+        }
+
+        @-webkit-keyframes fgHitBrightPulse2 {
+          0% {
+            -webkit-filter: brightness(2) contrast(1.3);
+            filter: brightness(2) contrast(1.3);
+          }
+
+          100% {
+            -webkit-filter: brightness(1) contrast(1);
+            filter: brightness(1) contrast(1);
+          }
+        }
+
+        @keyframes fgHitBrightPulse2 {
+          0% {
+            -webkit-filter: brightness(2) contrast(1.3);
+            filter: brightness(2) contrast(1.3);
+          }
+
+          100% {
+            -webkit-filter: brightness(1) contrast(1);
+            filter: brightness(1) contrast(1);
+          }
+        }
+
         @-webkit-keyframes fgHitBrightPulse {
           0% {
             -webkit-filter: brightness(2) contrast(1.3);
@@ -1271,79 +1577,114 @@
            DAMAGE HIT TRIGGERS (Player 1 Attack + Opponent Reactions)
            ======================================================================= */
 
-        /* P1 Attack 1 Animation on Hit */
+        /* P1 Attack 1 Animation on Hit (Alternating 1 & 2 across HP hits) */
         #fg_hp_75_p:checked ~ .fg-container .fg-character-sprite,
+        #fg_hp_25_p:checked ~ .fg-container .fg-character-sprite {
+          width: 190px !important;
+          height: 124px !important;
+          left: -15px !important;
+          background-size: 190px 124px !important;
+          background-position: left bottom !important;
+          -webkit-animation: fgP1Atk1_1 0.45s steps(1) forwards !important;
+          animation: fgP1Atk1_1 0.45s steps(1) forwards !important;
+        }
+
         #fg_hp_50_p:checked ~ .fg-container .fg-character-sprite,
-        #fg_hp_25_p:checked ~ .fg-container .fg-character-sprite,
         #fg_hp_0_p:checked ~ .fg-container .fg-character-sprite {
           width: 190px !important;
           height: 124px !important;
           left: -15px !important;
           background-size: 190px 124px !important;
           background-position: left bottom !important;
-          -webkit-animation: fgP1Atk1 0.45s steps(1) forwards !important;
-          animation: fgP1Atk1 0.45s steps(1) forwards !important;
+          -webkit-animation: fgP1Atk1_2 0.45s steps(1) forwards !important;
+          animation: fgP1Atk1_2 0.45s steps(1) forwards !important;
         }
 
-        /* P1 Attack 2 Animation on Hit */
+        /* P1 Attack 2 Animation on Hit (Alternating 1 & 2 across HP hits) */
         #fg_hp_75_k:checked ~ .fg-container .fg-character-sprite,
+        #fg_hp_25_k:checked ~ .fg-container .fg-character-sprite {
+          width: 190px !important;
+          height: 124px !important;
+          left: -15px !important;
+          background-size: 190px 124px !important;
+          background-position: left bottom !important;
+          -webkit-animation: fgP1Atk2_1 0.48s steps(1) forwards !important;
+          animation: fgP1Atk2_1 0.48s steps(1) forwards !important;
+        }
+
         #fg_hp_50_k:checked ~ .fg-container .fg-character-sprite,
-        #fg_hp_25_k:checked ~ .fg-container .fg-character-sprite,
         #fg_hp_0_k:checked ~ .fg-container .fg-character-sprite {
           width: 190px !important;
           height: 124px !important;
           left: -15px !important;
           background-size: 190px 124px !important;
           background-position: left bottom !important;
-          -webkit-animation: fgP1Atk2 0.48s steps(1) forwards !important;
-          animation: fgP1Atk2 0.48s steps(1) forwards !important;
+          -webkit-animation: fgP1Atk2_2 0.48s steps(1) forwards !important;
+          animation: fgP1Atk2_2 0.48s steps(1) forwards !important;
         }
 
-        /* Opponent Knight Stagger on Damage */
+        /* Opponent Knight Stagger on Damage (Alternating 1 & 2 across HP hits) */
         #fg_hp_75_p:checked ~ .fg-container .fg-p2-stagger-wrapper,
         #fg_hp_75_k:checked ~ .fg-container .fg-p2-stagger-wrapper,
-        #fg_hp_50_p:checked ~ .fg-container .fg-p2-stagger-wrapper,
-        #fg_hp_50_k:checked ~ .fg-container .fg-p2-stagger-wrapper,
         #fg_hp_25_p:checked ~ .fg-container .fg-p2-stagger-wrapper,
         #fg_hp_25_k:checked ~ .fg-container .fg-p2-stagger-wrapper {
-          -webkit-animation: fgP2HitStagger 0.38s ease-out !important;
-          animation: fgP2HitStagger 0.38s ease-out !important;
+          -webkit-animation: fgP2HitStagger1 0.38s ease-out !important;
+          animation: fgP2HitStagger1 0.38s ease-out !important;
         }
 
-        /* Opponent Knight Hit Sprite on Damage */
+        #fg_hp_50_p:checked ~ .fg-container .fg-p2-stagger-wrapper,
+        #fg_hp_50_k:checked ~ .fg-container .fg-p2-stagger-wrapper {
+          -webkit-animation: fgP2HitStagger2 0.38s ease-out !important;
+          animation: fgP2HitStagger2 0.38s ease-out !important;
+        }
+
+        /* Opponent Knight Hit Sprite on Damage (Alternating 1 & 2 across HP hits) */
         #fg_hp_75_p:checked ~ .fg-container .fg-p2-sprite,
         #fg_hp_75_k:checked ~ .fg-container .fg-p2-sprite,
-        #fg_hp_50_p:checked ~ .fg-container .fg-p2-sprite,
-        #fg_hp_50_k:checked ~ .fg-container .fg-p2-sprite,
         #fg_hp_25_p:checked ~ .fg-container .fg-p2-sprite,
         #fg_hp_25_k:checked ~ .fg-container .fg-p2-sprite {
-          -webkit-animation: fgP2HitSprite 0.38s steps(1) !important;
-          animation: fgP2HitSprite 0.38s steps(1) !important;
+          -webkit-animation: fgP2HitSprite1 0.38s steps(1) !important;
+          animation: fgP2HitSprite1 0.38s steps(1) !important;
         }
 
-        /* Opponent Knight Hit Flash on Damage */
+        #fg_hp_50_p:checked ~ .fg-container .fg-p2-sprite,
+        #fg_hp_50_k:checked ~ .fg-container .fg-p2-sprite {
+          -webkit-animation: fgP2HitSprite2 0.38s steps(1) !important;
+          animation: fgP2HitSprite2 0.38s steps(1) !important;
+        }
+
+        /* Opponent Knight Hit Flash on Damage (Alternating 1 & 2 across HP hits) */
         #fg_hp_75_p:checked ~ .fg-container .fg-p2-hit-flash,
         #fg_hp_75_k:checked ~ .fg-container .fg-p2-hit-flash,
+        #fg_hp_25_p:checked ~ .fg-container .fg-p2-hit-flash,
+        #fg_hp_25_k:checked ~ .fg-container .fg-p2-hit-flash {
+          display: block !important;
+          -webkit-animation: fgHitFlashAnim1 0.38s ease-out forwards !important;
+          animation: fgHitFlashAnim1 0.38s ease-out forwards !important;
+        }
+
         #fg_hp_50_p:checked ~ .fg-container .fg-p2-hit-flash,
         #fg_hp_50_k:checked ~ .fg-container .fg-p2-hit-flash,
-        #fg_hp_25_p:checked ~ .fg-container .fg-p2-hit-flash,
-        #fg_hp_25_k:checked ~ .fg-container .fg-p2-hit-flash,
         #fg_hp_0_p:checked ~ .fg-container .fg-p2-hit-flash,
         #fg_hp_0_k:checked ~ .fg-container .fg-p2-hit-flash {
           display: block !important;
-          -webkit-animation: fgHitFlashAnim 0.38s ease-out forwards !important;
-          animation: fgHitFlashAnim 0.38s ease-out forwards !important;
+          -webkit-animation: fgHitFlashAnim2 0.38s ease-out forwards !important;
+          animation: fgHitFlashAnim2 0.38s ease-out forwards !important;
         }
 
-        /* Opponent Knight Brightness Flash on Damage */
+        /* Opponent Knight Brightness Flash on Damage (Alternating 1 & 2 across HP hits) */
         #fg_hp_75_p:checked ~ .fg-container .fg-p2-anchor,
         #fg_hp_75_k:checked ~ .fg-container .fg-p2-anchor,
-        #fg_hp_50_p:checked ~ .fg-container .fg-p2-anchor,
-        #fg_hp_50_k:checked ~ .fg-container .fg-p2-anchor,
         #fg_hp_25_p:checked ~ .fg-container .fg-p2-anchor,
         #fg_hp_25_k:checked ~ .fg-container .fg-p2-anchor {
-          -webkit-animation: fgHitBrightPulse 0.38s ease-out !important;
-          animation: fgHitBrightPulse 0.38s ease-out !important;
+          -webkit-animation: fgHitBrightPulse1 0.38s ease-out !important;
+          animation: fgHitBrightPulse1 0.38s ease-out !important;
+        }
+
+        #fg_hp_50_p:checked ~ .fg-container .fg-p2-anchor,
+        #fg_hp_50_k:checked ~ .fg-container .fg-p2-anchor {
+          -webkit-animation: fgHitBrightPulse2 0.38s ease-out !important;
+          animation: fgHitBrightPulse2 0.38s ease-out !important;
         }
 
         /* Opponent Knight Defeat at 0 HP (Sprite collapses and anchor stops patrol) */
