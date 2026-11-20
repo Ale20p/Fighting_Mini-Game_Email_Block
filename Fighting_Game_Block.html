@@ -925,7 +925,7 @@
         /* Health bar frame / empty portion */
         .fg-health-track {
           height: 14px;
-          margin-bootm: 5px;
+          margin-bottom: 5px;
           padding: 2px;
           overflow: hidden;
           box-sizing: border-box;
@@ -933,17 +933,18 @@
           border: 1px solid #ffd700;
           border-radius: 3px;
           box-shadow: 0 0 8px rgba(255, 215, 0, 0.35);
-          ;
         }
 
         /* Remaining health */
         .fg-health-fill {
+          width: 100%;
           height: 100%;
           background-color: #43d34a;
           background-image: linear-gradient(180deg,
               #a0ff65 0%,
               #43d34a 45%,
               #17832a 100%);
+          border-radius: 2px;
         }
 
         /* =======================================================================
@@ -1078,9 +1079,39 @@
         }
 
         .fg-health-fill-p2 {
+          width: 100%;
+          height: 100%;
           background-color: #00b4d8;
           background-image: linear-gradient(180deg, #48cae4 0%, #00b4d8 45%, #0077b6 100%);
           float: right;
+          border-radius: 2px;
+          transition: width 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.35s ease, background-image 0.35s ease;
+          -webkit-transition: width 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.35s ease, background-image 0.35s ease;
+        }
+
+        /* Opponent Health Bar Depletion (Radio states 75%, 50%, 25%, 0%) */
+        #fg_hp_75_p:checked ~ .fg-container .fg-health-fill-p2,
+        #fg_hp_75_k:checked ~ .fg-container .fg-health-fill-p2 {
+          width: 75% !important;
+        }
+
+        #fg_hp_50_p:checked ~ .fg-container .fg-health-fill-p2,
+        #fg_hp_50_k:checked ~ .fg-container .fg-health-fill-p2 {
+          width: 50% !important;
+          background-color: #ffd166 !important;
+          background-image: linear-gradient(180deg, #ffe082 0%, #ffd166 45%, #ffb703 100%) !important;
+        }
+
+        #fg_hp_25_p:checked ~ .fg-container .fg-health-fill-p2,
+        #fg_hp_25_k:checked ~ .fg-container .fg-health-fill-p2 {
+          width: 25% !important;
+          background-color: #e63946 !important;
+          background-image: linear-gradient(180deg, #ff758f 0%, #e63946 45%, #c9184a 100%) !important;
+        }
+
+        #fg_hp_0_p:checked ~ .fg-container .fg-health-fill-p2,
+        #fg_hp_0_k:checked ~ .fg-container .fg-health-fill-p2 {
+          width: 0% !important;
         }
 
         /* P2 Character Anchor (autonomous patrol on right side of arena) */
@@ -1104,6 +1135,15 @@
           -webkit-transform-origin: center bottom;
           -webkit-animation: fgP2AttackCycle 5s ease-in-out infinite;
           animation: fgP2AttackCycle 5s ease-in-out infinite;
+        }
+
+        /* P2 Stagger Wrapper (isolates hit recoil from patrol & idle breathing) */
+        .fg-p2-stagger-wrapper {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-origin: center bottom;
+          -webkit-transform-origin: center bottom;
         }
 
         /* P2 Sprite (mirrored to face left via scaleX -1 in keyframes + idle breathing) */
@@ -1278,91 +1318,394 @@
           }
         }
 
-        /* P2 Hit Stagger Animation (recoil backward when struck) */
+        /* P2 Hit Stagger Animation (recoil backward on damage) */
         @-webkit-keyframes fgP2HitStagger {
           0% {
-            -webkit-transform: scaleX(-1) translateX(0);
-            transform: scaleX(-1) translateX(0);
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
           }
 
           25% {
-            -webkit-transform: scaleX(-1) translateX(-14px) skewX(5deg);
-            transform: scaleX(-1) translateX(-14px) skewX(5deg);
+            -webkit-transform: translateX(18px) skewX(-5deg);
+            transform: translateX(18px) skewX(-5deg);
           }
 
           50% {
-            -webkit-transform: scaleX(-1) translateX(-8px) skewX(2deg);
-            transform: scaleX(-1) translateX(-8px) skewX(2deg);
+            -webkit-transform: translateX(10px) skewX(-2deg);
+            transform: translateX(10px) skewX(-2deg);
           }
 
           100% {
-            -webkit-transform: scaleX(-1) translateX(0);
-            transform: scaleX(-1) translateX(0);
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
           }
         }
 
         @keyframes fgP2HitStagger {
           0% {
-            -webkit-transform: scaleX(-1) translateX(0);
-            transform: scaleX(-1) translateX(0);
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
           }
 
           25% {
-            -webkit-transform: scaleX(-1) translateX(-14px) skewX(5deg);
-            transform: scaleX(-1) translateX(-14px) skewX(5deg);
+            -webkit-transform: translateX(18px) skewX(-5deg);
+            transform: translateX(18px) skewX(-5deg);
           }
 
           50% {
-            -webkit-transform: scaleX(-1) translateX(-8px) skewX(2deg);
-            transform: scaleX(-1) translateX(-8px) skewX(2deg);
+            -webkit-transform: translateX(10px) skewX(-2deg);
+            transform: translateX(10px) skewX(-2deg);
           }
 
           100% {
-            -webkit-transform: scaleX(-1) translateX(0);
-            transform: scaleX(-1) translateX(0);
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+        }
+
+        /* Hit Flash Fade */
+        @-webkit-keyframes fgHitFlashAnim {
+          0% {
+            opacity: 0.9;
+          }
+
+          40% {
+            opacity: 0.7;
+          }
+
+          100% {
+            opacity: 0;
+          }
+        }
+
+        @keyframes fgHitFlashAnim {
+          0% {
+            opacity: 0.9;
+          }
+
+          40% {
+            opacity: 0.7;
+          }
+
+          100% {
+            opacity: 0;
+          }
+        }
+
+        /* Hit Brightness Pulse */
+        @-webkit-keyframes fgHitBrightPulse {
+          0% {
+            -webkit-filter: brightness(2) contrast(1.3);
+            filter: brightness(2) contrast(1.3);
+          }
+
+          100% {
+            -webkit-filter: brightness(1) contrast(1);
+            filter: brightness(1) contrast(1);
+          }
+        }
+
+        @keyframes fgHitBrightPulse {
+          0% {
+            -webkit-filter: brightness(2) contrast(1.3);
+            filter: brightness(2) contrast(1.3);
+          }
+
+          100% {
+            -webkit-filter: brightness(1) contrast(1);
+            filter: brightness(1) contrast(1);
+          }
+        }
+
+        /* Sub-Zero Defeat Fall (0 HP) */
+        @-webkit-keyframes fgP2Defeat {
+          0% {
+            -webkit-transform: translateY(0) rotate(0deg);
+            opacity: 1;
+          }
+
+          35% {
+            -webkit-transform: translateY(-16px) rotate(20deg);
+            opacity: 0.9;
+          }
+
+          100% {
+            -webkit-transform: translateY(32px) rotate(88deg);
+            opacity: 0.45;
+          }
+        }
+
+        @keyframes fgP2Defeat {
+          0% {
+            -webkit-transform: translateY(0) rotate(0deg);
+            opacity: 1;
+          }
+
+          35% {
+            -webkit-transform: translateY(-16px) rotate(20deg);
+            opacity: 0.9;
+          }
+
+          100% {
+            -webkit-transform: translateY(32px) rotate(88deg);
+            opacity: 0.45;
           }
         }
 
         /* =======================================================================
-           P2 HIT DETECTION (P1 at positions 6 or 7 + any attack = P2 reacts)
+           DAMAGE HIT TRIGGERS (Player 1 Attack + Opponent Reactions)
            ======================================================================= */
 
-        /* Show hit flash on P2 when P1 is in range and attacking */
-        #fg_pos_6:checked~#fg_atk1_1:checked~.fg-container .fg-p2-hit-flash,
-        #fg_pos_6:checked~#fg_atk1_2:checked~.fg-container .fg-p2-hit-flash,
-        #fg_pos_6:checked~#fg_atk2_1:checked~.fg-container .fg-p2-hit-flash,
-        #fg_pos_6:checked~#fg_atk2_2:checked~.fg-container .fg-p2-hit-flash,
-        #fg_pos_7:checked~#fg_atk1_1:checked~.fg-container .fg-p2-hit-flash,
-        #fg_pos_7:checked~#fg_atk1_2:checked~.fg-container .fg-p2-hit-flash,
-        #fg_pos_7:checked~#fg_atk2_1:checked~.fg-container .fg-p2-hit-flash,
-        #fg_pos_7:checked~#fg_atk2_2:checked~.fg-container .fg-p2-hit-flash {
+        /* P1 Punch Animation on Hit */
+        #fg_hp_75_p:checked ~ .fg-container .fg-character-sprite,
+        #fg_hp_50_p:checked ~ .fg-container .fg-character-sprite,
+        #fg_hp_25_p:checked ~ .fg-container .fg-character-sprite,
+        #fg_hp_0_p:checked ~ .fg-container .fg-character-sprite {
+          -webkit-animation: fgPunch1 0.38s ease-out !important;
+          animation: fgPunch1 0.38s ease-out !important;
+        }
+
+        /* P1 Kick Animation on Hit */
+        #fg_hp_75_k:checked ~ .fg-container .fg-character-sprite,
+        #fg_hp_50_k:checked ~ .fg-container .fg-character-sprite,
+        #fg_hp_25_k:checked ~ .fg-container .fg-character-sprite,
+        #fg_hp_0_k:checked ~ .fg-container .fg-character-sprite {
+          -webkit-animation: fgKick1 0.44s ease-out !important;
+          animation: fgKick1 0.44s ease-out !important;
+        }
+
+        /* Sub-Zero Stagger on Damage */
+        #fg_hp_75_p:checked ~ .fg-container .fg-p2-stagger-wrapper,
+        #fg_hp_75_k:checked ~ .fg-container .fg-p2-stagger-wrapper,
+        #fg_hp_50_p:checked ~ .fg-container .fg-p2-stagger-wrapper,
+        #fg_hp_50_k:checked ~ .fg-container .fg-p2-stagger-wrapper,
+        #fg_hp_25_p:checked ~ .fg-container .fg-p2-stagger-wrapper,
+        #fg_hp_25_k:checked ~ .fg-container .fg-p2-stagger-wrapper {
+          -webkit-animation: fgP2HitStagger 0.38s ease-out !important;
+          animation: fgP2HitStagger 0.38s ease-out !important;
+        }
+
+        /* Sub-Zero Hit Flash on Damage */
+        #fg_hp_75_p:checked ~ .fg-container .fg-p2-hit-flash,
+        #fg_hp_75_k:checked ~ .fg-container .fg-p2-hit-flash,
+        #fg_hp_50_p:checked ~ .fg-container .fg-p2-hit-flash,
+        #fg_hp_50_k:checked ~ .fg-container .fg-p2-hit-flash,
+        #fg_hp_25_p:checked ~ .fg-container .fg-p2-hit-flash,
+        #fg_hp_25_k:checked ~ .fg-container .fg-p2-hit-flash,
+        #fg_hp_0_p:checked ~ .fg-container .fg-p2-hit-flash,
+        #fg_hp_0_k:checked ~ .fg-container .fg-p2-hit-flash {
+          display: block !important;
+          -webkit-animation: fgHitFlashAnim 0.38s ease-out forwards !important;
+          animation: fgHitFlashAnim 0.38s ease-out forwards !important;
+        }
+
+        /* Sub-Zero Brightness Flash on Damage */
+        #fg_hp_75_p:checked ~ .fg-container .fg-p2-anchor,
+        #fg_hp_75_k:checked ~ .fg-container .fg-p2-anchor,
+        #fg_hp_50_p:checked ~ .fg-container .fg-p2-anchor,
+        #fg_hp_50_k:checked ~ .fg-container .fg-p2-anchor,
+        #fg_hp_25_p:checked ~ .fg-container .fg-p2-anchor,
+        #fg_hp_25_k:checked ~ .fg-container .fg-p2-anchor {
+          -webkit-animation: fgHitBrightPulse 0.38s ease-out !important;
+          animation: fgHitBrightPulse 0.38s ease-out !important;
+        }
+
+        /* Sub-Zero Defeat at 0 HP */
+        #fg_hp_0_p:checked ~ .fg-container .fg-p2-anchor,
+        #fg_hp_0_k:checked ~ .fg-container .fg-p2-anchor {
+          -webkit-animation: fgP2Defeat 0.6s ease-out forwards !important;
+          animation: fgP2Defeat 0.6s ease-out forwards !important;
+        }
+
+        #fg_hp_0_p:checked ~ .fg-container .fg-p2-shadow,
+        #fg_hp_0_k:checked ~ .fg-container .fg-p2-shadow {
+          opacity: 0 !important;
+        }
+
+        #fg_hp_0_p:checked ~ .fg-container .fg-p2-hud,
+        #fg_hp_0_k:checked ~ .fg-container .fg-p2-hud {
+          color: #ff3344 !important;
+          border-color: #ff3344 !important;
+          box-shadow: 0 0 8px rgba(255, 51, 68, 0.8) !important;
+        }
+
+        /* =======================================================================
+           K.O. VICTORY BANNER & CONTROL SWITCHING
+           ======================================================================= */
+        .fg-ko-banner {
+          display: none;
+          position: absolute;
+          top: 36%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          -webkit-transform: translate(-50%, -50%);
+          text-align: center;
+          z-index: 25;
+          pointer-events: none;
+          width: 100%;
+        }
+
+        .fg-ko-title {
+          font-family: 'Courier New', Courier, monospace, sans-serif;
+          font-size: 50px;
+          font-weight: 900;
+          letter-spacing: 4px;
+          color: #ff3344;
+          text-shadow: 0 0 16px rgba(255, 51, 68, 0.95), 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000;
+          -webkit-animation: fgKoZoom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+          animation: fgKoZoom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .fg-ko-sub {
+          font-family: 'Courier New', Courier, monospace, sans-serif;
+          font-size: 14px;
+          font-weight: bold;
+          letter-spacing: 3px;
+          color: #ffd700;
+          text-shadow: 0 0 8px rgba(255, 215, 0, 0.8), 2px 2px 0 #000;
+          margin-top: 4px;
+          text-transform: uppercase;
+        }
+
+        @-webkit-keyframes fgKoZoom {
+          0% {
+            -webkit-transform: scale(0.2);
+            opacity: 0;
+          }
+
+          65% {
+            -webkit-transform: scale(1.15);
+            opacity: 1;
+          }
+
+          100% {
+            -webkit-transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes fgKoZoom {
+          0% {
+            transform: scale(0.2);
+            opacity: 0;
+          }
+
+          65% {
+            transform: scale(1.15);
+            opacity: 1;
+          }
+
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        #fg_hp_0_p:checked ~ .fg-container .fg-ko-banner,
+        #fg_hp_0_k:checked ~ .fg-container .fg-ko-banner {
           display: block !important;
         }
 
-        /* Apply hit stagger to P2 sprite (overrides idle) */
-        #fg_pos_6:checked~#fg_atk1_1:checked~.fg-container .fg-p2-sprite,
-        #fg_pos_6:checked~#fg_atk1_2:checked~.fg-container .fg-p2-sprite,
-        #fg_pos_6:checked~#fg_atk2_1:checked~.fg-container .fg-p2-sprite,
-        #fg_pos_6:checked~#fg_atk2_2:checked~.fg-container .fg-p2-sprite,
-        #fg_pos_7:checked~#fg_atk1_1:checked~.fg-container .fg-p2-sprite,
-        #fg_pos_7:checked~#fg_atk1_2:checked~.fg-container .fg-p2-sprite,
-        #fg_pos_7:checked~#fg_atk2_1:checked~.fg-container .fg-p2-sprite,
-        #fg_pos_7:checked~#fg_atk2_2:checked~.fg-container .fg-p2-sprite {
-          -webkit-animation: fgP2HitStagger 0.35s ease-out !important;
-          animation: fgP2HitStagger 0.35s ease-out !important;
+        /* Attack Controls Management: Whiff vs Melee vs Rematch */
+        .fg-atk-whiff {
+          display: inline-block;
         }
 
-        /* Flash P2 anchor bright on hit (visual impact feedback) */
-        #fg_pos_6:checked~#fg_atk1_1:checked~.fg-container .fg-p2-anchor,
-        #fg_pos_6:checked~#fg_atk1_2:checked~.fg-container .fg-p2-anchor,
-        #fg_pos_6:checked~#fg_atk2_1:checked~.fg-container .fg-p2-anchor,
-        #fg_pos_6:checked~#fg_atk2_2:checked~.fg-container .fg-p2-anchor,
-        #fg_pos_7:checked~#fg_atk1_1:checked~.fg-container .fg-p2-anchor,
-        #fg_pos_7:checked~#fg_atk1_2:checked~.fg-container .fg-p2-anchor,
-        #fg_pos_7:checked~#fg_atk2_1:checked~.fg-container .fg-p2-anchor,
-        #fg_pos_7:checked~#fg_atk2_2:checked~.fg-container .fg-p2-anchor {
-          -webkit-filter: brightness(1.8) contrast(1.2);
-          filter: brightness(1.8) contrast(1.2);
+        .fg-atk-melee {
+          display: none;
+        }
+
+        .fg-rematch-wrap {
+          display: none;
+        }
+
+        .fg-atk-stage {
+          display: none;
+        }
+
+        /* In Melee Range (Positions 6 & 7): Swap to Melee Attack Buttons */
+        #fg_pos_6:checked ~ .fg-container .fg-atk-whiff,
+        #fg_pos_7:checked ~ .fg-container .fg-atk-whiff {
+          display: none !important;
+        }
+
+        #fg_pos_6:checked ~ .fg-container .fg-atk-melee,
+        #fg_pos_7:checked ~ .fg-container .fg-atk-melee {
+          display: inline-block !important;
+        }
+
+        /* Progressive Melee Stages: Show the correct hit button based on current HP */
+        #fg_hp_100:checked ~ .fg-container .fg-atk-stage-100 {
+          display: inline-block !important;
+        }
+
+        #fg_hp_75_p:checked ~ .fg-container .fg-atk-stage-75,
+        #fg_hp_75_k:checked ~ .fg-container .fg-atk-stage-75 {
+          display: inline-block !important;
+        }
+
+        #fg_hp_50_p:checked ~ .fg-container .fg-atk-stage-50,
+        #fg_hp_50_k:checked ~ .fg-container .fg-atk-stage-50 {
+          display: inline-block !important;
+        }
+
+        #fg_hp_25_p:checked ~ .fg-container .fg-atk-stage-25,
+        #fg_hp_25_k:checked ~ .fg-container .fg-atk-stage-25 {
+          display: inline-block !important;
+        }
+
+        /* When Opponent is Defeated (0 HP): Show Rematch Button everywhere */
+        #fg_hp_0_p:checked ~ .fg-container .fg-atk-whiff,
+        #fg_hp_0_k:checked ~ .fg-container .fg-atk-whiff,
+        #fg_hp_0_p:checked ~ .fg-container .fg-atk-melee,
+        #fg_hp_0_k:checked ~ .fg-container .fg-atk-melee {
+          display: none !important;
+        }
+
+        #fg_hp_0_p:checked ~ .fg-container .fg-rematch-wrap,
+        #fg_hp_0_k:checked ~ .fg-container .fg-rematch-wrap {
+          display: inline-block !important;
+        }
+
+        /* Rematch Button Styling */
+        .fg-btn-rematch {
+          min-width: 260px;
+          background: linear-gradient(180deg, #ffd700 0%, #ff8f00 100%);
+          color: #1a0026;
+          border: 1px solid #ffe57f;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 3px 0 #b26a00, 0 4px 12px rgba(255, 215, 0, 0.5);
+          font-weight: 900;
+          letter-spacing: 1.5px;
+          -webkit-animation: fgPulseRematch 1.5s infinite;
+          animation: fgPulseRematch 1.5s infinite;
+        }
+
+        .fg-btn-rematch:hover {
+          filter: brightness(1.2);
+        }
+
+        @-webkit-keyframes fgPulseRematch {
+          0%, 100% {
+            -webkit-transform: scale(1);
+            filter: brightness(1);
+          }
+
+          50% {
+            -webkit-transform: scale(1.03);
+            filter: brightness(1.2);
+          }
+        }
+
+        @keyframes fgPulseRematch {
+          0%, 100% {
+            transform: scale(1);
+            filter: brightness(1);
+          }
+
+          50% {
+            transform: scale(1.03);
+            filter: brightness(1.2);
+          }
         }
 
         /* Responsive Mobile Viewports (max-width: 599px) */
@@ -1392,6 +1735,14 @@
             font-size: 9px !important;
           }
 
+          .fg-ko-title {
+            font-size: 36px !important;
+          }
+
+          .fg-ko-sub {
+            font-size: 11px !important;
+          }
+
           .fg-btn {
             padding: 8px 12px !important;
             font-size: 11px !important;
@@ -1405,6 +1756,12 @@
           .fg-btn-move,
           .fg-btn-atk {
             min-width: 105px !important;
+          }
+
+          .fg-btn-rematch {
+            min-width: 200px !important;
+            font-size: 11px !important;
+            padding: 8px 14px !important;
           }
         }
       </style>
@@ -1430,6 +1787,17 @@
       <input type="radio" name="fg_action" id="fg_atk2_1" class="fg-action-radio" />
       <input type="radio" name="fg_action" id="fg_atk2_2" class="fg-action-radio" />
 
+      <!-- Opponent Health & Damage States (Radio group ensures single source of truth + instant reset) -->
+      <input type="radio" name="fg_p2_hp" id="fg_hp_100" class="fg-action-radio" checked="checked" />
+      <input type="radio" name="fg_p2_hp" id="fg_hp_75_p" class="fg-action-radio" />
+      <input type="radio" name="fg_p2_hp" id="fg_hp_75_k" class="fg-action-radio" />
+      <input type="radio" name="fg_p2_hp" id="fg_hp_50_p" class="fg-action-radio" />
+      <input type="radio" name="fg_p2_hp" id="fg_hp_50_k" class="fg-action-radio" />
+      <input type="radio" name="fg_p2_hp" id="fg_hp_25_p" class="fg-action-radio" />
+      <input type="radio" name="fg_p2_hp" id="fg_hp_25_k" class="fg-action-radio" />
+      <input type="radio" name="fg_p2_hp" id="fg_hp_0_p" class="fg-action-radio" />
+      <input type="radio" name="fg_p2_hp" id="fg_hp_0_k" class="fg-action-radio" />
+
       <div class="fg-container">
 
         <!-- Combat Arena -->
@@ -1441,8 +1809,8 @@
             <!-- Player health and name -->
             <div class="fg-p1-status">
               <div class="fg-health-track" role="presentation" aria-label="Player health" aria-valuemin="0"
-                aria-valuemax="100" aria-valuenow="%%=v(@P1_Health)=%%">
-                <div class="fg-health-fill" style="width: %%=v(@P1_Health)=%%">
+                aria-valuemax="100" aria-valuenow="100">
+                <div class="fg-health-fill" style="width: 100%;">
                 </div>
               </div>
               <div class="fg-p1-hud">%%=v(@P1_Name)=%%</div>
@@ -1453,8 +1821,8 @@
             <!-- Opponent health and name -->
             <div class="fg-p2-status">
               <div class="fg-health-track fg-health-track-p2" role="presentation" aria-label="Opponent health"
-                aria-valuemin="0" aria-valuemax="100" aria-valuenow="%%=v(@P2_Health)=%%">
-                <div class="fg-health-fill fg-health-fill-p2" style="width: %%=v(@P2_Health)=%%">
+                aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+                <div class="fg-health-fill fg-health-fill-p2" style="width: 100%;">
                 </div>
               </div>
               <div class="fg-p2-hud">%%=v(@P2_Name)=%%</div>
@@ -1519,53 +1887,61 @@
           <!-- Player 2 (Sub-Zero) - Autonomous Opponent -->
           <div class="fg-p2-anchor">
             <div class="fg-p2-attack-wrapper">
-              <div class="fg-p2-sprite">
-                %%[ IF @P2_Image != "" AND NOT Empty(@P2_Image) THEN ]%%
-                <img src="%%=v(@P2_Image)=%%" alt="%%=v(@P2_Name)=%%"
-                  style="display: block; width: 100%; height: 100%; object-fit: contain;" />
-                %%[ ELSE ]%%
-                <!-- Built-in Retro Sub-Zero Ninja Sprite (Ice Blue) -->
-                <svg viewBox="0 0 80 120" width="100%" height="100%"
-                  style="display: block; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));">
-                  <!-- Head / Ninja Mask -->
-                  <circle cx="40" cy="22" r="14" fill="#1b1b1b" stroke="#000" stroke-width="2" />
-                  <!-- Ice Blue Ninja Hood Trim -->
-                  <path d="M 28 16 Q 40 8 52 16 L 52 26 Q 40 32 28 26 Z" fill="#00b4d8" stroke="#005f73"
-                    stroke-width="1.5" />
-                  <!-- Eyes Slot -->
-                  <rect x="33" y="19" width="14" height="4" rx="2" fill="#fff" />
-                  <circle cx="37" cy="21" r="1.2" fill="#000" />
-                  <circle cx="43" cy="21" r="1.2" fill="#000" />
-                  <!-- Ninja Mask Cloth -->
-                  <path d="M 32 25 L 48 25 L 46 34 L 34 34 Z" fill="#00b4d8" stroke="#005f73" stroke-width="1.5" />
-                  <!-- Torso / Gi -->
-                  <path d="M 27 36 L 53 36 L 49 72 L 31 72 Z" fill="#1b1b1b" stroke="#000" stroke-width="2" />
-                  <!-- Ice Blue Tabard V-Strap -->
-                  <path d="M 29 36 L 37 36 L 41 68 L 33 68 Z" fill="#00b4d8" />
-                  <path d="M 51 36 L 43 36 L 39 68 L 47 68 Z" fill="#00b4d8" />
-                  <!-- Belt / Sash -->
-                  <rect x="29" y="68" width="22" height="6" fill="#111" stroke="#00b4d8" stroke-width="1" />
-                  <rect x="38" y="74" width="4" height="14" fill="#00b4d8" />
-                  <!-- Left Arm / Fist -->
-                  <path d="M 27 38 L 16 52 L 20 66 L 27 58 Z" fill="#1b1b1b" />
-                  <circle cx="21" cy="65" r="5" fill="#00b4d8" stroke="#000" stroke-width="1" />
-                  <!-- Right Arm / Guard -->
-                  <path d="M 53 38 L 64 50 L 59 64 L 52 56 Z" fill="#1b1b1b" />
-                  <circle cx="59" cy="64" r="5" fill="#00b4d8" stroke="#000" stroke-width="1" />
-                  <!-- Legs / Stance -->
-                  <path d="M 32 74 L 25 96 L 22 114 L 30 114 L 35 96 L 39 74 Z" fill="#1b1b1b" stroke="#000"
-                    stroke-width="1.5" />
-                  <path d="M 48 74 L 55 96 L 58 114 L 50 114 L 45 96 L 41 74 Z" fill="#1b1b1b" stroke="#000"
-                    stroke-width="1.5" />
-                  <!-- Shin Guards -->
-                  <rect x="22" y="98" width="8" height="13" rx="2" fill="#00b4d8" stroke="#005f73" stroke-width="1" />
-                  <rect x="50" y="98" width="8" height="13" rx="2" fill="#00b4d8" stroke="#005f73" stroke-width="1" />
-                </svg>
-                %%[ ENDIF ]%%
+              <div class="fg-p2-stagger-wrapper">
+                <div class="fg-p2-sprite">
+                  %%[ IF @P2_Image != "" AND NOT Empty(@P2_Image) THEN ]%%
+                  <img src="%%=v(@P2_Image)=%%" alt="%%=v(@P2_Name)=%%"
+                    style="display: block; width: 100%; height: 100%; object-fit: contain;" />
+                  %%[ ELSE ]%%
+                  <!-- Built-in Retro Sub-Zero Ninja Sprite (Ice Blue) -->
+                  <svg viewBox="0 0 80 120" width="100%" height="100%"
+                    style="display: block; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));">
+                    <!-- Head / Ninja Mask -->
+                    <circle cx="40" cy="22" r="14" fill="#1b1b1b" stroke="#000" stroke-width="2" />
+                    <!-- Ice Blue Ninja Hood Trim -->
+                    <path d="M 28 16 Q 40 8 52 16 L 52 26 Q 40 32 28 26 Z" fill="#00b4d8" stroke="#005f73"
+                      stroke-width="1.5" />
+                    <!-- Eyes Slot -->
+                    <rect x="33" y="19" width="14" height="4" rx="2" fill="#fff" />
+                    <circle cx="37" cy="21" r="1.2" fill="#000" />
+                    <circle cx="43" cy="21" r="1.2" fill="#000" />
+                    <!-- Ninja Mask Cloth -->
+                    <path d="M 32 25 L 48 25 L 46 34 L 34 34 Z" fill="#00b4d8" stroke="#005f73" stroke-width="1.5" />
+                    <!-- Torso / Gi -->
+                    <path d="M 27 36 L 53 36 L 49 72 L 31 72 Z" fill="#1b1b1b" stroke="#000" stroke-width="2" />
+                    <!-- Ice Blue Tabard V-Strap -->
+                    <path d="M 29 36 L 37 36 L 41 68 L 33 68 Z" fill="#00b4d8" />
+                    <path d="M 51 36 L 43 36 L 39 68 L 47 68 Z" fill="#00b4d8" />
+                    <!-- Belt / Sash -->
+                    <rect x="29" y="68" width="22" height="6" fill="#111" stroke="#00b4d8" stroke-width="1" />
+                    <rect x="38" y="74" width="4" height="14" fill="#00b4d8" />
+                    <!-- Left Arm / Fist -->
+                    <path d="M 27 38 L 16 52 L 20 66 L 27 58 Z" fill="#1b1b1b" />
+                    <circle cx="21" cy="65" r="5" fill="#00b4d8" stroke="#000" stroke-width="1" />
+                    <!-- Right Arm / Guard -->
+                    <path d="M 53 38 L 64 50 L 59 64 L 52 56 Z" fill="#1b1b1b" />
+                    <circle cx="59" cy="64" r="5" fill="#00b4d8" stroke="#000" stroke-width="1" />
+                    <!-- Legs / Stance -->
+                    <path d="M 32 74 L 25 96 L 22 114 L 30 114 L 35 96 L 39 74 Z" fill="#1b1b1b" stroke="#000"
+                      stroke-width="1.5" />
+                    <path d="M 48 74 L 55 96 L 58 114 L 50 114 L 45 96 L 41 74 Z" fill="#1b1b1b" stroke="#000"
+                      stroke-width="1.5" />
+                    <!-- Shin Guards -->
+                    <rect x="22" y="98" width="8" height="13" rx="2" fill="#00b4d8" stroke="#005f73" stroke-width="1" />
+                    <rect x="50" y="98" width="8" height="13" rx="2" fill="#00b4d8" stroke="#005f73" stroke-width="1" />
+                  </svg>
+                  %%[ ENDIF ]%%
+                </div>
               </div>
             </div>
             <div class="fg-p2-shadow"></div>
             <div class="fg-p2-hit-flash"></div>
+          </div>
+
+          <!-- K.O. Defeat Banner (appears when opponent reaches 0 HP) -->
+          <div class="fg-ko-banner">
+            <div class="fg-ko-title">K.O.</div>
+            <div class="fg-ko-sub">%%=v(@P1_Name)=%% WINS!</div>
           </div>
 
           <!-- Ground Floor -->
@@ -1630,15 +2006,54 @@
 
             <!-- Row 3: Attack 1 & Attack 2 -->
             <div class="fg-ctrl-row fg-row-atk">
-              <label for="fg_atk1_1"
-                class="fg-btn fg-btn-atk fg-btn-atk1 fg-atk1-alt-1">%%=v(@Btn_Atk1_Label)=%%</label>
-              <label for="fg_atk1_2"
-                class="fg-btn fg-btn-atk fg-btn-atk1 fg-atk1-alt-2">%%=v(@Btn_Atk1_Label)=%%</label>
 
-              <label for="fg_atk2_1"
-                class="fg-btn fg-btn-atk fg-btn-atk2 fg-atk2-alt-1">%%=v(@Btn_Atk2_Label)=%%</label>
-              <label for="fg_atk2_2"
-                class="fg-btn fg-btn-atk fg-btn-atk2 fg-atk2-alt-2">%%=v(@Btn_Atk2_Label)=%%</label>
+              <!-- Whiff Attacks (Active at Positions 1 to 5) -->
+              <div class="fg-atk-whiff">
+                <label for="fg_atk1_1"
+                  class="fg-btn fg-btn-atk fg-btn-atk1 fg-atk1-alt-1">%%=v(@Btn_Atk1_Label)=%%</label>
+                <label for="fg_atk1_2"
+                  class="fg-btn fg-btn-atk fg-btn-atk1 fg-atk1-alt-2">%%=v(@Btn_Atk1_Label)=%%</label>
+
+                <label for="fg_atk2_1"
+                  class="fg-btn fg-btn-atk fg-btn-atk2 fg-atk2-alt-1">%%=v(@Btn_Atk2_Label)=%%</label>
+                <label for="fg_atk2_2"
+                  class="fg-btn fg-btn-atk fg-btn-atk2 fg-atk2-alt-2">%%=v(@Btn_Atk2_Label)=%%</label>
+              </div>
+
+              <!-- Melee Attacks (Active at Positions 6 & 7: Connects with Sub-Zero) -->
+              <div class="fg-atk-melee">
+
+                <!-- Stage 100: Ready for Hit 1 (Takes HP to 75%) -->
+                <div class="fg-atk-stage fg-atk-stage-100">
+                  <label for="fg_hp_75_p" class="fg-btn fg-btn-atk fg-btn-atk1">%%=v(@Btn_Atk1_Label)=%%</label>
+                  <label for="fg_hp_75_k" class="fg-btn fg-btn-atk fg-btn-atk2">%%=v(@Btn_Atk2_Label)=%%</label>
+                </div>
+
+                <!-- Stage 75: Ready for Hit 2 (Takes HP to 50%) -->
+                <div class="fg-atk-stage fg-atk-stage-75">
+                  <label for="fg_hp_50_p" class="fg-btn fg-btn-atk fg-btn-atk1">%%=v(@Btn_Atk1_Label)=%%</label>
+                  <label for="fg_hp_50_k" class="fg-btn fg-btn-atk fg-btn-atk2">%%=v(@Btn_Atk2_Label)=%%</label>
+                </div>
+
+                <!-- Stage 50: Ready for Hit 3 (Takes HP to 25%) -->
+                <div class="fg-atk-stage fg-atk-stage-50">
+                  <label for="fg_hp_25_p" class="fg-btn fg-btn-atk fg-btn-atk1">%%=v(@Btn_Atk1_Label)=%%</label>
+                  <label for="fg_hp_25_k" class="fg-btn fg-btn-atk fg-btn-atk2">%%=v(@Btn_Atk2_Label)=%%</label>
+                </div>
+
+                <!-- Stage 25: Ready for Hit 4 (Finishing Blow: Takes HP to 0% K.O.) -->
+                <div class="fg-atk-stage fg-atk-stage-25">
+                  <label for="fg_hp_0_p" class="fg-btn fg-btn-atk fg-btn-atk1">%%=v(@Btn_Atk1_Label)=%%</label>
+                  <label for="fg_hp_0_k" class="fg-btn fg-btn-atk fg-btn-atk2">%%=v(@Btn_Atk2_Label)=%%</label>
+                </div>
+
+              </div>
+
+              <!-- Rematch Button (Active when Opponent is K.O. at 0 HP, regardless of position) -->
+              <div class="fg-rematch-wrap">
+                <label for="fg_hp_100" class="fg-btn fg-btn-rematch">&#x21bb; REMATCH / PLAY AGAIN</label>
+              </div>
+
             </div>
 
           </div>
