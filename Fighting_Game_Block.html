@@ -19,27 +19,28 @@
   Set @Arena_BG_Color = "#0f0714"
   Set @Floor_Color = "#1f1026"
 
-  /* Fighter 1 (Player) Settings */
-  Set @P1_Name = "SCORPION"
+  /* Fighter 1 (Player) Settings - Viking Axe */
+  Set @P1_Name = "VIKING"
   /* Starting health percentage: use a number from 0 to 100 */
   Set @P1_Health = 100
-  /* Set @P1_Image to a custom .png / .gif URL. If blank, built-in retro ninja sprite is used */
-  Set @P1_Image = ""
-  Set @P1_Width = "80px"
-  Set @P1_Height = "125px"
+  /* Character sprite folder base URL (supports GitHub raw / CDN links) */
+  Set @P1_Base_URL = "https://raw.githubusercontent.com/Ale20p/Fighting_Mini-Game_Email_Block/main/sprites_viking_axe/axe_origin/"
+  Set @P1_Width = "95px"
+  Set @P1_Height = "105px"
 
   /* Controls Settings (D-Pad & Action Buttons) */
   Set @Btn_Jump_Label = "JUMP"
   Set @Btn_Left_Label = "◀ LEFT"
   Set @Btn_Right_Label = "RIGHT ▶"
-  Set @Btn_Atk1_Label = "ATK 1"
-  Set @Btn_Atk2_Label = "ATK 2"
+  Set @Btn_Atk1_Label = "AXE 1"
+  Set @Btn_Atk2_Label = "AXE 2"
 
-  /* Fighter 2 (Opponent / CPU) Settings */
-  Set @P2_Name = "SUB-ZERO"
+  /* Fighter 2 (Opponent / CPU) Settings - Sword Master */
+  Set @P2_Name = "KNIGHT"
   Set @P2_Health = 100
-  /* Set @P2_Image to a custom .png / .gif URL. If blank, built-in retro blue ninja sprite is used */
-  Set @P2_Image = ""
+  Set @P2_Base_URL = "https://raw.githubusercontent.com/Ale20p/Fighting_Mini-Game_Email_Block/main/sword_1/"
+  Set @P2_Width = "95px"
+  Set @P2_Height = "105px"
 
   /* Non-Interactive Fallback (Outlook Desktop / MSO) */
   Set @Fallback_Image = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80"
@@ -153,12 +154,12 @@
           text-shadow: 0 0 6px rgba(255, 51, 68, 0.8), 2px 2px 0px #000;
         }
 
-        /* Character Sprite & Stance */
+        /* Character Sprite & Stance (Player 1 - Viking) */
         .fg-character-anchor {
           position: absolute;
           bottom: 26px;
-          width: 80px;
-          height: 125px;
+          width: %%=v(@P1_Width)=%%;
+          height: %%=v(@P1_Height)=%%;
           transition: left 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
           z-index: 10;
           will-change: left;
@@ -177,11 +178,18 @@
         .fg-character-sprite {
           width: 100%;
           height: 100%;
-          position: relative;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          background-repeat: no-repeat;
+          background-position: center bottom;
+          background-size: 100px 96px;
+          image-rendering: -webkit-optimize-contrast;
+          image-rendering: pixelated;
           transform-origin: center bottom;
           -webkit-transform-origin: center bottom;
-          -webkit-animation: fgIdleStance 1.4s ease-in-out infinite alternate;
-          animation: fgIdleStance 1.4s ease-in-out infinite alternate;
+          -webkit-animation: fgP1IdleSprite 0.85s steps(1) infinite;
+          animation: fgP1IdleSprite 0.85s steps(1) infinite;
         }
 
         /* Dynamic Shadow under Fighter */
@@ -196,39 +204,40 @@
           transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
-        /* Idle Animation: retro breathing & bobbing */
-        @-webkit-keyframes fgIdleStance {
-          0% {
-            -webkit-transform: translateY(0) scaleY(1);
-            transform: translateY(0) scaleY(1);
-          }
-
-          50% {
-            -webkit-transform: translateY(-2px) scaleY(1.015);
-            transform: translateY(-2px) scaleY(1.015);
-          }
-
-          100% {
-            -webkit-transform: translateY(2px) scaleY(0.985);
-            transform: translateY(2px) scaleY(0.985);
-          }
+        /* Player 1 Idle Sprite Keyframes (Viking Axe ready stance) */
+        @-webkit-keyframes fgP1IdleSprite {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%ready_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%ready_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%ready_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%ready_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%ready_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%ready_6.png'); }
         }
 
-        @keyframes fgIdleStance {
-          0% {
-            -webkit-transform: translateY(0) scaleY(1);
-            transform: translateY(0) scaleY(1);
-          }
+        @keyframes fgP1IdleSprite {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%ready_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%ready_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%ready_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%ready_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%ready_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%ready_6.png'); }
+        }
 
-          50% {
-            -webkit-transform: translateY(-2px) scaleY(1.015);
-            transform: translateY(-2px) scaleY(1.015);
-          }
+        /* Player 1 Jump Sprite Keyframes */
+        @-webkit-keyframes fgP1JumpSprite {
+          0%, 19.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_1.png'); }
+          20.00%, 39.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_2.png'); }
+          40.00%, 69.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_3.png'); }
+          70.00%, 89.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_4.png'); }
+          90.00%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%jump_5.png'); }
+        }
 
-          100% {
-            -webkit-transform: translateY(2px) scaleY(0.985);
-            transform: translateY(2px) scaleY(0.985);
-          }
+        @keyframes fgP1JumpSprite {
+          0%, 19.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_1.png'); }
+          20.00%, 39.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_2.png'); }
+          40.00%, 69.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_3.png'); }
+          70.00%, 89.99% { background-image: url('%%=v(@P1_Base_URL)=%%jump_4.png'); }
+          90.00%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%jump_5.png'); }
         }
 
         /* Jump Physics Keyframes (Arc 1 & Arc 2 for alternating seamless re-triggers) */
@@ -445,238 +454,60 @@
           }
         }
 
-        /* Attack 1 (Punch / Jab) Keyframes */
-        @-webkit-keyframes fgPunch1 {
-          0% {
-            -webkit-transform: translateY(0) scaleX(1);
-            transform: translateY(0) scaleX(1);
-          }
-
-          25% {
-            -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96);
-            transform: translateX(14px) scaleX(1.12) scaleY(0.96);
-          }
-
-          50% {
-            -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94);
-            transform: translateX(20px) scaleX(1.18) scaleY(0.94);
-          }
-
-          75% {
-            -webkit-transform: translateX(8px) scaleX(1.05);
-            transform: translateX(8px) scaleX(1.05);
-          }
-
-          100% {
-            -webkit-transform: translateY(0) scaleX(1);
-            transform: translateY(0) scaleX(1);
-          }
+        /* Attack 1 (Axe Strike) Sprite Keyframes */
+        @-webkit-keyframes fgP1Atk1 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_6.png'); }
         }
 
-        @keyframes fgPunch1 {
-          0% {
-            -webkit-transform: translateY(0) scaleX(1);
-            transform: translateY(0) scaleX(1);
-          }
-
-          25% {
-            -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96);
-            transform: translateX(14px) scaleX(1.12) scaleY(0.96);
-          }
-
-          50% {
-            -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94);
-            transform: translateX(20px) scaleX(1.18) scaleY(0.94);
-          }
-
-          75% {
-            -webkit-transform: translateX(8px) scaleX(1.05);
-            transform: translateX(8px) scaleX(1.05);
-          }
-
-          100% {
-            -webkit-transform: translateY(0) scaleX(1);
-            transform: translateY(0) scaleX(1);
-          }
+        @keyframes fgP1Atk1 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack1_6.png'); }
         }
 
-        @-webkit-keyframes fgPunch2 {
-          0% {
-            -webkit-transform: translateY(0) scaleX(1);
-            transform: translateY(0) scaleX(1);
-          }
-
-          25% {
-            -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96);
-            transform: translateX(14px) scaleX(1.12) scaleY(0.96);
-          }
-
-          50% {
-            -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94);
-            transform: translateX(20px) scaleX(1.18) scaleY(0.94);
-          }
-
-          75% {
-            -webkit-transform: translateX(8px) scaleX(1.05);
-            transform: translateX(8px) scaleX(1.05);
-          }
-
-          100% {
-            -webkit-transform: translateY(0) scaleX(1);
-            transform: translateY(0) scaleX(1);
-          }
+        /* Attack 2 (Heavy Chop) Sprite Keyframes */
+        @-webkit-keyframes fgP1Atk2 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_6.png'); }
         }
 
-        @keyframes fgPunch2 {
-          0% {
-            -webkit-transform: translateY(0) scaleX(1);
-            transform: translateY(0) scaleX(1);
-          }
-
-          25% {
-            -webkit-transform: translateX(14px) scaleX(1.12) scaleY(0.96);
-            transform: translateX(14px) scaleX(1.12) scaleY(0.96);
-          }
-
-          50% {
-            -webkit-transform: translateX(20px) scaleX(1.18) scaleY(0.94);
-            transform: translateX(20px) scaleX(1.18) scaleY(0.94);
-          }
-
-          75% {
-            -webkit-transform: translateX(8px) scaleX(1.05);
-            transform: translateX(8px) scaleX(1.05);
-          }
-
-          100% {
-            -webkit-transform: translateY(0) scaleX(1);
-            transform: translateY(0) scaleX(1);
-          }
+        @keyframes fgP1Atk2 {
+          0%, 16.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_1.png'); }
+          16.66%, 33.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_2.png'); }
+          33.33%, 49.99% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_3.png'); }
+          50.00%, 66.65% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_4.png'); }
+          66.66%, 83.32% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_5.png'); }
+          83.33%, 100% { background-image: url('%%=v(@P1_Base_URL)=%%attack2_6.png'); }
         }
 
-        /* Attack 2 (Kick / Strike) Keyframes */
-        @-webkit-keyframes fgKick1 {
-          0% {
-            -webkit-transform: translateY(0) rotate(0deg);
-            transform: translateY(0) rotate(0deg);
-          }
-
-          25% {
-            -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg);
-            transform: translateX(-4px) translateY(-8px) rotate(-8deg);
-          }
-
-          50% {
-            -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
-            transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
-          }
-
-          75% {
-            -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg);
-            transform: translateX(6px) translateY(-4px) rotate(3deg);
-          }
-
-          100% {
-            -webkit-transform: translateY(0) rotate(0deg);
-            transform: translateY(0) rotate(0deg);
-          }
-        }
-
-        @keyframes fgKick1 {
-          0% {
-            -webkit-transform: translateY(0) rotate(0deg);
-            transform: translateY(0) rotate(0deg);
-          }
-
-          25% {
-            -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg);
-            transform: translateX(-4px) translateY(-8px) rotate(-8deg);
-          }
-
-          50% {
-            -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
-            transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
-          }
-
-          75% {
-            -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg);
-            transform: translateX(6px) translateY(-4px) rotate(3deg);
-          }
-
-          100% {
-            -webkit-transform: translateY(0) rotate(0deg);
-            transform: translateY(0) rotate(0deg);
-          }
-        }
-
-        @-webkit-keyframes fgKick2 {
-          0% {
-            -webkit-transform: translateY(0) rotate(0deg);
-            transform: translateY(0) rotate(0deg);
-          }
-
-          25% {
-            -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg);
-            transform: translateX(-4px) translateY(-8px) rotate(-8deg);
-          }
-
-          50% {
-            -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
-            transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
-          }
-
-          75% {
-            -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg);
-            transform: translateX(6px) translateY(-4px) rotate(3deg);
-          }
-
-          100% {
-            -webkit-transform: translateY(0) rotate(0deg);
-            transform: translateY(0) rotate(0deg);
-          }
-        }
-
-        @keyframes fgKick2 {
-          0% {
-            -webkit-transform: translateY(0) rotate(0deg);
-            transform: translateY(0) rotate(0deg);
-          }
-
-          25% {
-            -webkit-transform: translateX(-4px) translateY(-8px) rotate(-8deg);
-            transform: translateX(-4px) translateY(-8px) rotate(-8deg);
-          }
-
-          50% {
-            -webkit-transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
-            transform: translateX(18px) translateY(-14px) rotate(10deg) scaleX(1.12);
-          }
-
-          75% {
-            -webkit-transform: translateX(6px) translateY(-4px) rotate(3deg);
-            transform: translateX(6px) translateY(-4px) rotate(3deg);
-          }
-
-          100% {
-            -webkit-transform: translateY(0) rotate(0deg);
-            transform: translateY(0) rotate(0deg);
-          }
-        }
-
-        /* Jump State Activation via CSS Radio Selectors (Triggers on Dedicated fg-jump-wrapper) */
-        #fg_jump_1:checked~.fg-container .fg-jump-wrapper {
+        /* Jump State Activation via CSS Radio Selectors (Triggers on Dedicated fg-jump-wrapper & sprite) */
+        #fg_jump_1:checked~.fg-container .fg-jump-wrapper,
+        #fg_jump_2:checked~.fg-container .fg-jump-wrapper {
           -webkit-animation: fgJumpArc1 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
           animation: fgJumpArc1 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        }
+
+        #fg_jump_1:checked~.fg-container .fg-character-sprite,
+        #fg_jump_2:checked~.fg-container .fg-character-sprite {
+          -webkit-animation: fgP1JumpSprite 0.62s steps(1) !important;
+          animation: fgP1JumpSprite 0.62s steps(1) !important;
         }
 
         #fg_jump_1:checked~.fg-container .fg-shadow {
           -webkit-animation: fgShadowShrink1 0.62s ease-out !important;
           animation: fgShadowShrink1 0.62s ease-out !important;
-        }
-
-        #fg_jump_2:checked~.fg-container .fg-jump-wrapper {
-          -webkit-animation: fgJumpArc2 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-          animation: fgJumpArc2 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
         }
 
         #fg_jump_2:checked~.fg-container .fg-shadow {
@@ -685,25 +516,27 @@
         }
 
         /* Attack 1 State Activation via CSS Radio Selectors */
-        #fg_atk1_1:checked~.fg-container .fg-character-sprite {
-          -webkit-animation: fgPunch1 0.38s ease-out !important;
-          animation: fgPunch1 0.38s ease-out !important;
-        }
-
+        #fg_atk1_1:checked~.fg-container .fg-character-sprite,
         #fg_atk1_2:checked~.fg-container .fg-character-sprite {
-          -webkit-animation: fgPunch2 0.38s ease-out !important;
-          animation: fgPunch2 0.38s ease-out !important;
+          width: 190px !important;
+          height: 124px !important;
+          left: -15px !important;
+          background-size: 190px 124px !important;
+          background-position: left bottom !important;
+          -webkit-animation: fgP1Atk1 0.45s steps(1) forwards !important;
+          animation: fgP1Atk1 0.45s steps(1) forwards !important;
         }
 
         /* Attack 2 State Activation via CSS Radio Selectors */
-        #fg_atk2_1:checked~.fg-container .fg-character-sprite {
-          -webkit-animation: fgKick1 0.44s ease-out !important;
-          animation: fgKick1 0.44s ease-out !important;
-        }
-
+        #fg_atk2_1:checked~.fg-container .fg-character-sprite,
         #fg_atk2_2:checked~.fg-container .fg-character-sprite {
-          -webkit-animation: fgKick2 0.44s ease-out !important;
-          animation: fgKick2 0.44s ease-out !important;
+          width: 190px !important;
+          height: 124px !important;
+          left: -15px !important;
+          background-size: 190px 124px !important;
+          background-position: left bottom !important;
+          -webkit-animation: fgP1Atk2 0.48s steps(1) forwards !important;
+          animation: fgP1Atk2 0.48s steps(1) forwards !important;
         }
 
         /* Alternating Button Swaps (ensures repeated clicks re-trigger animations seamlessly) */
@@ -1114,13 +947,13 @@
           width: 0% !important;
         }
 
-        /* P2 Character Anchor (autonomous patrol on right side of arena) */
+        /* P2 Character Anchor (Opponent Knight, autonomous patrol on right side of arena) */
         .fg-p2-anchor {
           position: absolute;
           bottom: 26px;
           left: 72%;
-          width: 80px;
-          height: 125px;
+          width: %%=v(@P2_Width)=%%;
+          height: %%=v(@P2_Height)=%%;
           z-index: 9;
           -webkit-animation: fgP2Patrol 4s ease-in-out infinite;
           animation: fgP2Patrol 4s ease-in-out infinite;
@@ -1137,7 +970,7 @@
           animation: fgP2AttackCycle 5s ease-in-out infinite;
         }
 
-        /* P2 Stagger Wrapper (isolates hit recoil from patrol & idle breathing) */
+        /* P2 Stagger Wrapper (isolates hit recoil from patrol & idle stance) */
         .fg-p2-stagger-wrapper {
           width: 100%;
           height: 100%;
@@ -1146,15 +979,24 @@
           -webkit-transform-origin: center bottom;
         }
 
-        /* P2 Sprite (mirrored to face left via scaleX -1 in keyframes + idle breathing) */
+        /* P2 Sprite (Opponent Knight, mirrored to face left + idle sprite animation) */
         .fg-p2-sprite {
           width: 100%;
           height: 100%;
-          position: relative;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          background-repeat: no-repeat;
+          background-position: center bottom;
+          background-size: 100px 96px;
+          image-rendering: -webkit-optimize-contrast;
+          image-rendering: pixelated;
+          transform: scaleX(-1);
+          -webkit-transform: scaleX(-1);
           transform-origin: center bottom;
           -webkit-transform-origin: center bottom;
-          -webkit-animation: fgP2Idle 1.4s ease-in-out infinite alternate;
-          animation: fgP2Idle 1.4s ease-in-out infinite alternate;
+          -webkit-animation: fgP2IdleSprite 0.75s steps(1) infinite;
+          animation: fgP2IdleSprite 0.75s steps(1) infinite;
         }
 
         /* P2 Shadow */
@@ -1214,39 +1056,47 @@
           }
         }
 
-        /* P2 Idle Breathing (includes scaleX -1 mirror so sprite faces P1) */
-        @-webkit-keyframes fgP2Idle {
-          0% {
-            -webkit-transform: scaleX(-1) translateY(0) scaleY(1);
-            transform: scaleX(-1) translateY(0) scaleY(1);
-          }
-
-          50% {
-            -webkit-transform: scaleX(-1) translateY(-2px) scaleY(1.015);
-            transform: scaleX(-1) translateY(-2px) scaleY(1.015);
-          }
-
-          100% {
-            -webkit-transform: scaleX(-1) translateY(2px) scaleY(0.985);
-            transform: scaleX(-1) translateY(2px) scaleY(0.985);
-          }
+        /* P2 Idle Sprite Keyframes (Opponent Knight ready stance) */
+        @-webkit-keyframes fgP2IdleSprite {
+          0%, 33.32% { background-image: url('%%=v(@P2_Base_URL)=%%ready_1.png'); }
+          33.33%, 66.65% { background-image: url('%%=v(@P2_Base_URL)=%%ready_2.png'); }
+          66.66%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%ready_3.png'); }
         }
 
-        @keyframes fgP2Idle {
-          0% {
-            -webkit-transform: scaleX(-1) translateY(0) scaleY(1);
-            transform: scaleX(-1) translateY(0) scaleY(1);
-          }
+        @keyframes fgP2IdleSprite {
+          0%, 33.32% { background-image: url('%%=v(@P2_Base_URL)=%%ready_1.png'); }
+          33.33%, 66.65% { background-image: url('%%=v(@P2_Base_URL)=%%ready_2.png'); }
+          66.66%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%ready_3.png'); }
+        }
 
-          50% {
-            -webkit-transform: scaleX(-1) translateY(-2px) scaleY(1.015);
-            transform: scaleX(-1) translateY(-2px) scaleY(1.015);
-          }
+        /* P2 Hit Sprite Keyframes (Recoil stance on damage) */
+        @-webkit-keyframes fgP2HitSprite {
+          0%, 33.32% { background-image: url('%%=v(@P2_Base_URL)=%%hit_1.png'); }
+          33.33%, 66.65% { background-image: url('%%=v(@P2_Base_URL)=%%hit_2.png'); }
+          66.66%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%hit_3.png'); }
+        }
 
-          100% {
-            -webkit-transform: scaleX(-1) translateY(2px) scaleY(0.985);
-            transform: scaleX(-1) translateY(2px) scaleY(0.985);
-          }
+        @keyframes fgP2HitSprite {
+          0%, 33.32% { background-image: url('%%=v(@P2_Base_URL)=%%hit_1.png'); }
+          33.33%, 66.65% { background-image: url('%%=v(@P2_Base_URL)=%%hit_2.png'); }
+          66.66%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%hit_3.png'); }
+        }
+
+        /* P2 Defeat Sprite Keyframes (Knight collapses to the floor at 0 HP) */
+        @-webkit-keyframes fgP2DeadSprite {
+          0%, 19.99% { background-image: url('%%=v(@P2_Base_URL)=%%fall_back_1.png'); }
+          20.00%, 39.99% { background-image: url('%%=v(@P2_Base_URL)=%%fall_back_2.png'); }
+          40.00%, 59.99% { background-image: url('%%=v(@P2_Base_URL)=%%fall_back_3.png'); }
+          60.00%, 79.99% { background-image: url('%%=v(@P2_Base_URL)=%%fall_back_4.png'); }
+          80.00%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%fall_back_5.png'); }
+        }
+
+        @keyframes fgP2DeadSprite {
+          0%, 19.99% { background-image: url('%%=v(@P2_Base_URL)=%%fall_back_1.png'); }
+          20.00%, 39.99% { background-image: url('%%=v(@P2_Base_URL)=%%fall_back_2.png'); }
+          40.00%, 59.99% { background-image: url('%%=v(@P2_Base_URL)=%%fall_back_3.png'); }
+          60.00%, 79.99% { background-image: url('%%=v(@P2_Base_URL)=%%fall_back_4.png'); }
+          80.00%, 100% { background-image: url('%%=v(@P2_Base_URL)=%%fall_back_5.png'); }
         }
 
         /* P2 Attack Cycle (periodic autonomous strike lunge toward P1) */
@@ -1417,64 +1267,39 @@
           }
         }
 
-        /* Sub-Zero Defeat Fall (0 HP) */
-        @-webkit-keyframes fgP2Defeat {
-          0% {
-            -webkit-transform: translateY(0) rotate(0deg);
-            opacity: 1;
-          }
-
-          35% {
-            -webkit-transform: translateY(-16px) rotate(20deg);
-            opacity: 0.9;
-          }
-
-          100% {
-            -webkit-transform: translateY(32px) rotate(88deg);
-            opacity: 0.45;
-          }
-        }
-
-        @keyframes fgP2Defeat {
-          0% {
-            -webkit-transform: translateY(0) rotate(0deg);
-            opacity: 1;
-          }
-
-          35% {
-            -webkit-transform: translateY(-16px) rotate(20deg);
-            opacity: 0.9;
-          }
-
-          100% {
-            -webkit-transform: translateY(32px) rotate(88deg);
-            opacity: 0.45;
-          }
-        }
-
         /* =======================================================================
            DAMAGE HIT TRIGGERS (Player 1 Attack + Opponent Reactions)
            ======================================================================= */
 
-        /* P1 Punch Animation on Hit */
+        /* P1 Attack 1 Animation on Hit */
         #fg_hp_75_p:checked ~ .fg-container .fg-character-sprite,
         #fg_hp_50_p:checked ~ .fg-container .fg-character-sprite,
         #fg_hp_25_p:checked ~ .fg-container .fg-character-sprite,
         #fg_hp_0_p:checked ~ .fg-container .fg-character-sprite {
-          -webkit-animation: fgPunch1 0.38s ease-out !important;
-          animation: fgPunch1 0.38s ease-out !important;
+          width: 190px !important;
+          height: 124px !important;
+          left: -15px !important;
+          background-size: 190px 124px !important;
+          background-position: left bottom !important;
+          -webkit-animation: fgP1Atk1 0.45s steps(1) forwards !important;
+          animation: fgP1Atk1 0.45s steps(1) forwards !important;
         }
 
-        /* P1 Kick Animation on Hit */
+        /* P1 Attack 2 Animation on Hit */
         #fg_hp_75_k:checked ~ .fg-container .fg-character-sprite,
         #fg_hp_50_k:checked ~ .fg-container .fg-character-sprite,
         #fg_hp_25_k:checked ~ .fg-container .fg-character-sprite,
         #fg_hp_0_k:checked ~ .fg-container .fg-character-sprite {
-          -webkit-animation: fgKick1 0.44s ease-out !important;
-          animation: fgKick1 0.44s ease-out !important;
+          width: 190px !important;
+          height: 124px !important;
+          left: -15px !important;
+          background-size: 190px 124px !important;
+          background-position: left bottom !important;
+          -webkit-animation: fgP1Atk2 0.48s steps(1) forwards !important;
+          animation: fgP1Atk2 0.48s steps(1) forwards !important;
         }
 
-        /* Sub-Zero Stagger on Damage */
+        /* Opponent Knight Stagger on Damage */
         #fg_hp_75_p:checked ~ .fg-container .fg-p2-stagger-wrapper,
         #fg_hp_75_k:checked ~ .fg-container .fg-p2-stagger-wrapper,
         #fg_hp_50_p:checked ~ .fg-container .fg-p2-stagger-wrapper,
@@ -1485,7 +1310,18 @@
           animation: fgP2HitStagger 0.38s ease-out !important;
         }
 
-        /* Sub-Zero Hit Flash on Damage */
+        /* Opponent Knight Hit Sprite on Damage */
+        #fg_hp_75_p:checked ~ .fg-container .fg-p2-sprite,
+        #fg_hp_75_k:checked ~ .fg-container .fg-p2-sprite,
+        #fg_hp_50_p:checked ~ .fg-container .fg-p2-sprite,
+        #fg_hp_50_k:checked ~ .fg-container .fg-p2-sprite,
+        #fg_hp_25_p:checked ~ .fg-container .fg-p2-sprite,
+        #fg_hp_25_k:checked ~ .fg-container .fg-p2-sprite {
+          -webkit-animation: fgP2HitSprite 0.38s steps(1) !important;
+          animation: fgP2HitSprite 0.38s steps(1) !important;
+        }
+
+        /* Opponent Knight Hit Flash on Damage */
         #fg_hp_75_p:checked ~ .fg-container .fg-p2-hit-flash,
         #fg_hp_75_k:checked ~ .fg-container .fg-p2-hit-flash,
         #fg_hp_50_p:checked ~ .fg-container .fg-p2-hit-flash,
@@ -1499,7 +1335,7 @@
           animation: fgHitFlashAnim 0.38s ease-out forwards !important;
         }
 
-        /* Sub-Zero Brightness Flash on Damage */
+        /* Opponent Knight Brightness Flash on Damage */
         #fg_hp_75_p:checked ~ .fg-container .fg-p2-anchor,
         #fg_hp_75_k:checked ~ .fg-container .fg-p2-anchor,
         #fg_hp_50_p:checked ~ .fg-container .fg-p2-anchor,
@@ -1510,11 +1346,17 @@
           animation: fgHitBrightPulse 0.38s ease-out !important;
         }
 
-        /* Sub-Zero Defeat at 0 HP */
+        /* Opponent Knight Defeat at 0 HP (Sprite collapses and anchor stops patrol) */
+        #fg_hp_0_p:checked ~ .fg-container .fg-p2-sprite,
+        #fg_hp_0_k:checked ~ .fg-container .fg-p2-sprite {
+          -webkit-animation: fgP2DeadSprite 0.7s steps(1) forwards !important;
+          animation: fgP2DeadSprite 0.7s steps(1) forwards !important;
+        }
+
         #fg_hp_0_p:checked ~ .fg-container .fg-p2-anchor,
         #fg_hp_0_k:checked ~ .fg-container .fg-p2-anchor {
-          -webkit-animation: fgP2Defeat 0.6s ease-out forwards !important;
-          animation: fgP2Defeat 0.6s ease-out forwards !important;
+          -webkit-animation: none !important;
+          animation: none !important;
         }
 
         #fg_hp_0_p:checked ~ .fg-container .fg-p2-shadow,
@@ -1723,15 +1565,20 @@
           }
 
           .fg-character-anchor {
-            width: 65px !important;
-            height: 100px !important;
+            width: 75px !important;
+            height: 85px !important;
             bottom: 22px !important;
           }
 
           .fg-p2-anchor {
-            width: 65px !important;
-            height: 100px !important;
+            width: 75px !important;
+            height: 85px !important;
             bottom: 22px !important;
+          }
+
+          .fg-character-sprite,
+          .fg-p2-sprite {
+            background-size: 80px 76px !important;
           }
 
           .fg-p1-status,
@@ -1777,6 +1624,52 @@
       <!--[if !mso]><!-->
       <!-- INTERACTIVE GAME ENGINE (Apple Mail, iOS, WebKit) -->
       <form class="fg-game-form" onsubmit="return false;" style="margin: 0; padding: 0; border: none; display: block;">
+
+      <!-- Hidden Sprite Image Preloader (Eliminates frame flicker in email clients) -->
+      <div style="display:none !important; max-height:0; overflow:hidden; mso-hide:all;">
+        <!-- P1 Viking Axe Sprites -->
+        <img src="%%=v(@P1_Base_URL)=%%ready_1.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%ready_2.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%ready_3.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%ready_4.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%ready_5.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%ready_6.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%jump_1.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%jump_2.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%jump_3.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%jump_4.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%jump_5.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack1_1.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack1_2.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack1_3.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack1_4.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack1_5.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack1_6.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack2_1.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack2_2.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack2_3.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack2_4.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack2_5.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P1_Base_URL)=%%attack2_6.png" width="1" height="1" alt="" />
+        <!-- P2 Knight Sprites -->
+        <img src="%%=v(@P2_Base_URL)=%%ready_1.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%ready_2.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%ready_3.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%attack1_1.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%attack1_2.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%attack1_3.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%attack1_4.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%attack1_5.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%attack1_6.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%hit_1.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%hit_2.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%hit_3.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%fall_back_1.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%fall_back_2.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%fall_back_3.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%fall_back_4.png" width="1" height="1" alt="" />
+        <img src="%%=v(@P2_Base_URL)=%%fall_back_5.png" width="1" height="1" alt="" />
+      </div>
 
       <!-- Position Radio Inputs -->
       <input type="radio" name="fg_pos" id="fg_pos_1" class="fg-pos-radio" />
@@ -1838,109 +1731,20 @@
             </div>
           </div>
 
-          <!-- The Moveable Character -->
+          <!-- The Moveable Character (Player 1 - Viking) -->
           <div class="fg-character-anchor">
             <div class="fg-jump-wrapper">
-              <div class="fg-character-sprite">
-                %%[ IF @P1_Image != "" AND NOT Empty(@P1_Image) THEN ]%%
-                <!-- Custom User Image (.png or .gif) -->
-                <img src="%%=v(@P1_Image)=%%" alt="%%=v(@P1_Name)=%%"
-                  style="display: block; width: 100%; height: 100%; object-fit: contain;" />
-                %%[ ELSE ]%%
-                <!-- Built-in Retro Ninja Fighter Sprite (Scalable SVG) -->
-                <svg viewBox="0 0 80 120" width="100%" height="100%"
-                  style="display: block; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));">
-                  <!-- Head / Ninja Mask -->
-                  <circle cx="40" cy="22" r="14" fill="#1b1b1b" stroke="#000" stroke-width="2" />
-                  <!-- Yellow Ninja Hood Trim -->
-                  <path d="M 28 16 Q 40 8 52 16 L 52 26 Q 40 32 28 26 Z" fill="#e5ad06" stroke="#8d6800"
-                    stroke-width="1.5" />
-                  <!-- Eyes Slot -->
-                  <rect x="33" y="19" width="14" height="4" rx="2" fill="#fff" />
-                  <circle cx="37" cy="21" r="1.2" fill="#000" />
-                  <circle cx="43" cy="21" r="1.2" fill="#000" />
-                  <!-- Ninja Mask Cloth -->
-                  <path d="M 32 25 L 48 25 L 46 34 L 34 34 Z" fill="#e5ad06" stroke="#8d6800" stroke-width="1.5" />
-                  <!-- Torso / Gi -->
-                  <path d="M 27 36 L 53 36 L 49 72 L 31 72 Z" fill="#1b1b1b" stroke="#000" stroke-width="2" />
-                  <!-- Yellow Tabard V-Strap -->
-                  <path d="M 29 36 L 37 36 L 41 68 L 33 68 Z" fill="#e5ad06" />
-                  <path d="M 51 36 L 43 36 L 39 68 L 47 68 Z" fill="#e5ad06" />
-                  <!-- Belt / Sash -->
-                  <rect x="29" y="68" width="22" height="6" fill="#111" stroke="#e5ad06" stroke-width="1" />
-                  <rect x="38" y="74" width="4" height="14" fill="#e5ad06" />
-                  <!-- Left Arm / Fist -->
-                  <path d="M 27 38 L 16 52 L 20 66 L 27 58 Z" fill="#1b1b1b" />
-                  <circle cx="21" cy="65" r="5" fill="#e5ad06" stroke="#000" stroke-width="1" />
-                  <!-- Right Arm / Guard -->
-                  <path d="M 53 38 L 64 50 L 59 64 L 52 56 Z" fill="#1b1b1b" />
-                  <circle cx="59" cy="64" r="5" fill="#e5ad06" stroke="#000" stroke-width="1" />
-                  <!-- Legs / Stance -->
-                  <!-- Left Leg -->
-                  <path d="M 32 74 L 25 96 L 22 114 L 30 114 L 35 96 L 39 74 Z" fill="#1b1b1b" stroke="#000"
-                    stroke-width="1.5" />
-                  <!-- Right Leg -->
-                  <path d="M 48 74 L 55 96 L 58 114 L 50 114 L 45 96 L 41 74 Z" fill="#1b1b1b" stroke="#000"
-                    stroke-width="1.5" />
-                  <!-- Shin Guards -->
-                  <rect x="22" y="98" width="8" height="13" rx="2" fill="#e5ad06" stroke="#8d6800" stroke-width="1" />
-                  <rect x="50" y="98" width="8" height="13" rx="2" fill="#e5ad06" stroke="#8d6800" stroke-width="1" />
-                </svg>
-                %%[ ENDIF ]%%
-              </div>
+              <div class="fg-character-sprite"></div>
             </div>
             <!-- Dynamic Foot Shadow -->
             <div class="fg-shadow"></div>
           </div>
 
-          <!-- Player 2 (Sub-Zero) - Autonomous Opponent -->
+          <!-- Player 2 (Opponent Knight) - Autonomous Opponent -->
           <div class="fg-p2-anchor">
             <div class="fg-p2-attack-wrapper">
               <div class="fg-p2-stagger-wrapper">
-                <div class="fg-p2-sprite">
-                  %%[ IF @P2_Image != "" AND NOT Empty(@P2_Image) THEN ]%%
-                  <img src="%%=v(@P2_Image)=%%" alt="%%=v(@P2_Name)=%%"
-                    style="display: block; width: 100%; height: 100%; object-fit: contain;" />
-                  %%[ ELSE ]%%
-                  <!-- Built-in Retro Sub-Zero Ninja Sprite (Ice Blue) -->
-                  <svg viewBox="0 0 80 120" width="100%" height="100%"
-                    style="display: block; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));">
-                    <!-- Head / Ninja Mask -->
-                    <circle cx="40" cy="22" r="14" fill="#1b1b1b" stroke="#000" stroke-width="2" />
-                    <!-- Ice Blue Ninja Hood Trim -->
-                    <path d="M 28 16 Q 40 8 52 16 L 52 26 Q 40 32 28 26 Z" fill="#00b4d8" stroke="#005f73"
-                      stroke-width="1.5" />
-                    <!-- Eyes Slot -->
-                    <rect x="33" y="19" width="14" height="4" rx="2" fill="#fff" />
-                    <circle cx="37" cy="21" r="1.2" fill="#000" />
-                    <circle cx="43" cy="21" r="1.2" fill="#000" />
-                    <!-- Ninja Mask Cloth -->
-                    <path d="M 32 25 L 48 25 L 46 34 L 34 34 Z" fill="#00b4d8" stroke="#005f73" stroke-width="1.5" />
-                    <!-- Torso / Gi -->
-                    <path d="M 27 36 L 53 36 L 49 72 L 31 72 Z" fill="#1b1b1b" stroke="#000" stroke-width="2" />
-                    <!-- Ice Blue Tabard V-Strap -->
-                    <path d="M 29 36 L 37 36 L 41 68 L 33 68 Z" fill="#00b4d8" />
-                    <path d="M 51 36 L 43 36 L 39 68 L 47 68 Z" fill="#00b4d8" />
-                    <!-- Belt / Sash -->
-                    <rect x="29" y="68" width="22" height="6" fill="#111" stroke="#00b4d8" stroke-width="1" />
-                    <rect x="38" y="74" width="4" height="14" fill="#00b4d8" />
-                    <!-- Left Arm / Fist -->
-                    <path d="M 27 38 L 16 52 L 20 66 L 27 58 Z" fill="#1b1b1b" />
-                    <circle cx="21" cy="65" r="5" fill="#00b4d8" stroke="#000" stroke-width="1" />
-                    <!-- Right Arm / Guard -->
-                    <path d="M 53 38 L 64 50 L 59 64 L 52 56 Z" fill="#1b1b1b" />
-                    <circle cx="59" cy="64" r="5" fill="#00b4d8" stroke="#000" stroke-width="1" />
-                    <!-- Legs / Stance -->
-                    <path d="M 32 74 L 25 96 L 22 114 L 30 114 L 35 96 L 39 74 Z" fill="#1b1b1b" stroke="#000"
-                      stroke-width="1.5" />
-                    <path d="M 48 74 L 55 96 L 58 114 L 50 114 L 45 96 L 41 74 Z" fill="#1b1b1b" stroke="#000"
-                      stroke-width="1.5" />
-                    <!-- Shin Guards -->
-                    <rect x="22" y="98" width="8" height="13" rx="2" fill="#00b4d8" stroke="#005f73" stroke-width="1" />
-                    <rect x="50" y="98" width="8" height="13" rx="2" fill="#00b4d8" stroke="#005f73" stroke-width="1" />
-                  </svg>
-                  %%[ ENDIF ]%%
-                </div>
+                <div class="fg-p2-sprite"></div>
               </div>
             </div>
             <div class="fg-p2-shadow"></div>
@@ -2029,7 +1833,7 @@
                   class="fg-btn fg-btn-atk fg-btn-atk2 fg-atk2-alt-2">%%=v(@Btn_Atk2_Label)=%%</label>
               </div>
 
-              <!-- Melee Attacks (Active at Positions 6 & 7: Connects with Sub-Zero) -->
+              <!-- Melee Attacks (Active at Positions 6 & 7: Connects with Opponent Knight) -->
               <div class="fg-atk-melee">
 
                 <!-- Stage 100: Ready for Hit 1 (Takes HP to 75%) -->
