@@ -35,6 +35,12 @@
   Set @Btn_Atk1_Label = "ATK 1"
   Set @Btn_Atk2_Label = "ATK 2"
 
+  /* Fighter 2 (Opponent / CPU) Settings */
+  Set @P2_Name = "SUB-ZERO"
+  Set @P2_Health = 100
+  /* Set @P2_Image to a custom .png / .gif URL. If blank, built-in retro blue ninja sprite is used */
+  Set @P2_Image = ""
+
   /* Non-Interactive Fallback (Outlook Desktop / MSO) */
   Set @Fallback_Image = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80"
   Set @Fallback_Title = "MORTAL EMAIL: TEST YOUR MIGHT"
@@ -1042,6 +1048,323 @@
           box-shadow: 0 0 6px #ffd700;
         }
 
+        /* =======================================================================
+           PLAYER 2 (OPPONENT / CPU) - Autonomous Character
+           ======================================================================= */
+
+        /* P2 HUD Status (right side, mirrored health bar) */
+        .fg-p2-status {
+          width: 160px;
+          max-width: 48%;
+          text-align: right;
+        }
+
+        .fg-p2-hud {
+          background: rgba(0, 0, 0, 0.7);
+          border: 1px solid #00b4d8;
+          padding: 4px 10px;
+          border-radius: 4px;
+          color: #00b4d8;
+          font-size: 11px;
+          font-weight: bold;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          box-shadow: 0 0 8px rgba(0, 180, 216, 0.4);
+        }
+
+        .fg-health-track-p2 {
+          border-color: #00b4d8;
+          box-shadow: 0 0 8px rgba(0, 180, 216, 0.35);
+        }
+
+        .fg-health-fill-p2 {
+          background-color: #00b4d8;
+          background-image: linear-gradient(180deg, #48cae4 0%, #00b4d8 45%, #0077b6 100%);
+          float: right;
+        }
+
+        /* P2 Character Anchor (autonomous patrol on right side of arena) */
+        .fg-p2-anchor {
+          position: absolute;
+          bottom: 26px;
+          left: 72%;
+          width: 80px;
+          height: 125px;
+          z-index: 9;
+          -webkit-animation: fgP2Patrol 4s ease-in-out infinite;
+          animation: fgP2Patrol 4s ease-in-out infinite;
+        }
+
+        /* P2 Attack Wrapper (periodic autonomous strike cycle) */
+        .fg-p2-attack-wrapper {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-origin: center bottom;
+          -webkit-transform-origin: center bottom;
+          -webkit-animation: fgP2AttackCycle 5s ease-in-out infinite;
+          animation: fgP2AttackCycle 5s ease-in-out infinite;
+        }
+
+        /* P2 Sprite (mirrored to face left via scaleX -1 in keyframes + idle breathing) */
+        .fg-p2-sprite {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-origin: center bottom;
+          -webkit-transform-origin: center bottom;
+          -webkit-animation: fgP2Idle 1.4s ease-in-out infinite alternate;
+          animation: fgP2Idle 1.4s ease-in-out infinite alternate;
+        }
+
+        /* P2 Shadow */
+        .fg-p2-shadow {
+          position: absolute;
+          bottom: -6px;
+          left: 15%;
+          width: 70%;
+          height: 10px;
+          background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 75%);
+          border-radius: 50%;
+        }
+
+        /* P2 Hit Flash Overlay (hidden by default, shown by compound CSS selector on hit) */
+        .fg-p2-hit-flash {
+          display: none;
+          position: absolute;
+          top: 0;
+          left: -10%;
+          width: 120%;
+          height: 100%;
+          background: radial-gradient(ellipse at center, rgba(255, 60, 60, 0.7) 0%, rgba(255, 0, 0, 0) 70%);
+          z-index: 15;
+          pointer-events: none;
+        }
+
+        /* P2 Patrol Animation (autonomous left-right movement on right side) */
+        @-webkit-keyframes fgP2Patrol {
+
+          0%,
+          100% {
+            left: 72%;
+          }
+
+          35% {
+            left: 66%;
+          }
+
+          65% {
+            left: 80%;
+          }
+        }
+
+        @keyframes fgP2Patrol {
+
+          0%,
+          100% {
+            left: 72%;
+          }
+
+          35% {
+            left: 66%;
+          }
+
+          65% {
+            left: 80%;
+          }
+        }
+
+        /* P2 Idle Breathing (includes scaleX -1 mirror so sprite faces P1) */
+        @-webkit-keyframes fgP2Idle {
+          0% {
+            -webkit-transform: scaleX(-1) translateY(0) scaleY(1);
+            transform: scaleX(-1) translateY(0) scaleY(1);
+          }
+
+          50% {
+            -webkit-transform: scaleX(-1) translateY(-2px) scaleY(1.015);
+            transform: scaleX(-1) translateY(-2px) scaleY(1.015);
+          }
+
+          100% {
+            -webkit-transform: scaleX(-1) translateY(2px) scaleY(0.985);
+            transform: scaleX(-1) translateY(2px) scaleY(0.985);
+          }
+        }
+
+        @keyframes fgP2Idle {
+          0% {
+            -webkit-transform: scaleX(-1) translateY(0) scaleY(1);
+            transform: scaleX(-1) translateY(0) scaleY(1);
+          }
+
+          50% {
+            -webkit-transform: scaleX(-1) translateY(-2px) scaleY(1.015);
+            transform: scaleX(-1) translateY(-2px) scaleY(1.015);
+          }
+
+          100% {
+            -webkit-transform: scaleX(-1) translateY(2px) scaleY(0.985);
+            transform: scaleX(-1) translateY(2px) scaleY(0.985);
+          }
+        }
+
+        /* P2 Attack Cycle (periodic autonomous strike lunge toward P1) */
+        @-webkit-keyframes fgP2AttackCycle {
+
+          0%,
+          62% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+
+          67% {
+            -webkit-transform: translateX(6px);
+            transform: translateX(6px);
+          }
+
+          74% {
+            -webkit-transform: translateX(-24px) scaleX(1.08);
+            transform: translateX(-24px) scaleX(1.08);
+          }
+
+          80% {
+            -webkit-transform: translateX(-18px);
+            transform: translateX(-18px);
+          }
+
+          92% {
+            -webkit-transform: translateX(-3px);
+            transform: translateX(-3px);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes fgP2AttackCycle {
+
+          0%,
+          62% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+
+          67% {
+            -webkit-transform: translateX(6px);
+            transform: translateX(6px);
+          }
+
+          74% {
+            -webkit-transform: translateX(-24px) scaleX(1.08);
+            transform: translateX(-24px) scaleX(1.08);
+          }
+
+          80% {
+            -webkit-transform: translateX(-18px);
+            transform: translateX(-18px);
+          }
+
+          92% {
+            -webkit-transform: translateX(-3px);
+            transform: translateX(-3px);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+          }
+        }
+
+        /* P2 Hit Stagger Animation (recoil backward when struck) */
+        @-webkit-keyframes fgP2HitStagger {
+          0% {
+            -webkit-transform: scaleX(-1) translateX(0);
+            transform: scaleX(-1) translateX(0);
+          }
+
+          25% {
+            -webkit-transform: scaleX(-1) translateX(-14px) skewX(5deg);
+            transform: scaleX(-1) translateX(-14px) skewX(5deg);
+          }
+
+          50% {
+            -webkit-transform: scaleX(-1) translateX(-8px) skewX(2deg);
+            transform: scaleX(-1) translateX(-8px) skewX(2deg);
+          }
+
+          100% {
+            -webkit-transform: scaleX(-1) translateX(0);
+            transform: scaleX(-1) translateX(0);
+          }
+        }
+
+        @keyframes fgP2HitStagger {
+          0% {
+            -webkit-transform: scaleX(-1) translateX(0);
+            transform: scaleX(-1) translateX(0);
+          }
+
+          25% {
+            -webkit-transform: scaleX(-1) translateX(-14px) skewX(5deg);
+            transform: scaleX(-1) translateX(-14px) skewX(5deg);
+          }
+
+          50% {
+            -webkit-transform: scaleX(-1) translateX(-8px) skewX(2deg);
+            transform: scaleX(-1) translateX(-8px) skewX(2deg);
+          }
+
+          100% {
+            -webkit-transform: scaleX(-1) translateX(0);
+            transform: scaleX(-1) translateX(0);
+          }
+        }
+
+        /* =======================================================================
+           P2 HIT DETECTION (P1 at positions 6 or 7 + any attack = P2 reacts)
+           ======================================================================= */
+
+        /* Show hit flash on P2 when P1 is in range and attacking */
+        #fg_pos_6:checked~#fg_atk1_1:checked~.fg-container .fg-p2-hit-flash,
+        #fg_pos_6:checked~#fg_atk1_2:checked~.fg-container .fg-p2-hit-flash,
+        #fg_pos_6:checked~#fg_atk2_1:checked~.fg-container .fg-p2-hit-flash,
+        #fg_pos_6:checked~#fg_atk2_2:checked~.fg-container .fg-p2-hit-flash,
+        #fg_pos_7:checked~#fg_atk1_1:checked~.fg-container .fg-p2-hit-flash,
+        #fg_pos_7:checked~#fg_atk1_2:checked~.fg-container .fg-p2-hit-flash,
+        #fg_pos_7:checked~#fg_atk2_1:checked~.fg-container .fg-p2-hit-flash,
+        #fg_pos_7:checked~#fg_atk2_2:checked~.fg-container .fg-p2-hit-flash {
+          display: block !important;
+        }
+
+        /* Apply hit stagger to P2 sprite (overrides idle) */
+        #fg_pos_6:checked~#fg_atk1_1:checked~.fg-container .fg-p2-sprite,
+        #fg_pos_6:checked~#fg_atk1_2:checked~.fg-container .fg-p2-sprite,
+        #fg_pos_6:checked~#fg_atk2_1:checked~.fg-container .fg-p2-sprite,
+        #fg_pos_6:checked~#fg_atk2_2:checked~.fg-container .fg-p2-sprite,
+        #fg_pos_7:checked~#fg_atk1_1:checked~.fg-container .fg-p2-sprite,
+        #fg_pos_7:checked~#fg_atk1_2:checked~.fg-container .fg-p2-sprite,
+        #fg_pos_7:checked~#fg_atk2_1:checked~.fg-container .fg-p2-sprite,
+        #fg_pos_7:checked~#fg_atk2_2:checked~.fg-container .fg-p2-sprite {
+          -webkit-animation: fgP2HitStagger 0.35s ease-out !important;
+          animation: fgP2HitStagger 0.35s ease-out !important;
+        }
+
+        /* Flash P2 anchor bright on hit (visual impact feedback) */
+        #fg_pos_6:checked~#fg_atk1_1:checked~.fg-container .fg-p2-anchor,
+        #fg_pos_6:checked~#fg_atk1_2:checked~.fg-container .fg-p2-anchor,
+        #fg_pos_6:checked~#fg_atk2_1:checked~.fg-container .fg-p2-anchor,
+        #fg_pos_6:checked~#fg_atk2_2:checked~.fg-container .fg-p2-anchor,
+        #fg_pos_7:checked~#fg_atk1_1:checked~.fg-container .fg-p2-anchor,
+        #fg_pos_7:checked~#fg_atk1_2:checked~.fg-container .fg-p2-anchor,
+        #fg_pos_7:checked~#fg_atk2_1:checked~.fg-container .fg-p2-anchor,
+        #fg_pos_7:checked~#fg_atk2_2:checked~.fg-container .fg-p2-anchor {
+          -webkit-filter: brightness(1.8) contrast(1.2);
+          filter: brightness(1.8) contrast(1.2);
+        }
+
         /* Responsive Mobile Viewports (max-width: 599px) */
         @media only screen and (max-width: 599px) {
           .fg-stage {
@@ -1052,6 +1375,21 @@
             width: 65px !important;
             height: 100px !important;
             bottom: 22px !important;
+          }
+
+          .fg-p2-anchor {
+            width: 65px !important;
+            height: 100px !important;
+            bottom: 22px !important;
+          }
+
+          .fg-p1-status,
+          .fg-p2-status {
+            width: 130px !important;
+          }
+
+          .fg-zone-title {
+            font-size: 9px !important;
           }
 
           .fg-btn {
@@ -1110,7 +1448,17 @@
               <div class="fg-p1-hud">%%=v(@P1_Name)=%%</div>
             </div>
 
-            <div class="fg-zone-title">OUTWORLD ARENA</div>
+            <div class="fg-zone-title">VS</div>
+
+            <!-- Opponent health and name -->
+            <div class="fg-p2-status">
+              <div class="fg-health-track fg-health-track-p2" role="presentation" aria-label="Opponent health"
+                aria-valuemin="0" aria-valuemax="100" aria-valuenow="%%=v(@P2_Health)=%%">
+                <div class="fg-health-fill fg-health-fill-p2" style="width: %%=v(@P2_Health)=%%">
+                </div>
+              </div>
+              <div class="fg-p2-hud">%%=v(@P2_Name)=%%</div>
+            </div>
           </div>
 
           <!-- The Moveable Character -->
@@ -1166,6 +1514,58 @@
             </div>
             <!-- Dynamic Foot Shadow -->
             <div class="fg-shadow"></div>
+          </div>
+
+          <!-- Player 2 (Sub-Zero) - Autonomous Opponent -->
+          <div class="fg-p2-anchor">
+            <div class="fg-p2-attack-wrapper">
+              <div class="fg-p2-sprite">
+                %%[ IF @P2_Image != "" AND NOT Empty(@P2_Image) THEN ]%%
+                <img src="%%=v(@P2_Image)=%%" alt="%%=v(@P2_Name)=%%"
+                  style="display: block; width: 100%; height: 100%; object-fit: contain;" />
+                %%[ ELSE ]%%
+                <!-- Built-in Retro Sub-Zero Ninja Sprite (Ice Blue) -->
+                <svg viewBox="0 0 80 120" width="100%" height="100%"
+                  style="display: block; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));">
+                  <!-- Head / Ninja Mask -->
+                  <circle cx="40" cy="22" r="14" fill="#1b1b1b" stroke="#000" stroke-width="2" />
+                  <!-- Ice Blue Ninja Hood Trim -->
+                  <path d="M 28 16 Q 40 8 52 16 L 52 26 Q 40 32 28 26 Z" fill="#00b4d8" stroke="#005f73"
+                    stroke-width="1.5" />
+                  <!-- Eyes Slot -->
+                  <rect x="33" y="19" width="14" height="4" rx="2" fill="#fff" />
+                  <circle cx="37" cy="21" r="1.2" fill="#000" />
+                  <circle cx="43" cy="21" r="1.2" fill="#000" />
+                  <!-- Ninja Mask Cloth -->
+                  <path d="M 32 25 L 48 25 L 46 34 L 34 34 Z" fill="#00b4d8" stroke="#005f73" stroke-width="1.5" />
+                  <!-- Torso / Gi -->
+                  <path d="M 27 36 L 53 36 L 49 72 L 31 72 Z" fill="#1b1b1b" stroke="#000" stroke-width="2" />
+                  <!-- Ice Blue Tabard V-Strap -->
+                  <path d="M 29 36 L 37 36 L 41 68 L 33 68 Z" fill="#00b4d8" />
+                  <path d="M 51 36 L 43 36 L 39 68 L 47 68 Z" fill="#00b4d8" />
+                  <!-- Belt / Sash -->
+                  <rect x="29" y="68" width="22" height="6" fill="#111" stroke="#00b4d8" stroke-width="1" />
+                  <rect x="38" y="74" width="4" height="14" fill="#00b4d8" />
+                  <!-- Left Arm / Fist -->
+                  <path d="M 27 38 L 16 52 L 20 66 L 27 58 Z" fill="#1b1b1b" />
+                  <circle cx="21" cy="65" r="5" fill="#00b4d8" stroke="#000" stroke-width="1" />
+                  <!-- Right Arm / Guard -->
+                  <path d="M 53 38 L 64 50 L 59 64 L 52 56 Z" fill="#1b1b1b" />
+                  <circle cx="59" cy="64" r="5" fill="#00b4d8" stroke="#000" stroke-width="1" />
+                  <!-- Legs / Stance -->
+                  <path d="M 32 74 L 25 96 L 22 114 L 30 114 L 35 96 L 39 74 Z" fill="#1b1b1b" stroke="#000"
+                    stroke-width="1.5" />
+                  <path d="M 48 74 L 55 96 L 58 114 L 50 114 L 45 96 L 41 74 Z" fill="#1b1b1b" stroke="#000"
+                    stroke-width="1.5" />
+                  <!-- Shin Guards -->
+                  <rect x="22" y="98" width="8" height="13" rx="2" fill="#00b4d8" stroke="#005f73" stroke-width="1" />
+                  <rect x="50" y="98" width="8" height="13" rx="2" fill="#00b4d8" stroke="#005f73" stroke-width="1" />
+                </svg>
+                %%[ ENDIF ]%%
+              </div>
+            </div>
+            <div class="fg-p2-shadow"></div>
+            <div class="fg-p2-hit-flash"></div>
           </div>
 
           <!-- Ground Floor -->
